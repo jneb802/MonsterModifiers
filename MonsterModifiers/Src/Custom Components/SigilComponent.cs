@@ -24,6 +24,11 @@ namespace MonsterModifiers.Custom_Components
             MonsterModifiersPlugin.MonsterModifiersLogger.LogError("ItemData is null");
             return new List<Modifier>();
         }
+        
+        public List<Modifier> GetSigilModifiers()
+        {
+            return m_sigilModifiers;
+        }
 
         public void SetSigilRarity(ModifierRarity rarity)
         {
