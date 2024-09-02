@@ -7,8 +7,9 @@ namespace MonsterModifiers.Custom_Components
     public class SigilComponent : MonoBehaviour
     {
         public List<Modifier> m_sigilModifiers = new List<Modifier>();
+        public ModifierRarity m_sigilRarity;
 
-        public static List<Modifier> GetSigilModifiers(ItemDrop.ItemData itemData)
+        public List<Modifier> GetSigilModifiers(ItemDrop.ItemData itemData)
         {
             if (itemData != null)
             {
@@ -22,6 +23,22 @@ namespace MonsterModifiers.Custom_Components
             }
             MonsterModifiersPlugin.MonsterModifiersLogger.LogError("ItemData is null");
             return new List<Modifier>();
+        }
+
+        public void SetSigilRarity(ModifierRarity rarity)
+        {
+            m_sigilRarity = rarity;
+        }
+        
+        public void SetSigilModifiers(ModifierRarity rarity)
+        {
+            m_sigilModifiers = ModiferUtils.SetModifiers(rarity);
+        }
+
+        public void AddModifier(Modifier modifier)
+        {
+            m_sigilModifiers.Add(modifier);
+            MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Added modifier with name: " + modifier.ModifierType + "to Sigial Component");
         }
         
         public void ApplyAllModifiers(List<CreatureSpawner> creatureSpawners)

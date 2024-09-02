@@ -1,0 +1,154 @@
+# Modifier Configuration File
+#
+# Each modifier is associated with different rarities and has an associated weight.
+# The `has_values` field indicates whether the modifier requires a specific range of values.
+# If `has_values` is true, the `values` section specifies the minimum and maximum values for each rarity.
+# The `increment` field specifies the step size between the min and max values for modifiers with value ranges.
+#
+# Modifiers with `has_values` set to false do not require value ranges and apply their effects directly.
+#
+# Example:
+#   ModifyHealth:
+#     rarities: [Magic, Rare, Epic, Legendary, Mythic]
+#     weight: 1
+#     has_values: true
+#     increment: 0.01
+#     values:
+#       Magic: [0.05, 0.1]
+#       Rare: [0.1, 0.15]
+#       Epic: [0.15, 0.2]
+#       Legendary: [0.2, 0.25]
+#       Mythic: [0.25, 0.3]
+
+modifiers:
+  AddBluntResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddBluntVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddSlashResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddSlashVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPierceResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPierceVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddChopResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddChopVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPickaxeResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPickaxeVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddFireResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddFireVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddFrostResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddFrostVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddLightningResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddLightningVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPoisonResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPoisonVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddSpiritResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddSpiritVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddDamageResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddDamageVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPhysicalResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddPhysicalVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddElementalResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  AddElementalVeryResistant:
+    rarities: [Magic, Rare, Epic, Legendary, Mythic]
+    weight: 1
+    has_values: false
+
+  # Continue for other modifiers if needed...

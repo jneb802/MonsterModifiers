@@ -7,16 +7,31 @@ namespace MonsterModifiers;
 public class DungeonGenUtils
 {
 
-    public static DungeonGenerator GetDungeonInterior(LocationProxy locationProxy, Location location)
+    public static DungeonGenerator GetDungeonInterior(GameObject prefab)
     {
-        var locationDungeonGenerator = location.m_generator;
-        var GroundPosition = locationProxy.transform.position;
-        var SkyPosition = locationProxy.transform.position;
-        var GroundDistance = location.m_exteriorRadius;
-        var SkyDistance = location.m_interiorRadius;
-        float maxDistance = Mathf.Max(GroundDistance, SkyDistance);
-        var GeneratorPosition = location.m_generator != null ? location.m_generator.transform.localPosition : Vector3.zero;
+        Debug.Log("GetDungeonInterior called.");
+    
+        if (prefab == null)
+        {
+            Debug.LogError("prefab is null.");
+            return null;
+        }
+        
+        Debug.Log("Prefab position: " + prefab.transform.position);
+
+        var GroundPosition = prefab.transform.position;
+        Debug.Log("GroundPosition: " + GroundPosition);
+
+        var SkyPosition = prefab.transform.position + new Vector3(0, 5000, 0);
+        Debug.Log("SkyPosition: " + SkyPosition);
+        
+        float maxDistance = 64f;
+
+        var GeneratorPosition = Vector3.zero;
+        Debug.Log("GeneratorPosition: " + GeneratorPosition);
+
         DungeonGenerator dungeonGenerator = GetDungeonGeneratorInBounds(GroundPosition + GeneratorPosition, maxDistance);
+        Debug.Log("DungeonGenerator found: " + (dungeonGenerator != null ? dungeonGenerator.name : "null"));
 
         return dungeonGenerator;
     }

@@ -38,24 +38,29 @@ namespace MonsterModifiers.GamePatches
             if (IsCustomAltar(__instance))
             {
                 MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Player and invoked custom altar");
-                ItemDrop.ItemData sigilObject = __instance.m_container.GetInventory().GetItem(1);
+                ItemDrop.ItemData sigilObject = __instance.m_container.GetInventory().GetItem(0);
                 if (sigilObject ==  null)
                 {
                     MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Player and invoked custom altar but inventory is empty");
                     return false;
                 }
-                var locationProxy = LocationUtils.GetLocationProxy(__instance.gameObject);
-                var location = LocationUtils.GetLocation(__instance.gameObject);
 
-                var dungeonGenerator = DungeonGenUtils.GetDungeonInterior(locationProxy, location);
-
+                var dungeonGenerator = DungeonGenUtils.GetDungeonInterior(__instance.gameObject);
+                
                 var creatureSpawners = CreatureSpawnerUtils.GetCreatureSpawnersInDungeon(dungeonGenerator);
                 
                 SigilComponent sigilComponent = sigilObject.m_dropPrefab.GetComponent<SigilComponent>();
+                if (sigilComponent != null)
+                {
+                    MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Found sigil component in item with name: " + sigilObject.m_dropPrefab);
+                    sigilComponent.AddModifier(new Modifier(MonsterModifierTypes.AddPierceResistant));
+                    sigilComponent.ApplyAllModifiers(creatureSpawners);
+                }
+                else
+                {
+                    MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Failed to find sigil component in item with name: " + sigilObject.m_dropPrefab);
+                }
                 
-                sigilComponent.ApplyAllModifiers(creatureSpawners);
-                    
-                // Return false to skip the original OnIncinerate logic
                 return false;
             }
             return true;

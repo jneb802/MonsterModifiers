@@ -1,3 +1,9 @@
+using System.Collections.Generic;
+using Jotunn.Utils;
+using UnityEngine;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+
 namespace MonsterModifiers;
 
 public enum MonsterModifierTypes
@@ -29,13 +35,22 @@ public enum MonsterModifierTypes
     AddPhysicalVeryResistant,
     AddElementalResistant,
     AddElementalVeryResistant,
-    
 }
+
+public enum ModifierRarity
+{
+    Magic,
+    Rare,
+    Epic,
+    Legendary,
+    Mythic
+}
+
 public class Modifier
 {
     public const float DefaultValue = 1;
     public MonsterModifierTypes ModifierType { get; set; }
-    public float ModifierValue;
+    public float ModifierValue { get; set; }
 
     public Modifier(MonsterModifierTypes modifierType, float value = DefaultValue)
     {

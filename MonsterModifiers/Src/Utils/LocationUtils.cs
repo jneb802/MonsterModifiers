@@ -18,27 +18,60 @@ public class LocationUtils
         Location location = gameObject.gameObject.GetComponent<Location>();
         return location;
     }
-    
-    public void ModifyLocation(string locationName)
+
+    public static void ModifyAllLocations()
     {
-        ZoneSystem.ZoneLocation location = ZoneManager.Instance.GetZoneLocation(locationName);
+        ModifyLocation("Crypt2");
         
+        ZoneManager.OnVanillaLocationsAvailable -= ModifyAllLocations;
+    }
+    
+    public static void ModifyLocation(string locationName)
+    {
+        Debug.Log("Attempting to modify location: " + locationName);
+
+        if (ZoneManager.Instance == null)
+        {
+            Debug.LogError("ZoneManager.Instance is null.");
+            return;
+        }
+
+        ZoneSystem.ZoneLocation location = ZoneManager.Instance.GetZoneLocation(locationName);
+
         if (location != null)
         {
-            GameObject prefab = PrefabManager.Instance.GetPrefab("DungeonAltar");
-            if (prefab != null)
+            Debug.Log("Location found: " + locationName);
+            
+            location.m_prefab.Load();
+
+            if (location.m_prefab.Asset != null)
             {
-                var altar = Object.Instantiate(prefab, location.m_prefab.Asset.transform);
-                altar.transform.localPosition = new Vector3(-8.52f, 5.37f, -0.92f);
+                GameObject prefab = PrefabManager.Instance.GetPrefab("DungeonAltar");
+
+                if (prefab != null)
+                {
+                    GameObject tempParent = new GameObject("TempParent");
+                    tempParent.SetActive(false);
+                    var altar = Object.Instantiate(prefab, tempParent.transform);
+                    altar.transform.SetParent(location.m_prefab.Asset.transform);
+                    altar.transform.localPosition = new Vector3(2.387963f, -0.1440315f, -4.879501f);
+                    altar.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    Object.Destroy(tempParent);
+                }
+                else
+                {
+                    Debug.LogError("Prefab 'DungeonAltar' not found.");
+                }
             }
             else
             {
-                Debug.LogError("Prefab 'piece_lul' not found.");
+                Debug.LogError("location.m_prefab.Asset is null after loading.");
             }
         }
         else
         {
-            Debug.LogError($"Location '{locationName}' not found.");
+            Debug.LogError("Location with name: " + locationName + " not found.");
         }
     }
+
 }

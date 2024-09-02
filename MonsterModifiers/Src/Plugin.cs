@@ -83,8 +83,15 @@ namespace MonsterModifiers
                 Config.Save();
             }
             
-            PrefabManager.OnVanillaPrefabsAvailable += Assets.CreateSigil;
             Assets.AddAltar();
+            Assets.AddSigilTable();
+            // Assets.AddSigil();
+            // Assets.AddSigilRecipe();
+            Assets.CreateSigil();
+            
+            ZoneManager.OnVanillaLocationsAvailable += LocationUtils.ModifyAllLocations;
+            
+            
         }
 
         private void OnDestroy()
