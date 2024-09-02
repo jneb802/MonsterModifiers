@@ -37,7 +37,6 @@ public class SigilCrafting
             if (!IsCraftingSigil) return;
             
             Debug.Log("Attempting to craft sigil");
-            Debug.Log("Result in addITem patch has name of:" + __result.m_dropPrefab.name);
     
             ItemDrop.ItemData sigilItem = __result;
     
@@ -45,6 +44,12 @@ public class SigilCrafting
             
             __result.m_dropPrefab.AddComponent<SigilComponent>();
             __result.m_dropPrefab.GetComponent<SigilComponent>().SetSigilModifiers(rarity);
+
+            var modifiers = __result.m_dropPrefab.GetComponent<SigilComponent>().GetSigilModifiers();
+            foreach (var modifier in modifiers)
+            {
+                Debug.Log($"Modifier with name: {modifier.ModifierType} added with value: {modifier.ModifierValue} to item with name {__result.m_dropPrefab.name}");
+            }
         }
     }
 }
