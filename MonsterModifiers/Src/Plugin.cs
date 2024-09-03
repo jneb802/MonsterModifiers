@@ -83,6 +83,8 @@ namespace MonsterModifiers
                 Config.Save();
             }
             
+            ModiferUtils.InitializeModifiers();
+            
             Assets.AddAltar();
             Assets.AddSigilTable();
             // Assets.AddSigil();

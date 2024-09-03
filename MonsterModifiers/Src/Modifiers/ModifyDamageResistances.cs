@@ -18,7 +18,7 @@ public class ModifyDamageResistances
             };
             
             monsterModifiers.Apply(modifiers);
-            MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Added resistance of type " + modifier + "to damage type" + damageType);
+            MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Added resistance of type " + modifier + " to damage type " + damageType);
         }
     }
 }

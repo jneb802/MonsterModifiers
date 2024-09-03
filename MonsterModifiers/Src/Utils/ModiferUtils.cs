@@ -8,6 +8,16 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace MonsterModifiers;
 
+public class ModifierConfigData
+{
+    public List<string> rarities { get; set; }
+    public int weight { get; set; }
+    public bool hasValues { get; set; }
+    public double increment { get; set; }
+    public Dictionary<string, List<double>> values { get; set; }
+    public string displayName { get; set; }
+}
+
 public class ModiferUtils
 {
     public static Dictionary<string, ModifierConfigData> ModifierConfigs = new Dictionary<string, ModifierConfigData>();
@@ -17,19 +27,21 @@ public class ModiferUtils
         string yamlContent = AssetUtils.LoadTextFromResources("modifierValues.yml");
         
         var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(new CamelCaseNamingConvention())
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
         
-        var modiferUtils = deserializer.Deserialize<ModiferUtils>(yamlContent);
+        var modifierConfigsFromYaml = deserializer.Deserialize<Dictionary<string, ModifierConfigData>>(yamlContent);
         
         ModifierConfigs.Clear();
         
-        foreach (var modifierConfig in ModifierConfigs)
+        foreach (var modifierConfig in modifierConfigsFromYaml)
         {
             string modifierKey = modifierConfig.Key;
             ModifierConfigData modifierConfigData = modifierConfig.Value;
-            
+        
             ModifierConfigs[modifierKey] = modifierConfigData;
+            
+            Debug.Log($"Modifier added: {modifierKey} with data: {modifierConfigData}");
         }
     }
     
@@ -39,7 +51,7 @@ public class ModiferUtils
 
         if (ModifierConfigs.TryGetValue(modifierKey, out var modifierData))
         {
-            return modifierData.DisplayName ?? "Unknown Modifier";
+            return modifierData.displayName ?? "Unknown Modifier";
         }
 
         return "Modifier Not Found";
@@ -49,7 +61,7 @@ public class ModiferUtils
     {
         var selectedModifiers = new List<Modifier>();
         var availableModifiers = ModifierConfigs
-            .Where(config => config.Value.Rarities.Contains(rarity.ToString()))
+            .Where(config => config.Value.rarities.Contains(rarity.ToString()))
             .ToList();
         var modifierCount = GetRarityModifierCount(rarity);
 
@@ -82,13 +94,13 @@ public class ModiferUtils
 
     private static KeyValuePair<string, ModifierConfigData> GetWeightedRandomModifier(List<KeyValuePair<string, ModifierConfigData>> availableModifiers)
     {
-        int totalWeight = availableModifiers.Sum(modifier => modifier.Value.Weight);
+        int totalWeight = availableModifiers.Sum(modifier => modifier.Value.weight);
         int randomWeight = UnityEngine.Random.Range(0, totalWeight);
         int currentWeight = 0;
 
         foreach (var modifier in availableModifiers)
         {
-            currentWeight += modifier.Value.Weight;
+            currentWeight += modifier.Value.weight;
             if (randomWeight < currentWeight)
             {
                 return modifier;
@@ -105,21 +117,43 @@ public class ModiferUtils
         
         if (ModifierConfigs.TryGetValue(modifierKey, out var modifierData))
         {
-            string rarityKey = rarity.ToString();
-            
-            if (modifierData.Values.TryGetValue(rarityKey, out var valuesList) && valuesList.Count == 2)
+            if (modifierData.hasValues)
             {
-                double minValue = valuesList[0];
-                double maxValue = valuesList[1];
+                string rarityKey = rarity.ToString();
                 
-                float randomValue = UnityEngine.Random.Range((float)minValue, (float)maxValue);
-                
-                return randomValue;
+                if (modifierData.values != null && modifierData.values.TryGetValue(rarityKey, out var valuesList))
+                {
+                    if (valuesList.Count == 2)
+                    {
+                        double minValue = valuesList[0];
+                        double maxValue = valuesList[1];
+                        
+                        float randomValue = UnityEngine.Random.Range((float)minValue, (float)maxValue);
+                        
+                        return randomValue;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Values list for rarity '{rarityKey}' does not contain exactly 2 elements.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Values for rarity '{rarityKey}' not found or values are not initialized.");
+                }
+            }
+            else
+            {
+                // Handle cases where `hasValues` is false
+                return 0f; // Default value or specific logic if needed
             }
         }
-        
-        Debug.LogWarning($"Modifier or rarity not found for {modifierType} with rarity {rarity}");
-        return 0f;
+        else
+        {
+            Debug.LogWarning($"Modifier key '{modifierKey}' not found in ModifierConfigs.");
+        }
+
+        return 0f; // Return a default value or handle the error as needed
     }
 
     public static int GetRarityModifierCount(ModifierRarity rarity)
@@ -154,12 +188,3 @@ public class ModiferUtils
 
 }
 
-public class ModifierConfigData
-{
-    public List<string> Rarities { get; set; }
-    public int Weight { get; set; }
-    public bool HasValues { get; set; }
-    public double Increment { get; set; }
-    public Dictionary<string, List<double>> Values { get; set; }
-    public string DisplayName { get; set; }
-}
