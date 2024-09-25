@@ -35,6 +35,9 @@ public enum MonsterModifierTypes
     AddPhysicalVeryResistant,
     AddElementalResistant,
     AddElementalVeryResistant,
+    StaminaSiphon,
+    AddElementalImmunity,
+    AddPhysicalImmunity
 }
 
 public enum ModifierRarity
@@ -51,10 +54,13 @@ public class Modifier
     public const float DefaultValue = 1;
     public MonsterModifierTypes ModifierType { get; set; }
     public float ModifierValue { get; set; }
+    
+    public float ModifierWeight { get; set; }
 
-    public Modifier(MonsterModifierTypes modifierType, float value = DefaultValue)
+    public Modifier(MonsterModifierTypes modifierType, int weight, float value = DefaultValue)
     {
         ModifierType = modifierType;
         ModifierValue = value;
+        ModifierWeight = weight;
     }
 }

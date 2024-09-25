@@ -122,6 +122,8 @@
     <ItemGroup>
         <Compile Include="Managers\LocalizationManager.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
+        <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifierComponent.cs" />
         <Compile Include="Src\Custom Components\SigilComponent.cs" />
         <Compile Include="Src\GamePatches\IncineratorPatch.cs" />

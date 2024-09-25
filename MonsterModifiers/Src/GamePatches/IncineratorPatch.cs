@@ -44,7 +44,7 @@ namespace MonsterModifiers.GamePatches
                     MonsterModifiersPlugin.MonsterModifiersLogger.LogDebug("Player and invoked custom altar but inventory is empty");
                     return false;
                 }
-
+        
                 var dungeonGenerator = DungeonGenUtils.GetDungeonInterior(__instance.gameObject);
                 
                 var creatureSpawners = CreatureSpawnerUtils.GetCreatureSpawnersInDungeon(dungeonGenerator);

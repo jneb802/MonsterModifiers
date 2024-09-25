@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 namespace MonsterModifiers.Custom_Components
 {
@@ -50,16 +51,26 @@ namespace MonsterModifiers.Custom_Components
         {
             foreach (var creatureSpawner in creatureSpawners)
             {
-                ZNetView creatureZNetView = creatureSpawner.Spawn();
-                if (!creatureZNetView || !creatureZNetView.gameObject || !creatureZNetView.gameObject)
+                if (creatureSpawner == null)
                 {
                     continue;
                 }
                 
                 foreach (var modifier in m_sigilModifiers)
                 {
-                    ApplyCreatureModifier(modifier, creatureZNetView.gameObject);
+                    ApplyCreatureModifier(modifier, creatureSpawner.m_creaturePrefab);
                 }
+                
+                creatureSpawner.gameObject.SetActive(true);
+                
+                ZNetView creatureZNetView = creatureSpawner.Spawn();
+                
+                // if (!creatureZNetView || !creatureZNetView.gameObject || !creatureZNetView.gameObject)
+                // {
+                //     continue;
+                // }
+                
+                
             }
         }
         
