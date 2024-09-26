@@ -10,6 +10,7 @@ using JetBrains.Annotations;
 using Jotunn.Managers;
 using Jotunn.Utils;
 using LocalizationManager;
+using MonsterModifiers.Modifiers;
 using ServerSync;
 using UnityEngine;
 using Paths = BepInEx.Paths;
@@ -82,17 +83,9 @@ namespace MonsterModifiers
                 Config.SaveOnConfigSet = saveOnSet;
                 Config.Save();
             }
-            
-            ModiferUtils.InitializeModifiers();
-            
-            Assets.AddAltar();
-            Assets.AddSigilTable();
-            // Assets.AddSigil();
-            // Assets.AddSigilRecipe();
-            Assets.CreateSigil();
-            
-            ZoneManager.OnVanillaLocationsAvailable += LocationUtils.ModifyAllLocations;
-            
+
+            YamlUtils.ParseDefaultYamls();
+            ShieldDome.LoadShieldDome();
             
         }
 

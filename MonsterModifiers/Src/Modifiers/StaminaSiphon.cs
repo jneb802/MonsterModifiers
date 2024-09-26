@@ -14,6 +14,11 @@ public class StaminaSiphon
             {
                 return;  
             }
+            
+            if (hit.m_damage.GetTotalDamage() == 0)
+            {
+                return;
+            }
 
             var attacker = hit.GetAttacker();
 
@@ -22,7 +27,7 @@ public class StaminaSiphon
                 return;
             }
 
-            var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifiers>();
+            var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)
             {
                 return;

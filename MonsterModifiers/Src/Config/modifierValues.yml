@@ -1,180 +1,43 @@
-# Modifier Configuration File
-#
-# Each modifier is associated with different rarities and has an associated weight.
-# The `hasValues` field indicates whether the modifier requires a specific range of values.
-# If `hasValues` is true, the `values` section specifies the minimum and maximum values for each rarity.
-# The `increment` field specifies the step size between the min and max values for modifiers with value ranges.
-#
-# Modifiers with `hasValues` set to false do not require value ranges and apply their effects directly.
-#
-# Example:
-#   ModifyHealth:
-#     rarities: [Magic, Rare, Epic, Legendary, Mythic]
-#     weight: 1
-#     hasValues: true
-#     increment: 0.01
-#     values:
-#       Magic: [0.05, 0.1]
-#       Rare: [0.1, 0.15]
-#       Epic: [0.15, 0.2]
-#       Legendary: [0.2, 0.25]
-#       Mythic: [0.25, 0.3]
-
-
-AddBluntResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+StaminaSiphon:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Blunt"
+  color: [0.8, 0.2, 0.2, 1]  # Dark Red
 
-AddBluntVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+EitrSiphon:
   weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Blunt"
+  color: [0.2, 0.6, 0.8, 1]  # Sky Blue
 
-AddSlashResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+ShieldBreaker:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Slash"
+  color: [0.9, 0.3, 0.1, 1]  # Brick Orange
 
-AddSlashVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+FoodDrain:
   weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Slash"
+  color: [0.4, 0.2, 0.6, 1]  # Purple
 
-AddPierceResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+IgnoreArmor:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Pierce"
+  color: [0.2, 0.8, 0.2, 1]  # Bright Green
 
-AddPierceVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+AddElementalImmunity:
   weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Pierce"
+  color: [0.8, 0.2, 0.8, 1]  # Magenta
 
-AddChopResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+AddPhysicalImmunity:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Chop"
+  color: [0.3, 0.6, 0.9, 1]  # Soft Blue
 
-AddChopVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+RemoveStatus:
   weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Chop"
+  color: [1, 0.9, 0.3, 1]  # Bright Yellow
 
-AddPickaxeResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+PersonalShield:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Pickaxe"
+  color: [0.1, 0.6, 0.3, 1]  # Forest Green
 
-AddPickaxeVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+ShieldDome:
   weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Pickaxe"
+  color: [0.9, 0.6, 0.2, 1]  # Goldenrod
 
-AddFireResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
+SoulEater:
   weight: 1
-  hasValues: false
-  displayName: "Resistant: Fire"
-
-AddFireVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Fire"
-
-AddFrostResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Frost"
-
-AddFrostVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Frost"
-
-AddLightningResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Lightning"
-
-AddLightningVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Lightning"
-
-AddPoisonResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Poison"
-
-AddPoisonVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Poison"
-
-AddSpiritResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Spirit"
-
-AddSpiritVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Spirit"
-
-AddDamageResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Damage"
-
-AddDamageVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Damage"
-
-AddPhysicalResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Physical"
-
-AddPhysicalVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Physical"
-
-AddElementalResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Resistant: Elemental"
-
-AddElementalVeryResistant:
-  rarities: [Magic, Rare, Epic, Legendary, Mythic]
-  weight: 1
-  hasValues: false
-  displayName: "Very Resistant: Elemental"
-
-  # Continue for other modifiers if needed...
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet

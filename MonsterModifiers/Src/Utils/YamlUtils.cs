@@ -1,14 +1,25 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Jotunn.Utils;
+using UnityEngine;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace MonsterModifiers;
 
 public class YamlUtils
 {
-    public string defaultModiferValues;
+    public static string defaultModifierValues;
     
-    public void ParseDefaultYamls()
+    public static void ParseDefaultYamls()
     { 
-        defaultModiferValues = AssetUtils.LoadTextFromResources("modifierValues.yml");
+        defaultModifierValues = AssetUtils.LoadTextFromResources("modifierValues.yml");
+        
+        var deserializer = new DeserializerBuilder()
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .Build();
+        
+        ModifierUtils.modifiers = deserializer.Deserialize<Dictionary<MonsterModifierTypes, ModifierData>>(new StringReader(defaultModifierValues));
     }
 }
