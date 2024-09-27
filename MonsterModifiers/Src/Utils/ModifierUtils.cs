@@ -14,6 +14,8 @@ public enum MonsterModifierTypes
     FoodDrain,
     IgnoreArmor,
     PoisonDeath,
+    FrostDeath,
+    FireDeath,
     PersonalShield,
     ShieldDome,
     SoulEater,
@@ -22,7 +24,6 @@ public enum MonsterModifierTypes
     FireInfused,
     PoisonInfused,
     FrostInfused,
-    SpiritInfused,
     LightningInfused,
     AddElementalImmunity,
     AddPhysicalImmunity,
@@ -88,6 +89,11 @@ public class ModifierUtils
         }
 
         return selectedModifiers;
+    }
+
+    public static void RunBiomeChecks()
+    {
+        
     }
 
     public static bool RunRPCDamageChecks(Character character, HitData hit)

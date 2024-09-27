@@ -51,12 +51,6 @@ public class ElementalInfusions
                 hit.m_damage.m_frost += hit.GetTotalPhysicalDamage();
                 Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
             }
-            
-            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.SpiritInfused))
-            {
-                hit.m_damage.m_spirit += hit.GetTotalPhysicalDamage();
-                Debug.Log("Hit has additional spirit damage added. Amount is: " + hit.m_damage.m_spirit);
-            }
         }
     }
 }

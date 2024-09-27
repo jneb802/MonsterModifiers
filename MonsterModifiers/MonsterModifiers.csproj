@@ -138,7 +138,7 @@
         <Compile Include="Src\Modifiers\ShieldBreaker.cs" />
         <Compile Include="Src\Modifiers\ShieldDome.cs" />
         <Compile Include="Src\Modifiers\PersonalShield.cs" />
-        <Compile Include="Src\Modifiers\PoisonDeath.cs" />
+        <Compile Include="Src\Modifiers\DeathSpawns.cs" />
         <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
