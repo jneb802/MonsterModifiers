@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace MonsterModifiers.Modifiers;
 
@@ -10,18 +12,12 @@ public class FoodDrain
     {
         public static void Postfix(Character __instance, HitData hit)
         {
-            if (hit == null || __instance == null)
-            {
-                return;  
-            }
-            
-            if (hit.m_damage.GetTotalDamage() == 0)
+            if (!ModifierUtils.RunRPCDamageChecks(__instance,hit))
             {
                 return;
             }
 
             var attacker = hit.GetAttacker();
-
             if (attacker.IsPlayer() || attacker == null)
             {
                 return;
@@ -41,7 +37,13 @@ public class FoodDrain
             var player = Player.m_localPlayer;
             if (player != null)
             {
-                player.RemoveOneFood();
+                List<Player.Food> playerFoods = player.GetFoods();
+                int foodCount = playerFoods.Count;
+                if (foodCount > 0)
+                {
+                    int randomNumber = Random.Range(0, foodCount);
+                    playerFoods[randomNumber].m_time *= 0.5f;
+                }
             }
         }
     }

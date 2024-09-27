@@ -18,6 +18,12 @@ public enum MonsterModifierTypes
     ShieldDome,
     SoulEater,
     RemoveStatus,
+    StaggerImmune,
+    FireInfused,
+    PoisonInfused,
+    FrostInfused,
+    SpiritInfused,
+    LightningInfused,
     AddElementalImmunity,
     AddPhysicalImmunity,
 }
@@ -31,12 +37,12 @@ public class ModifierData
 public class ModifierUtils
 {
     public static Dictionary<MonsterModifierTypes, ModifierData> modifiers;
-    
+
     public static Color GetModifierColor(MonsterModifierTypes modifier)
     {
         List<float> rgb = modifiers[modifier].color;
         Color color = new Color(rgb[0], rgb[1], rgb[2], rgb[3]);
-        
+
         return color;
     }
 
@@ -48,24 +54,23 @@ public class ModifierUtils
     public static List<MonsterModifierTypes> RollRandomModifiers(int numModifiers)
     {
         List<MonsterModifierTypes> selectedModifiers = new List<MonsterModifierTypes>();
-        Dictionary<MonsterModifierTypes, ModifierData> availableModifiers = new Dictionary<MonsterModifierTypes, ModifierData>(modifiers);
+        Dictionary<MonsterModifierTypes, ModifierData> availableModifiers =
+            new Dictionary<MonsterModifierTypes, ModifierData>(modifiers);
 
         for (int i = 0; i < numModifiers; i++)
         {
             int totalWeight = 0;
-        
-            // Calculate the total weight of available modifiers
+            
             foreach (var modifier in availableModifiers.Values)
             {
                 totalWeight += modifier.weight;
             }
-
-            // Select a random value within the total weight range
+            
             int randomValue = UnityEngine.Random.Range(0, totalWeight);
             int cumulativeWeight = 0;
 
-            MonsterModifierTypes selected = MonsterModifierTypes.StaminaSiphon; // Fallback
-            
+            MonsterModifierTypes selected = MonsterModifierTypes.StaminaSiphon;
+
             foreach (var entry in availableModifiers)
             {
                 cumulativeWeight += entry.Value.weight;
@@ -75,7 +80,7 @@ public class ModifierUtils
                     break;
                 }
             }
-            
+
             selectedModifiers.Add(selected);
             availableModifiers.Remove(selected);
         }
@@ -83,6 +88,25 @@ public class ModifierUtils
         return selectedModifiers;
     }
 
+    public static bool RunRPCDamageChecks(Character character, HitData hit)
+    {
+        if (hit == null || character == null)
+        {
+            return false;
+        }
+
+        if (hit.m_damage.GetTotalDamage() == 0)
+        {
+            return false;
+        }
+
+        if (hit.m_hitType != HitData.HitType.EnemyHit)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 

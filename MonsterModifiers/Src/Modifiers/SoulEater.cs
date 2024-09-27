@@ -53,7 +53,7 @@ public class SoulEater : MonoBehaviour
                      var modiferComponent = character.GetComponent<MonsterModifier>(); 
                      if (modiferComponent != null && modiferComponent.Modifiers.Contains(MonsterModifierTypes.SoulEater) && character.m_nview.GetZDO().IsOwner())
                      {
-                         if (character.m_nview.GetZDO().GetInt("MM_soulEaterCount") > 3)
+                         if (character.m_nview.GetZDO().GetInt("MM_soulEaterCount") < 3)
                          {
                              int soulEaterCount = character.m_nview.GetZDO().GetInt("MM_soulEaterCount") + 1;
                              character.m_nview.GetZDO().Set("MM_soulEaterCount",soulEaterCount);
@@ -62,8 +62,7 @@ public class SoulEater : MonoBehaviour
                              Physics.SyncTransforms();
 
                              character.m_health *= 1.1f;
-
-                             Object.Instantiate(ZNetScene.instance.GetPrefab("fx_bossstone_attach"),character.transform.position,character.transform.rotation);
+                             
                              Debug.Log("Monster with name " + __instance.m_name + " has been incremented via soulEater");
                          }
                      }
@@ -77,12 +76,7 @@ public class SoulEater : MonoBehaviour
      {
          public static void Prefix(Character __instance, HitData hit)
          {
-             if (hit == null || __instance == null)
-             {
-                 return;
-             }
-             
-             if (hit.m_damage.GetTotalDamage() == 0)
+             if (!ModifierUtils.RunRPCDamageChecks(__instance,hit))
              {
                  return;
              }

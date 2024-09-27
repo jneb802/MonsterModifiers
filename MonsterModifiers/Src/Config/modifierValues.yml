@@ -41,3 +41,11 @@ ShieldDome:
 SoulEater:
   weight: 1
   color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+
+StaggerImmune:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+FireInfused:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet

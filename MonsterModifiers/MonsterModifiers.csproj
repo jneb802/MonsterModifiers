@@ -127,10 +127,12 @@
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
         <Compile Include="Src\Modifiers\FoodDrain.cs" />
+        <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
         <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
+        <Compile Include="Src\Modifiers\StaggerImmune.cs" />
         <Compile Include="Src\Modifiers\ModiferDamageModifiers.cs" />
         <Compile Include="Src\Modifiers\RemoveStatus.cs" />
-        <Compile Include="Src\Modifiers\Shieldbreaker.cs" />
+        <Compile Include="Src\Modifiers\ShieldBreaker.cs" />
         <Compile Include="Src\Modifiers\ShieldDome.cs" />
         <Compile Include="Src\Modifiers\PersonalShield.cs" />
         <Compile Include="Src\Modifiers\PoisonDeath.cs" />

@@ -54,6 +54,11 @@ public class MonsterModifier : MonoBehaviour
             var shieldDome = character.gameObject.AddComponent<ShieldDome>();
             shieldDome.AddShieldDome(character);
          }
+         
+         if (Modifiers.Contains(MonsterModifierTypes.StaggerImmune))
+         {
+            StaggerImmune.AddStaggerImmune(character);
+         }
       }
    }
 }

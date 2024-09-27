@@ -13,12 +13,7 @@ public class RemoveStatus
     {
         public static void Postfix(Character __instance, HitData hit)
         {
-            if (hit == null || __instance == null)
-            {
-                return;  
-            }
-            
-            if (hit.m_damage.GetTotalDamage() == 0)
+            if (!ModifierUtils.RunRPCDamageChecks(__instance,hit))
             {
                 return;
             }
