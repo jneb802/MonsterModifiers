@@ -17,8 +17,7 @@ public class ShieldDome: MonoBehaviour
     
     public static void LoadShieldDome()
     {
-        AssetBundle assetBundle = AssetUtils.LoadAssetBundleFromResources("monster_modifiers_ashlands", Assembly.GetExecutingAssembly());
-        ShieldGenereatorBubbleCustomPrefab = new CustomPrefab(assetBundle, "ShieldDome_Bubble", true);
+        ShieldGenereatorBubbleCustomPrefab = new CustomPrefab(ModifierAssetUtils.ashlandsAssetBundle, "ShieldDome_Bubble", true);
     }
     
     public void AddShieldDome(Character character)

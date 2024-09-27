@@ -85,8 +85,9 @@ namespace MonsterModifiers
             }
 
             YamlUtils.ParseDefaultYamls();
+            ModifierAssetUtils.Setup();
             ShieldDome.LoadShieldDome();
-            
+
         }
 
         private void OnDestroy()

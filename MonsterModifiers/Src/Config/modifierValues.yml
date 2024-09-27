@@ -1,83 +1,83 @@
 StaminaSiphon:
   weight: 1
-  color: [0.8, 0.2, 0.2, 1]  # Dark Red
+  color: [0.9, 0.6, 0.3, 1]  # Light Orange
 
 EitrSiphon:
   weight: 1
-  color: [0.2, 0.6, 0.8, 1]  # Sky Blue
+  color: [0.3, 0.7, 0.5, 1]  # Mint Green
 
 ShieldBreaker:
   weight: 1
-  color: [0.9, 0.3, 0.1, 1]  # Brick Orange
+  color: [0.7, 0.2, 0.9, 1]  # Purple Magenta
 
 FoodDrain:
   weight: 1
-  color: [0.4, 0.2, 0.6, 1]  # Purple
+  color: [0.5, 0.3, 0.8, 1]  # Lavender
 
 IgnoreArmor:
   weight: 1
-  color: [0.2, 0.8, 0.2, 1]  # Bright Green
+  color: [0.1, 0.8, 0.7, 1]  # Teal
 
 AddElementalImmunity:
   weight: 1
-  color: [0.8, 0.2, 0.8, 1]  # Magenta
+  color: [0.9, 0.9, 0.2, 1]  # Yellow Lime
 
 AddPhysicalImmunity:
   weight: 1
-  color: [0.3, 0.6, 0.9, 1]  # Soft Blue
+  color: [0.4, 0.6, 0.8, 1]  # Slate Blue
 
 RemoveStatus:
   weight: 1
-  color: [1, 0.9, 0.3, 1]  # Bright Yellow
+  color: [0.9, 0.4, 0.2, 1]  # Coral
 
 PersonalShield:
   weight: 1
-  color: [0.1, 0.6, 0.3, 1]  # Forest Green
+  color: [0.2, 0.5, 0.8, 1]  # Sky Blue
 
 ShieldDome:
   weight: 1
-  color: [0.9, 0.6, 0.2, 1]  # Goldenrod
+  color: [0.9, 0.7, 0.4, 1]  # Sand
 
 SoulEater:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  color: [0.7, 0.1, 0.4, 1]  # Deep Rose
 
 StaggerImmune:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.8, 0.5, 0.1, 1]  # Mustard Yellow
+
 FireInfused:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.9, 0.3, 0.2, 1]  # Crimson Red
+
 FrostInfused:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.5, 0.8, 1, 1]  # Light Cyan
+
 PoisonInfused:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.3, 0.7, 0.3, 1]  # Green
+
 LightningInfused:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  color: [0.7, 0.8, 0.9, 1]  # Light Gray
 
 FastMovement:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.6, 0.8, 0.3, 1]  # Lime Green
+
 FastAttackSpeed:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  color: [0.7, 0.5, 0.2, 1]  # Bronze
 
 PoisonDeath:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  color: [0.3, 0.6, 0.2, 1]  # Moss Green
+
 FireDeath:
-  weight: 50
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
-  
+  weight: 1
+  color: [1, 0.4, 0.1, 1]  # Bright Red
+
 FrostDeath:
   weight: 1
-  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  color: [0.5, 0.9, 1, 1]  # Ice Blue

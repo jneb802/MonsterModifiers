@@ -125,6 +125,7 @@
         <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
+        <Compile Include="Src\Modifiers\Bleed.cs" />
         <Compile Include="Src\Modifiers\DistantDetection.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
         <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
@@ -142,6 +143,7 @@
         <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
+        <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="VersionHandshake.cs"/>
@@ -153,6 +155,7 @@
         <Content Include=".gitignore"/>
         <EmbeddedResource Include="assets\dungeonmodifiers" />
         <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
+        <EmbeddedResource Include="assets\statusicon" />
         <Content Include="environment.props"/>
         <Content Include="icons\README.txt"/>
         <Content Include="ILRepack.targets"/>

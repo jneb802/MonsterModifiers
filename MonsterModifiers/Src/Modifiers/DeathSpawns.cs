@@ -8,8 +8,19 @@ namespace MonsterModifiers.Modifiers;
 
 public class DeathSpawns
 {
+    
+    public static void ApplyDamageToNearbyPlayers(Vector3 position, HitData hit)
+    {
+        List<Player> nearbyPlayers = new List<Player>();
+        Player.GetPlayersInRange(position, 5f, nearbyPlayers);
+        foreach (var player in nearbyPlayers)
+        {
+            player.Damage(hit);
+        }
+    }
+    
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
-    public class PoisonDeath_Character_OnDeath_Patch
+    public class DeathSpawns_Character_OnDeath_Patch
     {
         public static void Prefix(Character __instance)
         {
@@ -36,54 +47,60 @@ public class DeathSpawns
                         m_damage = { m_poison = 20f }
                     };
 
-                    List<Player> nearbyPlayers = new List<Player>();
-                    Player.GetPlayersInRange(__instance.transform.position, 5f, nearbyPlayers);
-                    foreach (var player in nearbyPlayers)
-                    {
-                        player.Damage(poisonHit);
-                    }
+                    ApplyDamageToNearbyPlayers(__instance.transform.position, poisonHit);
                 }
             }
-
+                
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireDeath))
             {
+                // TO-DO: I'm overwriting the vanilla values here. Make a copy somehow.
                 GameObject fireNovaAOE = ZNetScene.instance.GetPrefab("fx_fireskeleton_nova");
-                TimedDestruction timedDestruction = fireNovaAOE.GetComponent<TimedDestruction>(); 
-                timedDestruction.m_timeout = 1f;
+
+                ParticleSystem[] listParticleSystem = fireNovaAOE.GetComponentsInChildren<ParticleSystem>();
+                foreach (var particleSystem in listParticleSystem)
+                {
+                    particleSystem.startDelay = 0f;
+                }
+
+                ZSFX zsfx = fireNovaAOE.GetComponentInChildren<ZSFX>();
+                zsfx.m_delay = 0f;
+                zsfx.m_minDelay = 0f;
+                zsfx.m_maxDelay = 0f;
 
                 if (fireNovaAOE != null)
                 {
+                    
                     Object.Instantiate(fireNovaAOE, 
                         new Vector3(
-                            __instance.transform.position.x,
-                            __instance.transform.position.y + 2f,
-                            __instance.transform.position.z
-                        ),
-                        __instance.transform.rotation);
+                            __instance.transform.position.x, __instance.transform.position.y + 1.25f, __instance.transform.position.z),
+                            __instance.transform.rotation);
 
                     HitData fireHit = new HitData
                     {
                         m_damage = { m_fire = 20f }
                     };
 
-                    List<Player> nearbyPlayers = new List<Player>();
-                    Player.GetPlayersInRange(__instance.transform.position, 5f, nearbyPlayers);
-                    foreach (var player in nearbyPlayers)
-                    {
-                        player.Damage(fireHit);
-                    }
+                    ApplyDamageToNearbyPlayers(__instance.transform.position, fireHit);
                 }
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostDeath))
             {
                 GameObject frostNovaAOE = ZNetScene.instance.GetPrefab("fx_fenring_icenova");
-                TimedDestruction timedDestruction = frostNovaAOE.GetComponent<TimedDestruction>();
-                timedDestruction.m_timeout = 0f;
-                GameObject sfx2 = frostNovaAOE.FindDeepChild("sfx").gameObject;
-                sfx2.SetActive(false);
-                GameObject sfx3 = frostNovaAOE.FindDeepChild("sfx").gameObject;
-                sfx3.SetActive(false);
+                // TimedDestruction timedDestruction = frostNovaAOE.GetComponent<TimedDestruction>();
+                // timedDestruction.m_timeout = 2.5f;
+                
+                ParticleSystem[] listParticleSystem = frostNovaAOE.GetComponentsInChildren<ParticleSystem>();
+                foreach (var particleSystem in listParticleSystem)
+                {
+                    particleSystem.startDelay = 0f;
+                }
+
+                ZSFX zsfx = frostNovaAOE.GetComponentInChildren<ZSFX>();
+                zsfx.m_delay = 0f;
+                zsfx.m_minDelay = 0f;
+                zsfx.m_maxDelay = 0f;
+                
                     
                 if (frostNovaAOE != null)
                 {
@@ -100,12 +117,7 @@ public class DeathSpawns
                         m_damage = { m_frost = 30f }
                     };
 
-                    List<Player> nearbyPlayers = new List<Player>();
-                    Player.GetPlayersInRange(__instance.transform.position, 5f, nearbyPlayers);
-                    foreach (var player in nearbyPlayers)
-                    {
-                        player.Damage(frostHit);
-                    }
+                    ApplyDamageToNearbyPlayers(__instance.transform.position, frostHit);
                 }
             }
         }
