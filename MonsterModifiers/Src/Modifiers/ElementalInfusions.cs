@@ -28,14 +28,35 @@ public class ElementalInfusions
                 return;
             }
 
-            if (!modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonInfused))
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonInfused))
             {
-                return;
+                hit.m_damage.m_poison += hit.GetTotalPhysicalDamage();
+                Debug.Log("Hit has additional poison damage added. Amount is: " + hit.m_damage.m_poison);
             }
             
-            hit.m_damage.m_poison += hit.GetTotalPhysicalDamage();
-            Debug.Log("Hit has additional poison damage added. Amount is: " + hit.m_damage.m_poison);
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireInfused))
+            {
+                hit.m_damage.m_fire += hit.GetTotalPhysicalDamage();
+                Debug.Log("Hit has additional fire damage added. Amount is: " + hit.m_damage.m_fire);
+            }
             
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.LightningInfused))
+            {
+                hit.m_damage.m_lightning += hit.GetTotalPhysicalDamage();
+                Debug.Log("Hit has additional lightning damage added. Amount is: " + hit.m_damage.m_lightning);
+            }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostInfused))
+            {
+                hit.m_damage.m_frost += hit.GetTotalPhysicalDamage();
+                Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
+            }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.SpiritInfused))
+            {
+                hit.m_damage.m_spirit += hit.GetTotalPhysicalDamage();
+                Debug.Log("Hit has additional spirit damage added. Amount is: " + hit.m_damage.m_spirit);
+            }
         }
     }
 }

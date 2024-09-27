@@ -59,6 +59,11 @@ public class MonsterModifier : MonoBehaviour
          {
             StaggerImmune.AddStaggerImmune(character);
          }
+         
+         if (Modifiers.Contains(MonsterModifierTypes.FastMovement))
+         {
+            FastMovement.AddFastMovement(character);
+         }
       }
    }
 }

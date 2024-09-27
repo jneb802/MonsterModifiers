@@ -125,7 +125,10 @@
         <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
+        <Compile Include="Src\Modifiers\DistantDetection.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
+        <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
+        <Compile Include="Src\Modifiers\FastMovement.cs" />
         <Compile Include="Src\Modifiers\FoodDrain.cs" />
         <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
         <Compile Include="Src\Modifiers\IgnoreArmor.cs" />

@@ -49,3 +49,27 @@ StaggerImmune:
 FireInfused:
   weight: 1
   color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+FrostInfused:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+PoisonInfused:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+LightningInfused:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+SpiritInfused:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+
+FastMovement:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet
+  
+FastAttackSpeed:
+  weight: 1
+  color: [0.6, 0.1, 0.6, 1]  # Deep Violet

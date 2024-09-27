@@ -26,6 +26,8 @@ public enum MonsterModifierTypes
     LightningInfused,
     AddElementalImmunity,
     AddPhysicalImmunity,
+    FastMovement,
+    FastAttackSpeed
 }
 
 public class ModifierData
