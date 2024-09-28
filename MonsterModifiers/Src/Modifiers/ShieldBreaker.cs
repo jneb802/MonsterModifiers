@@ -34,7 +34,10 @@ public class ShieldBreaker
             ItemDrop.ItemData shield = __instance.GetCurrentBlocker();
             if (shield != null)
             {
-                shield.m_durability *= 0.5f;
+                if (shield.m_durability > (shield.GetMaxDurability() * 0.1))
+                {
+                    shield.m_durability *= 0.5f;  
+                }
             }
         }
     }

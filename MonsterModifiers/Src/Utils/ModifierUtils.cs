@@ -19,14 +19,14 @@ public enum MonsterModifierTypes
     PersonalShield,
     ShieldDome,
     SoulEater,
-    RemoveStatus,
+    RemoveStatusEffect,
     StaggerImmune,
     FireInfused,
     PoisonInfused,
     FrostInfused,
     LightningInfused,
-    AddElementalImmunity,
-    AddPhysicalImmunity,
+    ElementalImmunity,
+    PhysicalImmunity,
     FastMovement,
     FastAttackSpeed
 }
@@ -49,6 +49,61 @@ public class ModifierUtils
         return color;
     }
 
+    public static Sprite GetModifierIcon(MonsterModifierTypes modifier)
+    {
+        
+        if (modifier == MonsterModifierTypes.FireInfused ||
+            modifier == MonsterModifierTypes.FrostInfused ||
+            modifier == MonsterModifierTypes.PoisonInfused ||
+            modifier == MonsterModifierTypes.LightningInfused ||
+            modifier == MonsterModifierTypes.StaminaSiphon ||
+            modifier == MonsterModifierTypes.EitrSiphon ||
+            modifier == MonsterModifierTypes.RemoveStatusEffect ||
+            modifier == MonsterModifierTypes.FoodDrain ||
+            modifier == MonsterModifierTypes.ShieldBreaker ||
+            modifier == MonsterModifierTypes.IgnoreArmor)
+        {
+            return ModifierAssetUtils.swordIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.PoisonDeath ||
+            modifier == MonsterModifierTypes.FireDeath ||
+            modifier == MonsterModifierTypes.FrostDeath)
+        {
+            return ModifierAssetUtils.skullIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.ElementalImmunity ||
+            modifier == MonsterModifierTypes.PhysicalImmunity ||
+            modifier == MonsterModifierTypes.StaggerImmune)
+        {
+            return ModifierAssetUtils.shieldIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.PersonalShield ||
+            modifier == MonsterModifierTypes.ShieldDome)
+
+        {
+            return ModifierAssetUtils.circleIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.SoulEater)
+
+        {
+            return ModifierAssetUtils.soulIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.FastAttackSpeed ||
+            modifier == MonsterModifierTypes.FastMovement)
+
+        {
+            return ModifierAssetUtils.plusSquareIcon;
+        }
+        
+        Debug.Log("Could not find icon for modifier");
+        return ModifierAssetUtils.plusSquareIcon;;
+    }
+
     public static int GetModifierWeight(MonsterModifierTypes modifier)
     {
         return modifiers[modifier].weight;
@@ -63,12 +118,12 @@ public class ModifierUtils
         for (int i = 0; i < numModifiers; i++)
         {
             int totalWeight = 0;
-            
+
             foreach (var modifier in availableModifiers.Values)
             {
                 totalWeight += modifier.weight;
             }
-            
+
             int randomValue = UnityEngine.Random.Range(0, totalWeight);
             int cumulativeWeight = 0;
 
@@ -93,7 +148,7 @@ public class ModifierUtils
 
     public static void RunBiomeChecks()
     {
-        
+
     }
 
     public static bool RunRPCDamageChecks(Character character, HitData hit)
@@ -103,11 +158,13 @@ public class ModifierUtils
             return false;
         }
 
+        // This avoids any hits that have no damage
         if (hit.m_damage.GetTotalDamage() == 0)
         {
             return false;
         }
 
+        // This avoids all non-enemy-attacking-player hits. Ex: fall damage
         if (hit.m_hitType != HitData.HitType.EnemyHit)
         {
             return false;
@@ -115,7 +172,34 @@ public class ModifierUtils
 
         return true;
     }
+
+    public static bool RunHitChecks(HitData hit, bool isMonsterAttacking)
+    {
+        Character attacker = hit.GetAttacker();
+        if (attacker == null)
+        {
+            return false;
+        }
+
+        if (isMonsterAttacking)
+        {
+            if (attacker.IsPlayer())
+            {
+                return false;
+            }
+        }
+
+        if (!isMonsterAttacking)
+        {
+            if (attacker.IsPlayer())
+            {
+                return true;
+            }
+        }
+        return true;
+    }
 }
+
 
 
 

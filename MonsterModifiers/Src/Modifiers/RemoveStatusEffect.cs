@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace MonsterModifiers.Modifiers;
 
-public class RemoveStatus
+public class RemoveStatusEffect
 {
     [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
     public class RemoveMead_Character_RPC_Damage_Patch
@@ -17,21 +17,20 @@ public class RemoveStatus
             {
                 return;
             }
-
-            var attacker = hit.GetAttacker();
-
-            if (attacker.IsPlayer() || attacker == null)
+            
+            if (!ModifierUtils.RunHitChecks(hit, true))
             {
                 return;
             }
 
+            var attacker = hit.GetAttacker();
             var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)
             {
                 return;
             }
 
-            if (!modiferComponent.Modifiers.Contains(MonsterModifierTypes.RemoveStatus))
+            if (!modiferComponent.Modifiers.Contains(MonsterModifierTypes.RemoveStatusEffect))
             {
                 return;
             }

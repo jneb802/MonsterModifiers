@@ -73,11 +73,18 @@ namespace MonsterModifiers.Patches
 					for (int j = 0; j < child.transform.childCount; j++)
 					{
 						Transform child2 = child.transform.GetChild(j);
+						child2.GetComponent<Image>().sprite =
+							ModifierUtils.GetModifierIcon(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
+						child2.GetComponent<Image>().color =
+							ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
 						// Debug.Log("Name of child at low index " + j + " is " + child2.name);
 						if (child2.name.StartsWith("star"))
 						{
-							child2.GetChild(0).GetComponent<Image>().color =
-								ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
+							child2.GetChild(0).gameObject.SetActive(false);
+							// child2.GetChild(0).GetComponent<Image>().sprite =
+							// 	ModifierUtils.GetModifierIcon(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
+							// child2.GetChild(0).GetComponent<Image>().color =
+							// 	ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
 						}
 					}
 				}

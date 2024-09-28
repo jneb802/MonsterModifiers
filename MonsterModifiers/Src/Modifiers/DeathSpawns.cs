@@ -86,7 +86,7 @@ public class DeathSpawns
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostDeath))
             {
-                GameObject frostNovaAOE = ZNetScene.instance.GetPrefab("fx_fenring_icenova");
+                GameObject frostNovaAOE = ZNetScene.instance.GetPrefab("fx_DvergerMage_Nova_ring");
                 // TimedDestruction timedDestruction = frostNovaAOE.GetComponent<TimedDestruction>();
                 // timedDestruction.m_timeout = 2.5f;
                 

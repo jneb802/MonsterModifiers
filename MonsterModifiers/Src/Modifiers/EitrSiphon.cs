@@ -14,12 +14,13 @@ public class EitrSiphon
             {
                 return;
             }
-
-            var attacker = hit.GetAttacker();
-            if (attacker.IsPlayer() || attacker == null)
+            
+            if (!ModifierUtils.RunHitChecks(hit, true))
             {
                 return;
             }
+
+            var attacker = hit.GetAttacker();
 
             var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)

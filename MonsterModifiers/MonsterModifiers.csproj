@@ -134,8 +134,8 @@
         <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
         <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
         <Compile Include="Src\Modifiers\StaggerImmune.cs" />
-        <Compile Include="Src\Modifiers\ModiferDamageModifiers.cs" />
-        <Compile Include="Src\Modifiers\RemoveStatus.cs" />
+        <Compile Include="Src\Modifiers\DamageModifiers.cs" />
+        <Compile Include="Src\Modifiers\RemoveStatusEffect.cs" />
         <Compile Include="Src\Modifiers\ShieldBreaker.cs" />
         <Compile Include="Src\Modifiers\ShieldDome.cs" />
         <Compile Include="Src\Modifiers\PersonalShield.cs" />
@@ -156,6 +156,7 @@
         <EmbeddedResource Include="assets\dungeonmodifiers" />
         <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
         <EmbeddedResource Include="assets\statusicon" />
+        <EmbeddedResource Include="assets\modifiericons" />
         <Content Include="environment.props"/>
         <Content Include="icons\README.txt"/>
         <Content Include="ILRepack.targets"/>

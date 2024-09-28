@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MonsterModifiers.Modifiers;
 
-public class ModiferDamageModifiers
+public class DamageModifiers
 {
     [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
     public class ModiferDamageModifiers_Character_RPC_Damage_Patch
@@ -16,9 +16,8 @@ public class ModiferDamageModifiers
             {
                 return;
             }
-
-            var attacker = hit.GetAttacker();
-            if (!attacker.IsPlayer() || attacker == null)
+            
+            if (!ModifierUtils.RunHitChecks(hit, false))
             {
                 return;
             }
@@ -29,7 +28,7 @@ public class ModiferDamageModifiers
                 return;
             }
 
-            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.AddPhysicalImmunity))
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PhysicalImmunity))
             {
                 __instance.m_damageModifiers.m_blunt = HitData.DamageModifier.Immune;
                 __instance.m_damageModifiers.m_pierce = HitData.DamageModifier.Immune;
@@ -38,7 +37,7 @@ public class ModiferDamageModifiers
                 __instance.m_damageModifiers.m_pickaxe = HitData.DamageModifier.Immune;
             }
             
-            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.AddElementalImmunity))
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.ElementalImmunity))
             {
                 __instance.m_damageModifiers.m_fire = HitData.DamageModifier.Immune;
                 __instance.m_damageModifiers.m_frost = HitData.DamageModifier.Immune;

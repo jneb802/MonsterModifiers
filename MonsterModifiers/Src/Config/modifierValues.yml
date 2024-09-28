@@ -1,10 +1,10 @@
 StaminaSiphon:
   weight: 1
-  color: [0.9, 0.6, 0.3, 1]  # Light Orange
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
 
 EitrSiphon:
   weight: 1
-  color: [0.3, 0.7, 0.5, 1]  # Mint Green
+  color: [0.73, 0.19, 0.77, 1]  # Purple
 
 ShieldBreaker:
   weight: 1
@@ -12,31 +12,31 @@ ShieldBreaker:
 
 FoodDrain:
   weight: 1
-  color: [0.5, 0.3, 0.8, 1]  # Lavender
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 IgnoreArmor:
   weight: 1
-  color: [0.1, 0.8, 0.7, 1]  # Teal
+  color: [0.5, 0.5, 0.5, 1]  # Grey
 
-AddElementalImmunity:
+ElementalImmunity:
   weight: 1
   color: [0.9, 0.9, 0.2, 1]  # Yellow Lime
 
-AddPhysicalImmunity:
+PhysicalImmunity:
   weight: 1
-  color: [0.4, 0.6, 0.8, 1]  # Slate Blue
+  color: [0.42, 0.56, 0.74, 1]  # Slate Blue
 
-RemoveStatus:
+RemoveStatusEffect:
   weight: 1
-  color: [0.9, 0.4, 0.2, 1]  # Coral
+  color: [1, 0.5, 0.31, 1]  # Coral
 
 PersonalShield:
   weight: 1
-  color: [0.2, 0.5, 0.8, 1]  # Sky Blue
+  color: [0.13, 0.45, 0.73, 1]  # Dark Blue
 
 ShieldDome:
   weight: 1
-  color: [0.9, 0.7, 0.4, 1]  # Sand
+  color: [0.68, 0.85, 0.9, 1]  # Light Blue
 
 SoulEater:
   weight: 1
@@ -44,40 +44,40 @@ SoulEater:
 
 StaggerImmune:
   weight: 1
-  color: [0.8, 0.5, 0.1, 1]  # Mustard Yellow
+  color: [0.82, 0.68, 0.08, 1]  # Mustard Yellow
 
 FireInfused:
   weight: 1
-  color: [0.9, 0.3, 0.2, 1]  # Crimson Red
+  color: [0.86, 0.08, 0.23, 1]  # Crimson Red
 
 FrostInfused:
   weight: 1
-  color: [0.5, 0.8, 1, 1]  # Light Cyan
+  color: [0.53, 0.8, 1, 1]  # Blue
 
 PoisonInfused:
   weight: 1
-  color: [0.3, 0.7, 0.3, 1]  # Green
+  color: [0.18, 0.55, 0.24, 1]  # Dark Green
 
 LightningInfused:
   weight: 1
-  color: [0.7, 0.8, 0.9, 1]  # Light Gray
+  color: [0.87, 0.84, 0.28, 1]  # Light Yellow
 
 FastMovement:
   weight: 1
-  color: [0.6, 0.8, 0.3, 1]  # Lime Green
+  color: [0.68, 0.82, 0.15, 1]  # Lime Green
 
 FastAttackSpeed:
   weight: 1
-  color: [0.7, 0.5, 0.2, 1]  # Bronze
+  color: [0.8, 0.5, 0.2, 1]  # Bronze
 
 PoisonDeath:
   weight: 1
-  color: [0.3, 0.6, 0.2, 1]  # Moss Green
+  color: [0.18, 0.55, 0.24, 1]  # Dark Green
 
 FireDeath:
   weight: 1
-  color: [1, 0.4, 0.1, 1]  # Bright Red
+  color: [0.86, 0.08, 0.23, 1]  # Crimson Red
 
 FrostDeath:
   weight: 1
-  color: [0.5, 0.9, 1, 1]  # Ice Blue
+  color: [0.53, 0.8, 1, 1]  # Blue
