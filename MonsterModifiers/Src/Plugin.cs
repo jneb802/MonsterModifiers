@@ -88,6 +88,7 @@ namespace MonsterModifiers
             ModifierAssetUtils.Setup();
             ShieldDome.LoadShieldDome();
             ModifierAssetUtils.LoadAllIcons();
+            CompatibilityUtils.RunCompatibiltyChecks();
         }
 
         private void OnDestroy()

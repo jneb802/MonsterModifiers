@@ -64,6 +64,11 @@ public class MonsterModifier : MonoBehaviour
          {
             FastMovement.AddFastMovement(character);
          }
+         
+         if (Modifiers.Contains(MonsterModifierTypes.DistantDetection))
+         {
+            DistantDetection.AddDistantDetection(character);
+         }
       }
    }
 }

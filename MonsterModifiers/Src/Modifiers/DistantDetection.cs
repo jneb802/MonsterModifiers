@@ -6,7 +6,7 @@ public class DistantDetection
 {
     public static void AddDistantDetection(Character character)
     {
-        Debug.Log("Monster with name " + character.m_name + " has modifier Stagger Immune");
+        // Debug.Log("Monster with name " + character.m_name + " has modifier Stagger Immune");
         BaseAI baseAI = character.m_baseAI;
         if (baseAI != null)
         {

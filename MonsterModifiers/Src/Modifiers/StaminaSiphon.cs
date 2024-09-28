@@ -19,6 +19,11 @@ public class StaminaSiphon
             {
                 return;
             }
+            
+            if (__instance.IsBlocking())
+            {
+                return;
+            }
 
             var attacker = hit.GetAttacker();
 

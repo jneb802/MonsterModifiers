@@ -28,7 +28,8 @@ public enum MonsterModifierTypes
     ElementalImmunity,
     PhysicalImmunity,
     FastMovement,
-    FastAttackSpeed
+    FastAttackSpeed,
+    DistantDetection
 }
 
 public class ModifierData
@@ -56,14 +57,26 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FrostInfused ||
             modifier == MonsterModifierTypes.PoisonInfused ||
             modifier == MonsterModifierTypes.LightningInfused ||
-            modifier == MonsterModifierTypes.StaminaSiphon ||
-            modifier == MonsterModifierTypes.EitrSiphon ||
-            modifier == MonsterModifierTypes.RemoveStatusEffect ||
-            modifier == MonsterModifierTypes.FoodDrain ||
-            modifier == MonsterModifierTypes.ShieldBreaker ||
-            modifier == MonsterModifierTypes.IgnoreArmor)
+            modifier == MonsterModifierTypes.RemoveStatusEffect)
         {
             return ModifierAssetUtils.swordIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.ShieldBreaker ||
+            modifier == MonsterModifierTypes.IgnoreArmor)
+        {
+            return ModifierAssetUtils.shieldBrokenIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.StaminaSiphon ||
+            modifier == MonsterModifierTypes.EitrSiphon)
+        {
+            return ModifierAssetUtils.potionIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.FoodDrain)
+        {
+            return ModifierAssetUtils.appleIcon;
         }
         
         if (modifier == MonsterModifierTypes.PoisonDeath ||
@@ -94,7 +107,8 @@ public class ModifierUtils
         }
         
         if (modifier == MonsterModifierTypes.FastAttackSpeed ||
-            modifier == MonsterModifierTypes.FastMovement)
+            modifier == MonsterModifierTypes.FastMovement ||
+            modifier == MonsterModifierTypes.DistantDetection)
 
         {
             return ModifierAssetUtils.plusSquareIcon;

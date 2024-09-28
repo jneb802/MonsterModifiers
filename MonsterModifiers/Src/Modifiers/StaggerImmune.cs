@@ -8,7 +8,7 @@ public class StaggerImmune
 {
     public static void AddStaggerImmune(Character character)
     {
-        Debug.Log("Monster with name " + character.m_name + " has modifier Stagger Immune");
+        // Debug.Log("Monster with name " + character.m_name + " has modifier Stagger Immune");
         character.m_staggerWhenBlocked = false;
     }
 }

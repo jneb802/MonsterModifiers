@@ -34,7 +34,7 @@ public class IgnoreArmor
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.IgnoreArmor))
             {
-                Debug.Log("Ignore amror is true");
+                // Debug.Log("Ignore amror is true");
                 shouldIgnoreArmor = true;
             }
         }
@@ -48,7 +48,7 @@ public class IgnoreArmor
             if (shouldIgnoreArmor)
             {
                 __result *= 0.5f;
-                Debug.Log("Get body armor has reduced the armor");
+                // Debug.Log("Get body armor has reduced the armor");
                 shouldIgnoreArmor = false;
             }
         }

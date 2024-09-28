@@ -8,67 +8,71 @@ EitrSiphon:
 
 ShieldBreaker:
   weight: 1
-  color: [0.7, 0.2, 0.9, 1]  # Purple Magenta
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
+
+IgnoreArmor:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 FoodDrain:
   weight: 1
   color: [0.88, 0.01, 0.15, 1]  # Red
 
-IgnoreArmor:
-  weight: 1
-  color: [0.5, 0.5, 0.5, 1]  # Grey
-
-ElementalImmunity:
-  weight: 1
-  color: [0.9, 0.9, 0.2, 1]  # Yellow Lime
-
-PhysicalImmunity:
-  weight: 1
-  color: [0.42, 0.56, 0.74, 1]  # Slate Blue
-
-RemoveStatusEffect:
-  weight: 1
-  color: [1, 0.5, 0.31, 1]  # Coral
-
-PersonalShield:
-  weight: 1
-  color: [0.13, 0.45, 0.73, 1]  # Dark Blue
-
-ShieldDome:
-  weight: 1
-  color: [0.68, 0.85, 0.9, 1]  # Light Blue
-
-SoulEater:
-  weight: 1
-  color: [0.7, 0.1, 0.4, 1]  # Deep Rose
-
-StaggerImmune:
-  weight: 1
-  color: [0.82, 0.68, 0.08, 1]  # Mustard Yellow
-
 FireInfused:
   weight: 1
-  color: [0.86, 0.08, 0.23, 1]  # Crimson Red
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 FrostInfused:
   weight: 1
-  color: [0.53, 0.8, 1, 1]  # Blue
+  color: [0.32, 0.66, 0.91, 1]  # Blue
 
 PoisonInfused:
   weight: 1
-  color: [0.18, 0.55, 0.24, 1]  # Dark Green
+  color: [0.18, 0.55, 0.24, 1]  # Green
 
 LightningInfused:
   weight: 1
-  color: [0.87, 0.84, 0.28, 1]  # Light Yellow
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
+
+RemoveStatusEffect:
+  weight: 1
+  color: [0.73, 0.19, 0.77, 1]  # Purple
+
+PersonalShield:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red
+
+ShieldDome:
+  weight: 1
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
+
+SoulEater:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 FastMovement:
   weight: 1
-  color: [0.68, 0.82, 0.15, 1]  # Lime Green
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 FastAttackSpeed:
   weight: 1
-  color: [0.8, 0.5, 0.2, 1]  # Bronze
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
+
+DistantDetection:
+  weight: 1
+  color: [0.73, 0.19, 0.77, 1]  # Purple
+
+ElementalImmunity:
+  weight: 1
+  color: [0.73, 0.19, 0.77, 1]  # Purple
+
+PhysicalImmunity:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red
+
+StaggerImmune:
+  weight: 1
+  color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
 
 PoisonDeath:
   weight: 1
@@ -76,8 +80,8 @@ PoisonDeath:
 
 FireDeath:
   weight: 1
-  color: [0.86, 0.08, 0.23, 1]  # Crimson Red
+  color: [0.88, 0.01, 0.15, 1]  # Red
 
 FrostDeath:
   weight: 1
-  color: [0.53, 0.8, 1, 1]  # Blue
+  color: [0.32, 0.66, 0.91, 1]  # Blue

@@ -143,6 +143,7 @@
         <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
+        <Compile Include="Src\Utils\CompatibilityUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />

@@ -25,7 +25,7 @@ public class FastAttackSpeed
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FastAttackSpeed))
             {
-                Debug.Log("Monster has fast attack speed");
+                // Debug.Log("Monster has fast attack speed");
                 double currentAttackSpeed = ___m_animator.speed * 10000000.0 % 100.0;
                 float attackSpeedModifier = 0.5f;
                 if ((!(currentAttackSpeed < 30.0) || !(currentAttackSpeed > 10.0)) && !(___m_animator.speed <= 0.001f))

@@ -17,6 +17,9 @@ public class ModifierAssetUtils
     public static Sprite circleIcon;
     public static Sprite soulIcon;
     public static Sprite skullIcon;
+    public static Sprite appleIcon;
+    public static Sprite shieldBrokenIcon;
+    public static Sprite potionIcon;
 
     public static void Setup()
     {
@@ -33,6 +36,9 @@ public class ModifierAssetUtils
         circleIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Circle.png");
         soulIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/SoulEater.png");
         skullIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Skull.png");
+        appleIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Apple.png");
+        shieldBrokenIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldBroken.png");
+        potionIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Potion.png");
         
     }
 

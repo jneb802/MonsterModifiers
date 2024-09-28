@@ -48,7 +48,7 @@ public class SoulEater : MonoBehaviour
              List<Character> characters = GetAllCharacter(__instance.transform.position,5f);
              foreach (var character in characters)
              {
-                 if (character != null)
+                 if (character != null && !character.IsDead())
                  {
                      var modiferComponent = character.GetComponent<MonsterModifier>(); 
                      if (modiferComponent != null && modiferComponent.Modifiers.Contains(MonsterModifierTypes.SoulEater) && character.m_nview.GetZDO().IsOwner())
@@ -106,23 +106,23 @@ public class SoulEater : MonoBehaviour
                          case 1:
                              hit.ApplyModifier(1.1f);
                              finalDamage = baseDamage * 1.1f;
-                             Debug.Log($"SoulEater modifier applied: 1.1. Final damage: {finalDamage}");
+                             // Debug.Log($"SoulEater modifier applied: 1.1. Final damage: {finalDamage}");
                              break;
                          case 2:
                              hit.ApplyModifier(1.2f);
                              finalDamage = baseDamage * 1.2f;
-                             Debug.Log($"SoulEater modifier applied: 1.2. Final damage: {finalDamage}");
+                             // Debug.Log($"SoulEater modifier applied: 1.2. Final damage: {finalDamage}");
                              break;
                          case 3:
                              hit.ApplyModifier(1.3f);
                              finalDamage = baseDamage * 1.3f;
-                             Debug.Log($"SoulEater modifier applied: 1.3. Final damage: {finalDamage}");
+                             // Debug.Log($"SoulEater modifier applied: 1.3. Final damage: {finalDamage}");
                              break;
                          default:
                              // Handle cases where soulEaterCount is outside the range 1-3
                              hit.ApplyModifier(1.0f); // No modifier or a default modifier
                              finalDamage = baseDamage * 1.0f;
-                             Debug.Log($"SoulEater modifier applied: 1.0 (default). Final damage: {finalDamage}");
+                             // Debug.Log($"SoulEater modifier applied: 1.0 (default). Final damage: {finalDamage}");
                              break;
                      }
                  }

@@ -18,11 +18,13 @@ public class ShieldDome: MonoBehaviour
     public static void LoadShieldDome()
     {
         ShieldGenereatorBubbleCustomPrefab = new CustomPrefab(ModifierAssetUtils.ashlandsAssetBundle, "ShieldDome_Bubble", true);
+        // var startupFX = ZNetScene.instance.GetPrefab("vfx_shieldgenerator_startup");
+        // ShieldGenereatorBubbleCustomPrefab.Prefab.GetComponent<ShieldGenerator>().m_shieldStart.m_effectPrefabs[1].m_prefab = startupFX;
     }
     
     public void AddShieldDome(Character character)
     {
-        Debug.Log("Monster with name " + character.m_name + " has modifier ShieldDome");
+        // Debug.Log("Monster with name " + character.m_name + " has modifier ShieldDome");
         character.gameObject.AddComponent<ShieldDome>();
         shieldGenereatorBubble = Instantiate(ShieldGenereatorBubbleCustomPrefab.Prefab, character.transform.position,
             character.transform.rotation);
@@ -71,7 +73,7 @@ public class ShieldDome: MonoBehaviour
             if (__instance.TryGetComponent(out ShieldDome shieldDome))
             {
                 shieldDome.Destroy();
-                Debug.Log("Shield dome destroyed when character died");
+                // Debug.Log("Shield dome destroyed when character died");
             }
         }
     }

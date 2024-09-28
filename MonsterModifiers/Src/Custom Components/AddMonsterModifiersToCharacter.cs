@@ -11,10 +11,10 @@ public class AddMonsterModifiersToCharacter
     {
         private static void Postfix(Character __instance)
         {
-            if (!__instance.IsPlayer())
+            if (!__instance.IsPlayer() && !__instance.IsBoss())
             {
                 __instance.gameObject.AddComponent<MonsterModifier>();
-                Debug.Log("Monster Modifier component was added to creature with name " + __instance.m_name);
+                // Debug.Log("Monster Modifier component was added to creature with name " + __instance.m_name);
             }
         }
     }
