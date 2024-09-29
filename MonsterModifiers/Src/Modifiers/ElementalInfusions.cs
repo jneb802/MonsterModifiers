@@ -20,8 +20,8 @@ public class ElementalInfusions
             {
                 return;
             }
-
-            if (!__instance.IsBlocking())
+            
+            if (__instance.IsBlocking())
             {
                 return;
             }

@@ -1,6 +1,7 @@
 using System.Reflection;
 using HarmonyLib;
 using Jotunn.Entities;
+using Jotunn.Managers;
 using Jotunn.Utils;
 using MonsterModifiers.Custom_Components;
 using UnityEngine;
@@ -18,8 +19,7 @@ public class ShieldDome: MonoBehaviour
     public static void LoadShieldDome()
     {
         ShieldGenereatorBubbleCustomPrefab = new CustomPrefab(ModifierAssetUtils.ashlandsAssetBundle, "ShieldDome_Bubble", true);
-        // var startupFX = ZNetScene.instance.GetPrefab("vfx_shieldgenerator_startup");
-        // ShieldGenereatorBubbleCustomPrefab.Prefab.GetComponent<ShieldGenerator>().m_shieldStart.m_effectPrefabs[1].m_prefab = startupFX;
+        PrefabManager.Instance.AddPrefab(ShieldGenereatorBubbleCustomPrefab);
     }
     
     public void AddShieldDome(Character character)
@@ -46,14 +46,14 @@ public class ShieldDome: MonoBehaviour
         if (m_character != null && shieldGenereatorBubble != null)
         {
             
-            shieldGenereatorBubble.transform.position = m_character.transform.position;
-            shieldGenereatorBubble.transform.rotation = m_character.transform.rotation;
+            // shieldGenereatorBubble.transform.position = m_character.transform.position;
+            // shieldGenereatorBubble.transform.rotation = m_character.transform.rotation;
             
             m_shieldGenerator.m_shieldDome.transform.position = m_character.transform.position;
             m_shieldGenerator.m_shieldDome.transform.rotation = m_character.transform.rotation;
             
-            m_shieldDomeImageEffect.transform.position = m_character.transform.position;
-            m_shieldDomeImageEffect.transform.rotation = m_character.transform.rotation;
+            // m_shieldDomeImageEffect.transform.position = m_character.transform.position;
+            // m_shieldDomeImageEffect.transform.rotation = m_character.transform.rotation;
          
             m_shieldDomeImageEffect.SetShieldData(m_shieldGenerator,m_character.transform.position,10,m_shieldGenerator.m_lastFuel,m_shieldGenerator.m_lastHitTime);
         }
@@ -61,8 +61,9 @@ public class ShieldDome: MonoBehaviour
 
     public void Destroy()
     {
+        m_shieldGenerator.OnDestroy();
         m_shieldDomeImageEffect.RemoveShield(m_shieldGenerator);
-        Destroy(shieldGenereatorBubble);
+        ZNetScene.instance.Destroy(shieldGenereatorBubble);
     }
     
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
@@ -74,6 +75,18 @@ public class ShieldDome: MonoBehaviour
             {
                 shieldDome.Destroy();
                 // Debug.Log("Shield dome destroyed when character died");
+            }
+        }
+    }
+    
+    [HarmonyPatch(typeof(ShieldGenerator), nameof(ShieldGenerator.Start))]
+    public class ShieldDome_ShieldGenerator_Start_Patch
+    {
+        public static void Postfix(ShieldGenerator __instance)
+        {
+            if (__instance != null)
+            {
+                Debug.Log("Value of isPlacementGhost is " + __instance.m_isPlacementGhost);
             }
         }
     }

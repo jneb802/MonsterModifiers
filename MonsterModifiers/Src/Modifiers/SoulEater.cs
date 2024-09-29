@@ -36,7 +36,7 @@ public class SoulEater : MonoBehaviour
              {
                  return;  
              }
-
+             
              if (__instance.TryGetComponent(out MonsterModifier monsterModifier))
              {
                  if (monsterModifier.Modifiers.Contains(MonsterModifierTypes.SoulEater))
@@ -48,23 +48,25 @@ public class SoulEater : MonoBehaviour
              List<Character> characters = GetAllCharacter(__instance.transform.position,5f);
              foreach (var character in characters)
              {
-                 if (character != null && !character.IsDead())
+                 if (character == null || character.m_nview == null || character.m_nview.GetZDO() == null || !character.m_nview.GetZDO().IsOwner())
                  {
-                     var modiferComponent = character.GetComponent<MonsterModifier>(); 
-                     if (modiferComponent != null && modiferComponent.Modifiers.Contains(MonsterModifierTypes.SoulEater) && character.m_nview.GetZDO().IsOwner())
+                     continue;
+                 }
+                 
+                 var modiferComponent = character.GetComponent<MonsterModifier>(); 
+                 if (modiferComponent != null && modiferComponent.Modifiers.Contains(MonsterModifierTypes.SoulEater))
+                 {
+                     if (character.m_nview.GetZDO().GetInt("MM_soulEaterCount") < 3)
                      {
-                         if (character.m_nview.GetZDO().GetInt("MM_soulEaterCount") < 3)
-                         {
-                             int soulEaterCount = character.m_nview.GetZDO().GetInt("MM_soulEaterCount") + 1;
-                             character.m_nview.GetZDO().Set("MM_soulEaterCount",soulEaterCount);
+                         // Debug.Log("Monster with name " + character.m_name + " has been incremented via soulEater");
                          
-                             character.transform.localScale *= 1.1f;
-                             Physics.SyncTransforms();
+                         int soulEaterCount = character.m_nview.GetZDO().GetInt("MM_soulEaterCount") + 1;
+                         character.m_nview.GetZDO().Set("MM_soulEaterCount",soulEaterCount);
+                         
+                         character.transform.localScale *= 1.1f;
+                         Physics.SyncTransforms();
 
-                             character.m_health *= 1.1f;
-                             
-                             Debug.Log("Monster with name " + __instance.m_name + " has been incremented via soulEater");
-                         }
+                         character.m_health *= 1.1f;
                      }
                  }
              }

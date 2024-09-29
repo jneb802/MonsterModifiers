@@ -28,14 +28,14 @@ public class MonsterModifier : MonoBehaviour
             foreach (var modifier in ModifierUtils.RollRandomModifiers(level - 1))
             {
                Modifiers.Add(modifier);
-               Debug.Log("Adding modifier: " + modifier.ToString() + " to monster with name: " + character.m_name);
+               // Debug.Log("Adding modifier: " + modifier.ToString() + " to monster with name: " + character.m_name);
             }
             
             if (character.m_nview.GetZDO().IsOwner())
             {
                string serializedModifiers = string.Join(",", Modifiers);
                character.m_nview.GetZDO().Set("modifiers", serializedModifiers);
-               Debug.Log("Adding modifiers to monster with name " + character.m_name);
+               // Debug.Log("Adding modifiers to monster with name " + character.m_name);
             }
          }
          else

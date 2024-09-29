@@ -24,7 +24,7 @@ namespace MonsterModifiers.Patches
 				return;
 			}
 
-			ChangeEnemyStarColor(c, monsterModifier.Modifiers);
+			ChangeEnemyStars(c, monsterModifier.Modifiers);
 
 		}
 
@@ -53,7 +53,7 @@ namespace MonsterModifiers.Patches
 		}
 		
 		
-		private static void ChangeEnemyStarColor(Character character, List<MonsterModifierTypes> modifiers)
+		private static void ChangeEnemyStars(Character character, List<MonsterModifierTypes> modifiers)
 		{
 			if (character.GetLevel() <= 1 || character.IsBoss() ||
 			    !EnemyHud.instance.m_huds.TryGetValue(character, out var value))
