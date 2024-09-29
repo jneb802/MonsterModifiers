@@ -124,23 +124,30 @@
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
-        <Compile Include="Src\Custom Components\MonsterModifierComponent.cs" />
-        <Compile Include="Src\Custom Components\SigilComponent.cs" />
-        <Compile Include="Src\GamePatches\IncineratorPatch.cs" />
-        <Compile Include="Src\GamePatches\ItemDropPatch.cs" />
-        <Compile Include="Src\GamePatches\SigilCrafting.cs" />
-        <Compile Include="Src\Modifiers\ModifyDamageResistances.cs" />
-        <Compile Include="Src\Modifiers\ModifyHealth.cs" />
-        <Compile Include="Src\Modifiers\SpawnPoison.cs" />
+        <Compile Include="Src\Custom Components\MonsterModifier.cs" />
+        <Compile Include="Src\Modifiers\Bleed.cs" />
+        <Compile Include="Src\Modifiers\DistantDetection.cs" />
+        <Compile Include="Src\Modifiers\EitrSiphon.cs" />
+        <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
+        <Compile Include="Src\Modifiers\FastMovement.cs" />
+        <Compile Include="Src\Modifiers\FoodDrain.cs" />
+        <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
+        <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
+        <Compile Include="Src\Modifiers\StaggerImmune.cs" />
+        <Compile Include="Src\Modifiers\DamageModifiers.cs" />
+        <Compile Include="Src\Modifiers\RemoveStatusEffect.cs" />
+        <Compile Include="Src\Modifiers\ShieldBreaker.cs" />
+        <Compile Include="Src\Modifiers\ShieldDome.cs" />
+        <Compile Include="Src\Modifiers\PersonalShield.cs" />
+        <Compile Include="Src\Modifiers\DeathSpawns.cs" />
+        <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
-        <Compile Include="Src\Utils\Assets.cs" />
-        <Compile Include="Src\Utils\CreatureSpawnerUtils.cs" />
-        <Compile Include="Src\Utils\DungeonGenUtils.cs" />
-        <Compile Include="Src\Utils\LocationUtils.cs" />
-        <Compile Include="Src\Utils\ModiferUtils.cs" />
-        <Compile Include="Src\Utils\Modifier.cs" />
+        <Compile Include="Src\Utils\CompatibilityUtils.cs" />
+        <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
+        <Compile Include="Src\Utils\ModifierUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
+        <Compile Include="Src\Utils\ZnetUtils.cs" />
         <Compile Include="VersionHandshake.cs"/>
     </ItemGroup>
     <ItemGroup>
@@ -149,6 +156,9 @@
     <ItemGroup>
         <Content Include=".gitignore"/>
         <EmbeddedResource Include="assets\dungeonmodifiers" />
+        <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
+        <EmbeddedResource Include="assets\statusicon" />
+        <EmbeddedResource Include="assets\modifiericons" />
         <Content Include="environment.props"/>
         <Content Include="icons\README.txt"/>
         <Content Include="ILRepack.targets"/>
@@ -173,6 +183,9 @@
         <PackageReference Include="MonoMod.RuntimeDetour" Version="22.1.29.1" />
         <PackageReference Include="MonoMod.Utils" Version="22.1.29.1" />
         <PackageReference Include="YamlDotNet" Version="13.2.0"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Src\GamePatches\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

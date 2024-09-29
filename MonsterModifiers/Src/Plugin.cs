@@ -10,6 +10,7 @@ using JetBrains.Annotations;
 using Jotunn.Managers;
 using Jotunn.Utils;
 using LocalizationManager;
+using MonsterModifiers.Modifiers;
 using ServerSync;
 using UnityEngine;
 using Paths = BepInEx.Paths;
@@ -20,7 +21,7 @@ namespace MonsterModifiers
     public class MonsterModifiersPlugin : BaseUnityPlugin
     {
         internal const string ModName = "MonsterModifiers";
-        internal const string ModVersion = "1.0.0";
+        internal const string ModVersion = "1.0.3";
         internal const string Author = "warpalicious";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
@@ -82,18 +83,12 @@ namespace MonsterModifiers
                 Config.SaveOnConfigSet = saveOnSet;
                 Config.Save();
             }
-            
-            ModiferUtils.InitializeModifiers();
-            
-            Assets.AddAltar();
-            Assets.AddSigilTable();
-            // Assets.AddSigil();
-            // Assets.AddSigilRecipe();
-            Assets.CreateSigil();
-            
-            ZoneManager.OnVanillaLocationsAvailable += LocationUtils.ModifyAllLocations;
-            
-            
+
+            YamlUtils.ParseDefaultYamls();
+            ModifierAssetUtils.Setup();
+            ShieldDome.LoadShieldDome();
+            ModifierAssetUtils.LoadAllIcons();
+            CompatibilityUtils.RunCompatibiltyChecks();
         }
 
         private void OnDestroy()
