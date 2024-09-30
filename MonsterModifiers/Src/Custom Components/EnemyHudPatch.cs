@@ -28,32 +28,8 @@ namespace MonsterModifiers.Patches
 
 		}
 
-		private static void ChangeEnemyStarColor(Character character, Color color)
-		{
-			if (character.GetLevel() <= 1 || character.IsBoss() ||
-			    !EnemyHud.instance.m_huds.TryGetValue(character, out var value))
-			{
-				return;
-			}
-		
-			GameObject creatureGUI = value.m_gui;
-		
-			for (int i = 0; i < creatureGUI.transform.childCount; i++)
-			{
-				Transform child = creatureGUI.transform.GetChild(i);
-				for (int j = 0; j < child.transform.childCount; j++)
-				{
-					Transform child2 = child.transform.GetChild(j);
-					if (child2.name.StartsWith("star"))
-					{
-						child2.GetChild(0).GetComponent<Image>().color = color;
-					}
-				}
-			}
-		}
-		
-		
-		private static void ChangeEnemyStars(Character character, List<MonsterModifierTypes> modifiers)
+
+		public static void ChangeEnemyStars(Character character, List<MonsterModifierTypes> modifiers)
 		{
 			if (character.GetLevel() <= 1 || character.IsBoss() ||
 			    !EnemyHud.instance.m_huds.TryGetValue(character, out var value))

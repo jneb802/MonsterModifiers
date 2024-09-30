@@ -10,22 +10,6 @@ namespace MonsterModifiers.Modifiers;
 
 public class SoulEater : MonoBehaviour
 {
-    public static List<Character> GetAllCharacter(Vector3 position, float range)
-    {
-        Collider[] hits = Physics.OverlapBox(position, Vector3.one * range, Quaternion.identity);
-        List<Character> characters = new List<Character>();
-
-        foreach (var hit in hits)
-        {
-            var npc = hit.transform.root.gameObject.GetComponentInChildren<Character>();
-            if (npc != null)
-            {
-                characters.Add(npc);
-            }
-        }
-
-        return characters;
-    }
     
      [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
      public class SoulEater_Character_OnDeath_Patch
@@ -45,7 +29,7 @@ public class SoulEater : MonoBehaviour
                  }
              }
 
-             List<Character> characters = GetAllCharacter(__instance.transform.position,5f);
+             List<Character> characters = WorldUtils.GetAllCharacter(__instance.transform.position,5f);
              foreach (var character in characters)
              {
                  if (character == null || character.m_nview == null || character.m_nview.GetZDO() == null || !character.m_nview.GetZDO().IsOwner())

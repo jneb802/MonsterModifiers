@@ -46,19 +46,6 @@ namespace MonsterModifiers
             On = 1,
             Off = 0
         }
-        
-        public static AssetBundle assetBundle;
-        public static string bundleName = "dungeonmodifiers";
-        
-        public static void LoadAssetBundle()
-        {
-            assetBundle = AssetUtils.LoadAssetBundleFromResources(bundleName, Assembly.GetExecutingAssembly());
-        
-            if (assetBundle == null)
-            {
-                MonsterModifiersLogger.LogError("Failed to load asset bundle with name: " + bundleName);
-            }
-        }
 
         public void Awake()
         {
@@ -72,8 +59,6 @@ namespace MonsterModifiers
                 "If on, the configuration is locked and can be changed by server admins only.");
             _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
-            LoadAssetBundle();
-
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
             SetupWatcher();
@@ -86,9 +71,16 @@ namespace MonsterModifiers
 
             YamlUtils.ParseDefaultYamls();
             ModifierAssetUtils.Setup();
-            ShieldDome.LoadShieldDome();
             ModifierAssetUtils.LoadAllIcons();
+            
+            DungeonAssetUtils.Setup();
+            DungeonAssetUtils.SetupDungeonAssets();
+            
+            ShieldDome.LoadShieldDome();
+            
             CompatibilityUtils.RunCompatibiltyChecks();
+            
+            ZoneManager.OnVanillaLocationsAvailable += LocationUtils.ModifyAllLocations;
         }
 
         private void OnDestroy()

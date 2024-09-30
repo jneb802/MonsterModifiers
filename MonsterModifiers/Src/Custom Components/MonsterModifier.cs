@@ -44,31 +44,55 @@ public class MonsterModifier : MonoBehaviour
                str => (MonsterModifierTypes)Enum.Parse(typeof(MonsterModifierTypes), str)));
          }
 
-         if (Modifiers.Contains(MonsterModifierTypes.PersonalShield))
+         ApplyStartModifiers();
+
+      }
+   }
+
+   public void ChangeModifiers(List<MonsterModifierTypes> modifierTypesList, int numModifiers)
+   {
+      if (level > 1)
+      {
+         foreach (var modifier in modifierTypesList)
          {
-            PersonalShield.AddPersonalShield(character);
+            Modifiers.Add(modifier);
+            Debug.Log("Monster with name " + character.name + " has has changed modifiers. New modifier: " + modifier);
          }
          
-         if (Modifiers.Contains(MonsterModifierTypes.ShieldDome))
+         if (character.m_nview.GetZDO().IsOwner())
          {
-            var shieldDome = character.gameObject.AddComponent<ShieldDome>();
-            shieldDome.AddShieldDome(character);
+            string serializedModifiers = string.Join(",", Modifiers);
+            character.m_nview.GetZDO().Set("modifiers", serializedModifiers);
          }
+      }
+   }
+
+   public void ApplyStartModifiers()
+   {
+      if (Modifiers.Contains(MonsterModifierTypes.PersonalShield))
+      {
+         PersonalShield.AddPersonalShield(character);
+      }
          
-         if (Modifiers.Contains(MonsterModifierTypes.StaggerImmune))
-         {
-            StaggerImmune.AddStaggerImmune(character);
-         }
+      if (Modifiers.Contains(MonsterModifierTypes.ShieldDome))
+      {
+         var shieldDome = character.gameObject.AddComponent<ShieldDome>();
+         shieldDome.AddShieldDome(character);
+      }
          
-         if (Modifiers.Contains(MonsterModifierTypes.FastMovement))
-         {
-            FastMovement.AddFastMovement(character);
-         }
+      if (Modifiers.Contains(MonsterModifierTypes.StaggerImmune))
+      {
+         StaggerImmune.AddStaggerImmune(character);
+      }
          
-         if (Modifiers.Contains(MonsterModifierTypes.DistantDetection))
-         {
-            DistantDetection.AddDistantDetection(character);
-         }
+      if (Modifiers.Contains(MonsterModifierTypes.FastMovement))
+      {
+         FastMovement.AddFastMovement(character);
+      }
+         
+      if (Modifiers.Contains(MonsterModifierTypes.DistantDetection))
+      {
+         DistantDetection.AddDistantDetection(character);
       }
    }
 }

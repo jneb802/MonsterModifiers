@@ -123,8 +123,12 @@
         <Compile Include="Managers\LocalizationManager.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
+        <Compile Include="Src\Custom Components\Altar.cs" />
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
+        <Compile Include="Src\Custom Components\Sigil.cs" />
+        <Compile Include="Src\DungeonPatches\IncineratorPatch.cs" />
+        <Compile Include="Src\DungeonPatches\ItemDropPatch.cs" />
         <Compile Include="Src\Modifiers\Bleed.cs" />
         <Compile Include="Src\Modifiers\DistantDetection.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
@@ -144,45 +148,50 @@
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
         <Compile Include="Src\Utils\CompatibilityUtils.cs" />
+        <Compile Include="Src\Utils\DungeonAssetUtils.cs" />
+        <Compile Include="Src\Utils\DungeonGenUtils.cs" />
+        <Compile Include="Src\Utils\LocationUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
+        <Compile Include="Src\Utils\TranslationUtils.cs" />
+        <Compile Include="Src\Utils\WorldUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="Src\Utils\ZnetUtils.cs" />
-        <Compile Include="VersionHandshake.cs"/>
+        <Compile Include="VersionHandshake.cs" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
+        <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include=".gitignore"/>
+        <Content Include=".gitignore" />
         <EmbeddedResource Include="assets\dungeonmodifiers" />
         <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
         <EmbeddedResource Include="assets\statusicon" />
         <EmbeddedResource Include="assets\modifiericons" />
-        <Content Include="environment.props"/>
-        <Content Include="icons\README.txt"/>
-        <Content Include="ILRepack.targets"/>
-        <Content Include="Libs\LocalizationManager.dll"/>
+        <Content Include="environment.props" />
+        <Content Include="icons\README.txt" />
+        <Content Include="ILRepack.targets" />
+        <Content Include="Libs\LocalizationManager.dll" />
         <Content Include="Libs\ServerSync.dll">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="LICENSE.md"/>
-        <Content Include="README.md"/>
+        <Content Include="LICENSE.md" />
+        <Content Include="README.md" />
         <EmbeddedResource Include="Src\Config\modifierValues.yml" />
-        <Content Include="Thunderstore\CHANGELOG.md"/>
-        <Content Include="Thunderstore\icon.png"/>
-        <Content Include="Thunderstore\manifest.json"/>
-        <EmbeddedResource Include="translations\English.yml"/>
-        <Content Include="UpdateManifest.ps1"/>
+        <Content Include="Thunderstore\CHANGELOG.md" />
+        <Content Include="Thunderstore\icon.png" />
+        <Content Include="Thunderstore\manifest.json" />
+        <EmbeddedResource Include="translations\English.yml" />
+        <Content Include="UpdateManifest.ps1" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2"/>
+        <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2" />
         <PackageReference Include="JotunnLib" Version="2.20.3" />
         <PackageReference Include="Mono.Cecil" Version="0.11.4" />
         <PackageReference Include="MonoMod" Version="21.9.19.1" />
         <PackageReference Include="MonoMod.RuntimeDetour" Version="22.1.29.1" />
         <PackageReference Include="MonoMod.Utils" Version="22.1.29.1" />
-        <PackageReference Include="YamlDotNet" Version="13.2.0"/>
+        <PackageReference Include="YamlDotNet" Version="13.2.0" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
