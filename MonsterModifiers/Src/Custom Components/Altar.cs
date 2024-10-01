@@ -27,6 +27,11 @@ public class Altar : MonoBehaviour
         
         Altar altar = this;
         Inventory inventory = altar.m_container.GetInventory();
+
+        if (inventory.GetItem(0) == null)
+        {
+            return false;
+        }
         
         ItemDrop.ItemData sigilObject = inventory.GetItem(0);
         if (sigilObject ==  null)

@@ -21,7 +21,7 @@ public class DungeonAssetUtils
     public static void SetupDungeonAssets()
     {
         CreateSigil();
-        AddAltar();
+        AddAllAltars();
     }
     
     public static void CreateSigil()
@@ -34,10 +34,19 @@ public class DungeonAssetUtils
         runeItem.ItemPrefab.AddComponent<Sigil>();
         ItemManager.Instance.AddItem(runeItem);
     }
-
-    public static void AddAltar()
+    
+    public static void AddAllAltars()
     {
-        CustomPrefab altarPrefab = new CustomPrefab(dungeonAssetBundle, "DungeonAltar", true);
+        AddAltar("DungeonAltar_BlackForest");  // Corresponds to Crypt2// Corresponds to Crypt4
+        AddAltar("DungeonAltar_Swamp");        // Corresponds to SunkenCrypt4
+        AddAltar("DungeonAltar_Mountain");     // Corresponds to MountainCave02
+        AddAltar("DungeonAltar_Mistlands1");   // Corresponds to Mistlands_DvergrTownEntrance1
+        AddAltar("DungeonAltar_Mistlands2");   // Corresponds to Mistlands_DvergrTownEntrance2
+    }
+
+    public static void AddAltar(string altarName)
+    {
+        CustomPrefab altarPrefab = new CustomPrefab(dungeonAssetBundle, altarName, true);
         
         var altar = altarPrefab.Prefab.AddComponent<Altar>();
         altar.m_incinerateSwitch = altarPrefab.Prefab.GetComponentInChildren<Switch>();
@@ -45,16 +54,5 @@ public class DungeonAssetUtils
         altar.m_container = altarPrefab.Prefab.GetComponentInChildren<Container>();
         
         PrefabManager.Instance.AddPrefab(altarPrefab);
-    }
-    
-    public static void AddSigilTable()
-    {
-        var sigilTablePrefab = new CustomPrefab(dungeonAssetBundle, "piece_sigiltable_warp", true);
-
-        if (sigilTablePrefab == null)
-        {
-            MonsterModifiersPlugin.MonsterModifiersLogger.LogError("Failed to load gameObject with name: piece_sigiltable_warp");
-        }
-        PrefabManager.Instance.AddPrefab(sigilTablePrefab);
     }
 }
