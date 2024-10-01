@@ -155,6 +155,14 @@ public class ModifierUtils
 
             selectedModifiers.Add(selected);
             availableModifiers.Remove(selected);
+            if (selected == MonsterModifierTypes.ElementalImmunity)
+            {
+                availableModifiers.Remove(MonsterModifierTypes.PhysicalImmunity);
+            }
+            if (selected == MonsterModifierTypes.PhysicalImmunity)
+            {
+                availableModifiers.Remove(MonsterModifierTypes.ElementalImmunity);
+            }
         }
 
         return selectedModifiers;
