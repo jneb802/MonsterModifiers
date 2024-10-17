@@ -22,6 +22,11 @@ public class FoodDrain
                 return;
             }
 
+            if (__instance.IsBlocking())
+            {
+                return;
+            }
+
             var attacker = hit.GetAttacker();
             var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)
