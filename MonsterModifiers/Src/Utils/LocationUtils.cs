@@ -73,22 +73,22 @@ public class LocationUtils
                 switch (locationName)
                 {
                     case "Crypt2":
-                        altarPrefabName = "DungeonAltar_BlackForest";
+                        altarPrefabName = "DungeonAltar_BlackForest_temp";
                         break;
                     case "Crypt4":
-                        altarPrefabName = "DungeonAltar_BlackForest";
+                        altarPrefabName = "DungeonAltar_BlackForest_temp";
                         break;
                     case "SunkenCrypt4":
-                        altarPrefabName = "DungeonAltar_Swamp";
+                        altarPrefabName = "DungeonAltar_Swamp_temp";
                         break;
                     case "MountainCave02":
-                        altarPrefabName = "DungeonAltar_Mountain";
+                        altarPrefabName = "DungeonAltar_Mountain_temp";
                         break;
                     case "Mistlands_DvergrTownEntrance1":
-                        altarPrefabName = "DungeonAltar_Mistlands1";
+                        altarPrefabName = "DungeonAltar_Mistlands1_temp";
                         break;
                     case "Mistlands_DvergrTownEntrance2":
-                        altarPrefabName = "DungeonAltar_Mistlands2";
+                        altarPrefabName = "DungeonAltar_Mistlands2_temp";
                         break;
                 }
                 

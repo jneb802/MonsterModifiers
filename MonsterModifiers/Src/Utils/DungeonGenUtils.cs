@@ -84,4 +84,110 @@ public class DungeonGenUtils
     {
         return (float)Math.Sqrt(Math.Pow(x, 2) + Math.Pow(z, 2));
     }
+    
+    /// <summary>
+    /// Calculates the generous radius of a dungeon.
+    /// </summary>
+    /// <param name="dg"></param>
+    /// <returns></returns>
+    public static float GetDungeonRadius(DungeonGenerator dg)
+    {
+        return GetMaximumDistance(dg.m_zoneSize.x / 2, dg.m_zoneSize.z / 2);
+    }
+    
+    /// <summary>
+    /// Returns whether an object can be destroyed and respawned.
+    /// Used for ground locations.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    private bool QualifyingObject(GameObject obj)
+    {
+        if (obj.GetComponent<RandomFlyingBird>() != null)
+        {
+            return false;
+        }
+
+        return obj.GetComponent<Destructible>() ||
+               obj.GetComponent<MineRock>() ||
+               obj.GetComponent<MineRock5>() ||
+               obj.GetComponent<ItemDrop>() ||
+               obj.GetComponent<Piece>() ||
+               obj.GetComponent<Pickable>() ||
+               obj.GetComponent<Character>() ||
+               obj.GetComponent<CreatureSpawner>() ||
+               obj.GetComponent<WearNTear>() ||
+               obj.GetComponent<SpawnArea>() ||
+               obj.GetComponent<RandomSpawn>();
+    }
+    
+    /// <summary>
+    /// Returns whether an object can be destroyed and respawned.
+    /// Used for sky locations.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    private static bool QualifyingSkyObject(GameObject obj)
+    {
+        return !(obj.GetComponent<DungeonGenerator>() ||
+                 obj.GetComponent<LocationProxy>() ||
+                 obj.GetComponent<Player>()) &&
+               obj.transform.position.y > 4000;
+    }
+    
+    /// <summary>
+    /// Deletes an object from the ZNetScene.
+    /// </summary>
+    /// <param name="obj"></param>
+    private static void DeleteObject(ref GameObject obj)
+    {
+        var nview = obj.GetComponent<ZNetView>();
+        if (nview != null && nview.GetZDO() != null)
+        {
+            nview.GetZDO().SetOwner(ZDOMan.GetSessionID());
+        }
+
+        ZNetScene.instance.Destroy(obj);
+    }
+    
+    /// <summary>
+    /// If the object is a door, closes it if it has key requirements.
+    /// </summary>
+    /// <param name="obj"></param>
+    public void TryResetDoor(GameObject obj)
+    {
+        var door = obj.GetComponent<Door>();
+
+        if (door != null && door.m_keyItem != null)
+        {
+            if (door.m_nview != null && door.m_nview.GetZDO() != null)
+            {
+                door.m_nview.GetZDO().Set(ZDOVars.s_state, 0);
+                door.UpdateState();
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Deletes all objects in the given dungeon.
+    /// </summary>
+    /// <param name="dungeonGenerator"></param>
+    public static void DeleteDungeon(DungeonGenerator dungeonGenerator)
+    {
+        var list = SceneManager.GetActiveScene().GetRootGameObjects();
+        
+        var skyDistance = GetDungeonRadius(dungeonGenerator);
+
+        for (int lcv = 0; lcv < list.Length; lcv++)
+        {
+            var obj = list[lcv];
+            
+            // sky object
+            if (QualifyingSkyObject(obj) && 
+                InBounds(dungeonGenerator.transform.position, obj.transform.position, skyDistance))
+            {
+                DeleteObject(ref obj);
+            }
+        }
+    }
 }

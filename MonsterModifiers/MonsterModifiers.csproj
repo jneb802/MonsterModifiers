@@ -148,6 +148,7 @@
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
         <Compile Include="Src\Utils\CompatibilityUtils.cs" />
+        <Compile Include="Src\Utils\Debug.cs" />
         <Compile Include="Src\Utils\DungeonAssetUtils.cs" />
         <Compile Include="Src\Utils\DungeonGenUtils.cs" />
         <Compile Include="Src\Utils\LocationUtils.cs" />

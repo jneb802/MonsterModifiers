@@ -46,7 +46,11 @@ public class DungeonAssetUtils
 
     public static void AddAltar(string altarName)
     {
-        CustomPrefab altarPrefab = new CustomPrefab(dungeonAssetBundle, altarName, true);
+
+        GameObject prefabGameObject = dungeonAssetBundle.LoadAsset<GameObject>(altarName);
+        GameObject clonedPrefab = PrefabManager.Instance.CreateClonedPrefab(altarName+"_temp", prefabGameObject);
+        
+        CustomPrefab altarPrefab = new CustomPrefab(clonedPrefab, true);
         
         var altar = altarPrefab.Prefab.AddComponent<Altar>();
         altar.m_incinerateSwitch = altarPrefab.Prefab.GetComponentInChildren<Switch>();

@@ -31,7 +31,7 @@ public static class ItemDropPatch
                     {
                         if (Enum.TryParse(modifierName, out MonsterModifierTypes modifier))
                         {
-                            string modifierTextString = $"\n<color=#00ffffff>{modifierName}</color>";
+                            string modifierTextString = $"\n<color=#00abff>{modifierName}</color>";
                             modifierTextList.Add(modifierTextString);
                         }
                     }
