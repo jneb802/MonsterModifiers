@@ -11,10 +11,12 @@ namespace MonsterModifiers.Modifiers;
 public class ShieldDome: MonoBehaviour
 {
     public static CustomPrefab ShieldGenereatorBubbleCustomPrefab;
+    public static EffectList.EffectData shieldDomeBubbleSFX;
     public GameObject shieldGenereatorBubble;
     public Character m_character;
     public ShieldGenerator m_shieldGenerator;
     public ShieldDomeImageEffect m_shieldDomeImageEffect;
+    public ZNetView m_nview;
     
     public static void LoadShieldDome()
     {
@@ -32,8 +34,10 @@ public class ShieldDome: MonoBehaviour
         m_character = character;
         
         m_shieldGenerator = shieldGenereatorBubble.GetComponent<ShieldGenerator>();
-        m_shieldGenerator.m_nview = m_shieldGenerator.GetComponentInParent<ZNetView>();
-        m_shieldGenerator.m_defaultFuel = 200;
+        m_nview = shieldGenereatorBubble.GetComponent<ZNetView>();
+
+        m_shieldGenerator.m_nview = m_nview;
+        m_shieldGenerator.m_defaultFuel = 999;
         m_shieldGenerator.m_radius = 10;
         m_shieldGenerator.m_maxShieldRadius = 10;
         m_shieldGenerator.m_minShieldRadius = 10;
@@ -45,7 +49,6 @@ public class ShieldDome: MonoBehaviour
     {
         if (m_character != null && shieldGenereatorBubble != null)
         {
-            
             // shieldGenereatorBubble.transform.position = m_character.transform.position;
             // shieldGenereatorBubble.transform.rotation = m_character.transform.rotation;
             
@@ -63,7 +66,14 @@ public class ShieldDome: MonoBehaviour
     {
         m_shieldGenerator.OnDestroy();
         m_shieldDomeImageEffect.RemoveShield(m_shieldGenerator);
+        if (!m_nview.IsOwner())
+        {
+            m_nview.ClaimOwnership();
+            ZNetScene.instance.Destroy(shieldGenereatorBubble);
+            // Debug.Log("The net view attempting to destroy is not the owner");
+        }
         ZNetScene.instance.Destroy(shieldGenereatorBubble);
+        // Debug.Log("The net view attempting to destroy is the owner");
     }
     
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
@@ -75,18 +85,6 @@ public class ShieldDome: MonoBehaviour
             {
                 shieldDome.Destroy();
                 // Debug.Log("Shield dome destroyed when character died");
-            }
-        }
-    }
-    
-    [HarmonyPatch(typeof(ShieldGenerator), nameof(ShieldGenerator.Start))]
-    public class ShieldDome_ShieldGenerator_Start_Patch
-    {
-        public static void Postfix(ShieldGenerator __instance)
-        {
-            if (__instance != null)
-            {
-                Debug.Log("Value of isPlacementGhost is " + __instance.m_isPlacementGhost);
             }
         }
     }

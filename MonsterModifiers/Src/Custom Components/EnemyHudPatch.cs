@@ -36,6 +36,8 @@ namespace MonsterModifiers.Patches
 			{
 				return;
 			}
+			
+			// Debug.Log("Count of modifiers is " + modifiers.Count);
 
 			GameObject creatureGUI = value.m_gui;
 			// Debug.Log("Name of creatureGUI is " + creatureGUI.name);
@@ -43,7 +45,7 @@ namespace MonsterModifiers.Patches
 			for (int i = 0; i < creatureGUI.transform.childCount; i++)
 			{
 				Transform child = creatureGUI.transform.GetChild(i);
-				if (child.name.StartsWith("level_") && child.gameObject.activeSelf)
+				if (child.name.StartsWith("level_"+(modifiers.Count+1)) && child.gameObject.activeSelf)
 				{
 					// Debug.Log("Name of child at high index " + i + " is " + child.name);
 					for (int j = 0; j < child.transform.childCount; j++)
@@ -54,13 +56,14 @@ namespace MonsterModifiers.Patches
 						child2.GetComponent<Image>().color =
 							ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
 						// Debug.Log("Name of child at low index " + j + " is " + child2.name);
-						if (child2.name.StartsWith("star"))
+						if (child2.name.StartsWith("star") && child2.gameObject.activeSelf)
 						{
 							child2.GetChild(0).gameObject.SetActive(false);
 							// child2.GetChild(0).GetComponent<Image>().sprite =
 							// 	ModifierUtils.GetModifierIcon(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
 							// child2.GetChild(0).GetComponent<Image>().color =
 							// 	ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
+							
 						}
 					}
 				}

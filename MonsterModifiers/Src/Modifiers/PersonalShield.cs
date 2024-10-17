@@ -12,4 +12,10 @@ public class PersonalShield
         int hashName = "GoblinShaman_shield".GetStableHashCode();
         character.GetSEMan().AddStatusEffect(hashName, true, 10, 2.0f);
     }
+    
+    public static void RemovePersonalShield(Character character)
+    {
+        int hashName = "GoblinShaman_shield".GetStableHashCode();
+        character.GetSEMan().RemoveStatusEffect(hashName);
+    }
 }
