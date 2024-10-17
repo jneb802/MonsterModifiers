@@ -73,16 +73,9 @@ namespace MonsterModifiers
             ModifierAssetUtils.Setup();
             ModifierAssetUtils.LoadAllIcons();
             
-            DungeonAssetUtils.Setup();
-            DungeonAssetUtils.SetupDungeonAssets();
-            
             ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
-
-            TranslationUtils.AddLocalizations();
-            
-            ZoneManager.OnVanillaLocationsAvailable += LocationUtils.ModifyAllLocations;
         }
 
         private void OnDestroy()

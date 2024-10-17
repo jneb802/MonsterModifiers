@@ -123,12 +123,8 @@
         <Compile Include="Managers\LocalizationManager.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Src\Custom Components\AddMonsterModifiersToCharacter.cs" />
-        <Compile Include="Src\Custom Components\Altar.cs" />
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
-        <Compile Include="Src\Custom Components\Sigil.cs" />
-        <Compile Include="Src\DungeonPatches\IncineratorPatch.cs" />
-        <Compile Include="Src\DungeonPatches\ItemDropPatch.cs" />
         <Compile Include="Src\Modifiers\Bleed.cs" />
         <Compile Include="Src\Modifiers\DistantDetection.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
@@ -148,12 +144,8 @@
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
         <Compile Include="Src\Utils\CompatibilityUtils.cs" />
-        <Compile Include="Src\Utils\DungeonAssetUtils.cs" />
-        <Compile Include="Src\Utils\DungeonGenUtils.cs" />
-        <Compile Include="Src\Utils\LocationUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
-        <Compile Include="Src\Utils\TranslationUtils.cs" />
         <Compile Include="Src\Utils\WorldUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="Src\Utils\ZnetUtils.cs" />
@@ -164,7 +156,6 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include=".gitignore" />
-        <EmbeddedResource Include="assets\dungeonmodifiers" />
         <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
         <EmbeddedResource Include="assets\statusicon" />
         <EmbeddedResource Include="assets\modifiericons" />
