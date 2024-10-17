@@ -34,7 +34,7 @@ public class FoodDrain
                 return;
             }
 
-            var player = Player.m_localPlayer;
+            Player player = __instance as Player;
             if (player != null)
             {
                 List<Player.Food> playerFoods = player.GetFoods();
