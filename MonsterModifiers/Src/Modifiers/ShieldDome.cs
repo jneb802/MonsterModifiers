@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using HarmonyLib;
 using Jotunn.Entities;
@@ -28,7 +29,7 @@ public class ShieldDome: MonoBehaviour
     {
         // Debug.Log("Monster with name " + character.m_name + " has modifier ShieldDome");
         character.gameObject.AddComponent<ShieldDome>();
-        shieldGenereatorBubble = Instantiate(ShieldGenereatorBubbleCustomPrefab.Prefab, character.transform.position,
+        shieldGenereatorBubble = ZNetScene.Instantiate(ShieldGenereatorBubbleCustomPrefab.Prefab, character.transform.position,
             character.transform.rotation);
         
         m_character = character;
@@ -43,49 +44,53 @@ public class ShieldDome: MonoBehaviour
         m_shieldGenerator.m_minShieldRadius = 10;
         
         m_shieldDomeImageEffect = UnityEngine.Object.FindFirstObjectByType<ShieldDomeImageEffect>();
+        
+        // Register the custom RPC for destroying the ShieldDome
+        if (m_nview != null)
+        {
+            m_nview.Register("RPC_DestroyShieldDome", new Action<long>(RPC_DestroyShieldDome));
+        }
     }
 
     public void Update()
     {
         if (m_character != null && shieldGenereatorBubble != null)
         {
-            // shieldGenereatorBubble.transform.position = m_character.transform.position;
-            // shieldGenereatorBubble.transform.rotation = m_character.transform.rotation;
-            
-            m_shieldGenerator.m_shieldDome.transform.position = m_character.transform.position;
-            m_shieldGenerator.m_shieldDome.transform.rotation = m_character.transform.rotation;
-            
-            // m_shieldDomeImageEffect.transform.position = m_character.transform.position;
-            // m_shieldDomeImageEffect.transform.rotation = m_character.transform.rotation;
+                m_shieldGenerator.m_shieldDome.transform.position = m_character.transform.position;
+                m_shieldGenerator.m_shieldDome.transform.rotation = m_character.transform.rotation;
          
-            m_shieldDomeImageEffect.SetShieldData(m_shieldGenerator,m_character.transform.position,10,m_shieldGenerator.m_lastFuel,m_shieldGenerator.m_lastHitTime);
+                m_shieldDomeImageEffect.SetShieldData(m_shieldGenerator,m_character.transform.position,10,m_shieldGenerator.m_lastFuel,m_shieldGenerator.m_lastHitTime);
         }
-    }
-
-    public void Destroy()
-    {
-        m_shieldGenerator.OnDestroy();
-        m_shieldDomeImageEffect.RemoveShield(m_shieldGenerator);
-        if (!m_nview.IsOwner())
-        {
-            m_nview.ClaimOwnership();
-            ZNetScene.instance.Destroy(shieldGenereatorBubble);
-            // Debug.Log("The net view attempting to destroy is not the owner");
-        }
-        ZNetScene.instance.Destroy(shieldGenereatorBubble);
-        // Debug.Log("The net view attempting to destroy is the owner");
     }
     
-    [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
-    public class ShieldDome_Character_OnDeath_Patch
+    public void OnDestroy()
     {
-        public static void Prefix(Character __instance)
+        if (m_nview != null && m_nview.IsValid() && m_nview.IsOwner())
         {
-            if (__instance.TryGetComponent(out ShieldDome shieldDome))
-            {
-                shieldDome.Destroy();
-                // Debug.Log("Shield dome destroyed when character died");
-            }
+            m_nview.InvokeRPC(ZNetView.Everybody, "RPC_DestroyShieldDome");
+        }
+    }
+    
+    private void RPC_DestroyShieldDome(long sender)
+    {
+        DestroyShieldDome();
+    }
+    
+    private void DestroyShieldDome()
+    {
+        if (m_shieldGenerator != null)
+        {
+            m_shieldDomeImageEffect.RemoveShield(m_shieldGenerator);
+        }
+
+        if (shieldGenereatorBubble != null)
+        {
+            ZNetScene.instance.Destroy(shieldGenereatorBubble);
+        }
+
+        if (m_shieldGenerator.m_shieldDome != null)
+        {
+            ZNetScene.instance.Destroy(m_shieldGenerator.m_shieldDome);
         }
     }
 }

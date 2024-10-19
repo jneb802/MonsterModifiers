@@ -14,7 +14,7 @@ public class AddMonsterModifiersToCharacter
             if (!__instance.IsPlayer() && !__instance.IsBoss())
             {
                 __instance.gameObject.AddComponent<MonsterModifier>();
-                Debug.Log("Monster Modifier component was added to creature with name " + __instance.m_name);
+                // Debug.Log("Monster Modifier component was added to creature with name " + __instance.m_name);
             }
         }
     }
