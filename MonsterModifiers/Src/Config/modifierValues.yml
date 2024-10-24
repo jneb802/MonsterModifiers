@@ -43,7 +43,7 @@ PersonalShield:
   color: [0.88, 0.01, 0.15, 1]  # Red
 
 ShieldDome:
-  weight: 1
+  weight: 0
   color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
 
 SoulEater:
