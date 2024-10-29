@@ -39,6 +39,7 @@ public class StaminaSiphon
             }
             
             __instance.UseStamina(hit.GetTotalDamage());
+            // __instance.UseStamina(1);
         }
     }
 }
