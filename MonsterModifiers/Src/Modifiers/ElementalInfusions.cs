@@ -35,25 +35,25 @@ public class ElementalInfusions
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonInfused))
             {
-                hit.m_damage.m_poison += hit.GetTotalPhysicalDamage();
+                hit.m_damage.m_poison += hit.GetTotalDamage();
                 // Debug.Log("Hit has additional poison damage added. Amount is: " + hit.m_damage.m_poison);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireInfused))
             {
-                hit.m_damage.m_fire += hit.GetTotalPhysicalDamage();
+                hit.m_damage.m_fire += hit.GetTotalDamage();
                 // Debug.Log("Hit has additional fire damage added. Amount is: " + hit.m_damage.m_fire);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.LightningInfused))
             {
-                hit.m_damage.m_lightning += hit.GetTotalPhysicalDamage();
+                hit.m_damage.m_lightning += hit.GetTotalDamage();
                 // Debug.Log("Hit has additional lightning damage added. Amount is: " + hit.m_damage.m_lightning);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostInfused))
             {
-                hit.m_damage.m_frost += hit.GetTotalPhysicalDamage();
+                hit.m_damage.m_frost += hit.GetTotalDamage();
                 // Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
             }
         }
