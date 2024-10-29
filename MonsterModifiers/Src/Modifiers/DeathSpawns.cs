@@ -8,7 +8,6 @@ namespace MonsterModifiers.Modifiers;
 
 public class DeathSpawns
 {
-    
     public static void ApplyDamageToNearbyPlayers(Vector3 position, HitData hit)
     {
         List<Player> nearbyPlayers = new List<Player>();
@@ -26,7 +25,7 @@ public class DeathSpawns
         {
             if (__instance == null || __instance.IsPlayer())
             {
-                return;  
+                return;
             }
 
             var modiferComponent = __instance.GetComponent<Custom_Components.MonsterModifier>();
@@ -37,6 +36,7 @@ public class DeathSpawns
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonDeath))
             {
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
                 GameObject blobAoe = ZNetScene.instance.GetPrefab("blob_aoe");
                 if (blobAoe != null)
                 {
@@ -44,7 +44,7 @@ public class DeathSpawns
 
                     HitData poisonHit = new HitData
                     {
-                        m_damage = { m_poison = 20f }
+                        m_damage = { m_poison = deathSpawnDamage }
                     };
 
                     ApplyDamageToNearbyPlayers(__instance.transform.position, poisonHit);
@@ -53,6 +53,7 @@ public class DeathSpawns
                 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireDeath))
             {
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
                 // TO-DO: I'm overwriting the vanilla values here. Make a copy somehow.
                 GameObject fireNovaAOE = ZNetScene.instance.GetPrefab("fx_fireskeleton_nova");
 
@@ -77,7 +78,7 @@ public class DeathSpawns
 
                     HitData fireHit = new HitData
                     {
-                        m_damage = { m_fire = 20f }
+                        m_damage = { m_fire = deathSpawnDamage }
                     };
 
                     ApplyDamageToNearbyPlayers(__instance.transform.position, fireHit);
@@ -86,6 +87,7 @@ public class DeathSpawns
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostDeath))
             {
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
                 GameObject frostNovaAOE = ZNetScene.instance.GetPrefab("fx_DvergerMage_Nova_ring");
                 // TimedDestruction timedDestruction = frostNovaAOE.GetComponent<TimedDestruction>();
                 // timedDestruction.m_timeout = 2.5f;
@@ -114,7 +116,7 @@ public class DeathSpawns
 
                     HitData frostHit = new HitData
                     {
-                        m_damage = { m_frost = 30f }
+                        m_damage = { m_frost = deathSpawnDamage }
                     };
 
                     ApplyDamageToNearbyPlayers(__instance.transform.position, frostHit);
