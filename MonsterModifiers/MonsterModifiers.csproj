@@ -147,6 +147,7 @@
         <Compile Include="Src\Utils\DamageUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
+        <Compile Include="Src\Utils\SpawnCommands.cs" />
         <Compile Include="Src\Utils\WorldUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="Src\Utils\ZnetUtils.cs" />
