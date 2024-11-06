@@ -16,6 +16,7 @@ public enum MonsterModifierTypes
     PoisonDeath,
     FrostDeath,
     FireDeath,
+    HealDeath,
     PersonalShield,
     ShieldDome,
     SoulEater,
@@ -29,7 +30,8 @@ public enum MonsterModifierTypes
     PhysicalImmunity,
     FastMovement,
     FastAttackSpeed,
-    DistantDetection
+    DistantDetection,
+    BloodLoss
 }
 
 public class ModifierData
@@ -81,7 +83,8 @@ public class ModifierUtils
         
         if (modifier == MonsterModifierTypes.PoisonDeath ||
             modifier == MonsterModifierTypes.FireDeath ||
-            modifier == MonsterModifierTypes.FrostDeath)
+            modifier == MonsterModifierTypes.FrostDeath ||
+            modifier == MonsterModifierTypes.HealDeath)
         {
             return ModifierAssetUtils.skullIcon;
         }
@@ -112,6 +115,12 @@ public class ModifierUtils
 
         {
             return ModifierAssetUtils.plusSquareIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.BloodLoss)
+
+        {
+            return ModifierAssetUtils.bloodIcon;
         }
         
         Debug.Log("Could not find icon for modifier");

@@ -126,6 +126,7 @@
         <Compile Include="Src\Custom Components\EnemyHudPatch.cs" />
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
         <Compile Include="Src\Modifiers\Bleed.cs" />
+        <Compile Include="Src\Modifiers\BloodLoss.cs" />
         <Compile Include="Src\Modifiers\DistantDetection.cs" />
         <Compile Include="Src\Modifiers\EitrSiphon.cs" />
         <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
@@ -143,11 +144,15 @@
         <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
+        <Compile Include="Src\StatusEffects\BloodLoss_SE.cs" />
         <Compile Include="Src\Utils\CompatibilityUtils.cs" />
         <Compile Include="Src\Utils\DamageUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
         <Compile Include="Src\Utils\ModifierUtils.cs" />
+        <Compile Include="Src\Utils\PrefabUtils.cs" />
         <Compile Include="Src\Utils\SpawnCommands.cs" />
+        <Compile Include="Src\Utils\StatusEffectUtils.cs" />
+        <Compile Include="Src\Utils\TranslationUtils.cs" />
         <Compile Include="Src\Utils\WorldUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="Src\Utils\ZnetUtils.cs" />

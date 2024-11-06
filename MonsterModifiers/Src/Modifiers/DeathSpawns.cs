@@ -122,6 +122,53 @@ public class DeathSpawns
                     ApplyDamageToNearbyPlayers(__instance.transform.position, frostHit);
                 }
             }
+
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.HealDeath))
+            {
+                GameObject healNova = PrefabManager.Instance.GetPrefab("healCustomPrefab");
+                SE_Stats SE_HealDeath = ScriptableObject.CreateInstance<SE_Stats>();
+                SE_HealDeath.m_name = "HealDeath";
+                SE_HealDeath.m_ttl = 4;
+                // SE_HealDeath.m_activationAnimation = "gpower";
+                SE_HealDeath.m_healthOverTime = (__instance.GetMaxHealth() * 0.50f);
+                SE_HealDeath.m_healthOverTimeInterval = 0.5f;
+                
+                if (healNova != null)
+                {
+                    GameObject.Instantiate(healNova,
+                        new Vector3(
+                            __instance.transform.position.x,
+                            __instance.transform.position.y + 1f,
+                            __instance.transform.position.z
+                        ),
+                        __instance.transform.rotation);
+                }
+                
+                List<Character> characters = WorldUtils.GetAllCharacter(__instance.transform.position,15f);
+                foreach (var character in characters)
+                {
+                    if (character == null || character.m_nview == null)
+                    {
+                        continue;
+                    }
+                    
+                    character.GetSEMan().AddStatusEffect(SE_HealDeath);
+                    // Debug.Log("Character with name: " + character.name + " was given HealDeath status effect");
+                }
+                
+                List<Player> nearbyPlayers = new List<Player>();
+                Player.GetPlayersInRange(__instance.transform.position, 15f, nearbyPlayers);
+                foreach (var player in nearbyPlayers)
+                {
+                    if (player == null || player.m_nview == null)
+                    {
+                        continue;
+                    }
+                    
+                    player.GetSEMan().AddStatusEffect(SE_HealDeath);
+                }
+
+            }
         }
     }
 }

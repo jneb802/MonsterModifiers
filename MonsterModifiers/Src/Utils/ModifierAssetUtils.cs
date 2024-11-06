@@ -20,11 +20,13 @@ public class ModifierAssetUtils
     public static Sprite appleIcon;
     public static Sprite shieldBrokenIcon;
     public static Sprite potionIcon;
+    public static Sprite bloodIcon;
+    public static Sprite bloodIconRed;
 
     public static void Setup()
     {
         ashlandsAssetBundle = AssetUtils.LoadAssetBundleFromResources("monster_modifiers_ashlands", Assembly.GetExecutingAssembly());
-        // statusEffectBundle = AssetUtils.LoadAssetBundleFromResources("statusicon", Assembly.GetExecutingAssembly());
+        statusEffectBundle = AssetUtils.LoadAssetBundleFromResources("statusicon", Assembly.GetExecutingAssembly());
         modiferIconsBundle = AssetUtils.LoadAssetBundleFromResources("modifiericons", Assembly.GetExecutingAssembly());
     }
 
@@ -39,6 +41,8 @@ public class ModifierAssetUtils
         appleIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Apple.png");
         shieldBrokenIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldBroken.png");
         potionIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Potion.png");
+        bloodIcon = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIcon.png");
+        bloodIconRed = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIconRed.png");
     }
 
 
