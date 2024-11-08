@@ -23,6 +23,7 @@ public class BloodLoss_SE : StatusEffect
         if (reductionTimer >= 60f)
         {
             bloodLossAmount = Mathf.Max(0, bloodLossAmount - 10);
+            this.m_character.GetSEMan().RemoveStatusEffect("BloodLossStatusEffect".GetStableHashCode());
             
             reductionTimer = 0f;
         }
@@ -30,10 +31,11 @@ public class BloodLoss_SE : StatusEffect
         if (bloodLossAmount > bloodLossCap)
         {
             bloodLossAmount = 0;
+            this.m_character.GetSEMan().RemoveStatusEffect("BloodLossStatusEffect".GetStableHashCode());
             
             HitData bloodLossHit = new HitData
             {
-                m_damage = { m_slash = m_character.GetMaxHealth() * 0.15f }
+                m_damage = { m_slash = m_character.GetMaxHealth() * 0.30f }
             };
             
             m_character.Damage(bloodLossHit);

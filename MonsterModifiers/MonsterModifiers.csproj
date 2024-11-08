@@ -145,6 +145,7 @@
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Plugin.cs" />
         <Compile Include="Src\StatusEffects\BloodLoss_SE.cs" />
+        <Compile Include="Src\StatusEffects\HealDeath_SE.cs" />
         <Compile Include="Src\Utils\CompatibilityUtils.cs" />
         <Compile Include="Src\Utils\DamageUtils.cs" />
         <Compile Include="Src\Utils\ModifierAssetUtils.cs" />

@@ -21,7 +21,7 @@ namespace MonsterModifiers
     public class MonsterModifiersPlugin : BaseUnityPlugin
     {
         internal const string ModName = "MonsterModifiers";
-        internal const string ModVersion = "1.0.11";
+        internal const string ModVersion = "1.0.12";
         internal const string Author = "warpalicious";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
