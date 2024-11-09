@@ -13,7 +13,8 @@ public class TranslationUtils
         
         Localization.AddTranslation("English", new Dictionary<string, string>
         {
-            {"$se_bloodLoss", "Blood Loss"}
+            {"$se_bloodLoss", "Blood Loss"},
+            {"$modifier_mistile", "Stagger Bomb"},
         });
     }
     

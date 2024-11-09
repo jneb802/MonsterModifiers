@@ -17,6 +17,7 @@ public enum MonsterModifierTypes
     FrostDeath,
     FireDeath,
     HealDeath,
+    StaggerDeath,
     PersonalShield,
     ShieldDome,
     SoulEater,
@@ -31,7 +32,8 @@ public enum MonsterModifierTypes
     FastMovement,
     FastAttackSpeed,
     DistantDetection,
-    BloodLoss
+    BloodLoss,
+    Absorption
 }
 
 public class ModifierData
@@ -84,7 +86,8 @@ public class ModifierUtils
         if (modifier == MonsterModifierTypes.PoisonDeath ||
             modifier == MonsterModifierTypes.FireDeath ||
             modifier == MonsterModifierTypes.FrostDeath ||
-            modifier == MonsterModifierTypes.HealDeath)
+            modifier == MonsterModifierTypes.HealDeath ||
+            modifier == MonsterModifierTypes.StaggerDeath)
         {
             return ModifierAssetUtils.skullIcon;
         }
@@ -122,6 +125,13 @@ public class ModifierUtils
         {
             return ModifierAssetUtils.bloodIcon;
         }
+        
+        if (modifier == MonsterModifierTypes.Absorption)
+
+        {
+            return ModifierAssetUtils.heartIcon;
+        }
+        
         
         Debug.Log("Could not find icon for modifier");
         return ModifierAssetUtils.plusSquareIcon;;
@@ -203,8 +213,47 @@ public class ModifierUtils
 
         return true;
     }
+    
+    public static bool RunRPCDamageChecks(Character character, HitData hit, bool isMonsterAttackingPlayer)
+    {
+        if (hit == null || character == null)
+        {
+            Debug.Log("Hit or character is null");
+            return true;
+        }
 
-    public static bool RunHitChecks(HitData hit, bool isMonsterAttacking)
+        // This avoids any hits that have no damage
+        if (hit.m_damage.GetTotalDamage() == 0)
+        {
+            Debug.Log("Total damage is 0");
+            return true;
+        }
+
+        if (isMonsterAttackingPlayer)
+        {
+            // This checks if the hit is monster attacking player.
+            if (hit.m_hitType != HitData.HitType.EnemyHit)
+            {
+                Debug.Log("hit type is not enemy hit");
+                return true;
+            }
+        }
+        else
+        {
+            // This checks if the hit is player attacking monster.
+            if (hit.m_hitType != HitData.HitType.PlayerHit)
+            {
+                Debug.Log("hit type is not player hit");
+                return true;
+            }
+        }
+
+        
+
+        return true;
+    }
+
+    public static bool RunHitChecks(HitData hit, bool isMonsterAttackingPlayer)
     {
         Character attacker = hit.GetAttacker();
         if (attacker == null)
@@ -212,7 +261,7 @@ public class ModifierUtils
             return false;
         }
 
-        if (isMonsterAttacking)
+        if (isMonsterAttackingPlayer)
         {
             if (attacker.IsPlayer())
             {
@@ -220,7 +269,7 @@ public class ModifierUtils
             }
         }
 
-        if (!isMonsterAttacking)
+        if (!isMonsterAttackingPlayer)
         {
             if (attacker.IsPlayer())
             {
