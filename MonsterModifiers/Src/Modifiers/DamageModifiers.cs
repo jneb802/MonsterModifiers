@@ -12,12 +12,12 @@ public class DamageModifiers
     {
         public static void Prefix(Character __instance, HitData hit)
         {
-            if (!ModifierUtils.RunRPCDamageChecks(__instance,hit))
+            if (hit == null || __instance == null)
             {
                 return;
             }
             
-            if (!ModifierUtils.RunHitChecks(hit, false))
+            if (hit.m_damage.GetTotalDamage() == 0)
             {
                 return;
             }
