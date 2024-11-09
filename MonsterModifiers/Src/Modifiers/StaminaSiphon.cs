@@ -20,11 +20,6 @@ public class StaminaSiphon
                 return;
             }
             
-            if (__instance.IsBlocking())
-            {
-                return;
-            }
-
             var attacker = hit.GetAttacker();
 
             var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
@@ -34,6 +29,11 @@ public class StaminaSiphon
             }
 
             if (!modiferComponent.Modifiers.Contains(MonsterModifierTypes.StaminaSiphon))
+            {
+                return;
+            }
+            
+            if (__instance.IsBlocking())
             {
                 return;
             }
