@@ -9,6 +9,7 @@ public class BloodLoss_SE : StatusEffect
     public int bloodLossAmount = 0;
     public int bloodLossCap;
     private float reductionTimer = 0f;
+    private bool shouldRemove = false;
     
     public override void Setup(Character character)
     {
@@ -23,15 +24,13 @@ public class BloodLoss_SE : StatusEffect
         if (reductionTimer >= 60f)
         {
             bloodLossAmount = Mathf.Max(0, bloodLossAmount - 10);
-            this.m_character.GetSEMan().RemoveStatusEffect("BloodLossStatusEffect".GetStableHashCode());
-            
+            shouldRemove = true;
             reductionTimer = 0f;
         }
 
         if (bloodLossAmount > bloodLossCap)
         {
             bloodLossAmount = 0;
-            this.m_character.GetSEMan().RemoveStatusEffect("BloodLossStatusEffect".GetStableHashCode());
             
             HitData bloodLossHit = new HitData
             {
@@ -41,6 +40,7 @@ public class BloodLoss_SE : StatusEffect
             m_character.Damage(bloodLossHit);
             Object.Instantiate(PrefabUtils.leechDeathSFX,m_character.transform.position,m_character.transform.rotation);
             Object.Instantiate(PrefabUtils.leechDeathVFX,m_character.transform.position,m_character.transform.rotation);
+            shouldRemove = true;
         }
     }
     
@@ -51,7 +51,7 @@ public class BloodLoss_SE : StatusEffect
     
     public override void OnDamaged(HitData hit, Character attacker)
     {
-        Debug.Log("Character with name: " + m_character.name + " was attacked by a monster with bloodloss");
+        // Debug.Log("Character with name: " + m_character.name + " was attacked by a monster with bloodloss");
         if (!ModifierUtils.RunRPCDamageChecks(attacker,hit))
         {
             return;
@@ -74,6 +74,11 @@ public class BloodLoss_SE : StatusEffect
         }
 
         bloodLossAmount += Mathf.FloorToInt(hit.GetTotalDamage());
-        
+    }
+    
+    public override bool IsDone()
+    {
+        // Return true if flagged for removal, so SEMan handles it gracefully.
+        return shouldRemove || base.IsDone();
     }
 }

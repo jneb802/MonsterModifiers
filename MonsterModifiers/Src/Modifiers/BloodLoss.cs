@@ -23,28 +23,28 @@ public class BloodLoss
                 return;
             }
             
-            if (__instance.IsBlocking())
-            {
-                return;
-            }
-
             var attacker = hit.GetAttacker();
             var modiferComponent = attacker.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)
             {
                 return;
             }
-
+            
             if (!modiferComponent.Modifiers.Contains(MonsterModifierTypes.BloodLoss))
             {
                 return;
             }
             
-            Debug.Log("All checks passed, ready to apply bloodLoss");
+            if (__instance.IsBlocking())
+            {
+                return;
+            }
+            
+            // Debug.Log("All checks passed, ready to apply bloodLoss");
 
             if (!__instance.GetSEMan().HaveStatusEffect("BloodLossStatusEffect".GetStableHashCode()))
             {
-                Debug.Log("Player does not have bloodLoss, now adding status effect");
+                // Debug.Log("Player does not have bloodLoss, now adding status effect");
                 __instance.GetSEMan().AddStatusEffect("BloodLossStatusEffect".GetStableHashCode());  
             }
         }
