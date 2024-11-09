@@ -18,6 +18,7 @@ public enum MonsterModifierTypes
     FireDeath,
     HealDeath,
     StaggerDeath,
+    TarDeath,
     PersonalShield,
     ShieldDome,
     SoulEater,
@@ -87,7 +88,8 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FireDeath ||
             modifier == MonsterModifierTypes.FrostDeath ||
             modifier == MonsterModifierTypes.HealDeath ||
-            modifier == MonsterModifierTypes.StaggerDeath)
+            modifier == MonsterModifierTypes.StaggerDeath ||
+            modifier == MonsterModifierTypes.TarDeath)
         {
             return ModifierAssetUtils.skullIcon;
         }

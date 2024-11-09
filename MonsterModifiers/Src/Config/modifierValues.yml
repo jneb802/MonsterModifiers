@@ -93,6 +93,10 @@ HealDeath:
 StaggerDeath:
   weight: 1
   color: [0.87, 0.84, 0.28, 1]  # Yellow-Gold
+
+TarDeath:
+  weight: 1
+  color: [0.22, 0.15, 0.04, 1]  # Brown
   
 BloodLoss:
   weight: 1

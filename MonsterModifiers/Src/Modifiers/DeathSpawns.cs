@@ -192,6 +192,53 @@ public class DeathSpawns
                     }
                 }
             }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.TarDeath))
+            {
+                GameObject tarNova = ZNetScene.instance.GetPrefab("blobtar_projectile_tarball");
+                
+                if (tarNova != null)
+                {
+                    GameObject.Instantiate(tarNova,
+                        new Vector3(
+                            __instance.transform.position.x,
+                            __instance.transform.position.y + 1f,
+                            __instance.transform.position.z
+                        ),
+                        __instance.transform.rotation);
+                }
+
+                if (Player.m_localPlayer.IsOwner())
+                {
+                    List<Character> characters = WorldUtils.GetAllCharacter(__instance.transform.position,5f);
+                    foreach (var character in characters)
+                    {
+                        if (character == __instance || character == null)
+                        {
+                            continue;
+                        }
+                        
+                        if (character.m_nview == null || character.IsPlayer())
+                        {
+                            continue;
+                        }
+                        
+                        character.GetSEMan().AddStatusEffect("Tared".GetStableHashCode());
+                    }
+            
+                    List<Player> nearbyPlayers = new List<Player>();
+                    Player.GetPlayersInRange(__instance.transform.position, 5f, nearbyPlayers);
+                    foreach (Character character in nearbyPlayers)
+                    {
+                        if (character == null || character.m_nview == null)
+                        {
+                            continue;
+                        }
+                        
+                        character.GetSEMan().AddStatusEffect("Tared".GetStableHashCode());
+                    }
+                }
+            }
         }
     }
 }
