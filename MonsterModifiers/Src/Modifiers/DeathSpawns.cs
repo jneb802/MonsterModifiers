@@ -125,6 +125,22 @@ public class DeathSpawns
                     ApplyDamageToNearbyPlayers(__instance.transform.position, frostHit);
                 }
             }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.StaggerDeath))
+            {
+                GameObject customMistile = PrefabManager.Instance.GetPrefab("mistleCustomPrefab");
+
+                if (customMistile != null)
+                {
+                    GameObject.Instantiate(customMistile,
+                        new Vector3(
+                            __instance.transform.position.x,
+                            __instance.transform.position.y + 1f,
+                            __instance.transform.position.z
+                        ),
+                        __instance.transform.rotation);
+                }
+            }
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.HealDeath))
             {
