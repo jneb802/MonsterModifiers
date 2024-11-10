@@ -34,7 +34,8 @@ public enum MonsterModifierTypes
     FastAttackSpeed,
     DistantDetection,
     BloodLoss,
-    Absorption
+    Absorption,
+    FireOrbs
 }
 
 public class ModifierData
@@ -102,7 +103,8 @@ public class ModifierUtils
         }
         
         if (modifier == MonsterModifierTypes.PersonalShield ||
-            modifier == MonsterModifierTypes.ShieldDome)
+            modifier == MonsterModifierTypes.ShieldDome ||
+            modifier == MonsterModifierTypes.FireOrbs)
 
         {
             return ModifierAssetUtils.circleIcon;

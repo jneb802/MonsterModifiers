@@ -123,6 +123,7 @@
         <Compile Include="Managers\LocalizationManager.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Src\Custom Components\MonsterModifier.cs" />
+        <Compile Include="Src\Custom Components\Orbs.cs" />
         <Compile Include="Src\Modifiers\Absorption.cs" />
         <Compile Include="Src\Modifiers\BloodLoss.cs" />
         <Compile Include="Src\Modifiers\DistantDetection.cs" />

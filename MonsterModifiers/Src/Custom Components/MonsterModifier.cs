@@ -94,5 +94,10 @@ public class MonsterModifier : MonoBehaviour
       {
          DistantDetection.AddDistantDetection(character);
       }
+      
+      if (Modifiers.Contains(MonsterModifierTypes.FireOrbs))
+      {
+         Orbs.AddOrbs(character);
+      }
    }
 }
