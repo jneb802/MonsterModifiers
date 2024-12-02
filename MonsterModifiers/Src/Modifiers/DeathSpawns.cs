@@ -39,7 +39,7 @@ public class DeathSpawns
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonDeath))
             {
-                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance, 0.5f);
                 GameObject blobAoe = ZNetScene.instance.GetPrefab("blob_aoe");
                 if (blobAoe != null)
                 {
@@ -56,7 +56,7 @@ public class DeathSpawns
                 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireDeath))
             {
-                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance, 0.5f);
                 // TO-DO: I'm overwriting the vanilla values here. Make a copy somehow.
                 GameObject fireNovaAOE = ZNetScene.instance.GetPrefab("fx_fireskeleton_nova");
 
@@ -90,7 +90,7 @@ public class DeathSpawns
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostDeath))
             {
-                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance);
+                float deathSpawnDamage = DamageUtils.CalculateDamage(__instance, 0.5f);
                 GameObject frostNovaAOE = ZNetScene.instance.GetPrefab("fx_DvergerMage_Nova_ring");
                 // TimedDestruction timedDestruction = frostNovaAOE.GetComponent<TimedDestruction>();
                 // timedDestruction.m_timeout = 2.5f;

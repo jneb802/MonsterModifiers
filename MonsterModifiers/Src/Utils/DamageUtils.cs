@@ -74,12 +74,17 @@ public class DamageUtils
         return weaponDamage;
     }
 
-    public static float CalculateDamage(Character character)
+    public static float CalculateDamage(Character character, float percentTotal)
     {
         Humanoid humanoid = character as Humanoid;
         if (humanoid == null)
         {
             // Debug.Log("Humanoid is null");
+            return 10f;
+        }
+
+        if (character.IsPlayer())
+        {
             return 10f;
         }
 
@@ -103,7 +108,7 @@ public class DamageUtils
             characterDamage = randomWeaponDamage;
         }
     
-        float finalDamage = characterDamage * 0.5f;
+        float finalDamage = characterDamage * percentTotal;
         
         // Debug.Log("Creature death spawn damage is: " + finalDamage);
         return finalDamage;
