@@ -20,6 +20,14 @@ public class MonsterModifier : MonoBehaviour
       character = GetComponent<Character>();
       level = character.GetLevel();
       
+      // Check if the character is an Epic Loot bounty target
+      if (character.m_nview != null && character.m_nview.GetZDO().GetString("BountyID") != string.Empty)
+      {
+         Destroy(this);
+         // Debug.Log("MonsterModifier removed from bounty target: " + character.m_name);
+         return;
+      }
+      
       if (level > 1)
       {
          string modifiersString = character.m_nview.GetZDO().GetString("modifiers", string.Empty);
@@ -95,7 +103,7 @@ public class MonsterModifier : MonoBehaviour
          DistantDetection.AddDistantDetection(character);
       }
       
-      if (Modifiers.Contains(MonsterModifierTypes.FireOrbs))
+      if (Modifiers.Contains(MonsterModifierTypes.FireOrbs) || Modifiers.Contains(MonsterModifierTypes.FrostOrbs))
       {
          Orbs.AddOrbs(character);
       }
