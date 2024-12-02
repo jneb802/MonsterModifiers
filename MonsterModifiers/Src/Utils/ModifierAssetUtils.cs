@@ -23,6 +23,7 @@ public class ModifierAssetUtils
     public static Sprite bloodIcon;
     public static Sprite bloodIconRed;
     public static Sprite heartIcon;
+    public static Sprite orbIcon;
 
     public static void Setup()
     {
@@ -43,6 +44,7 @@ public class ModifierAssetUtils
         shieldBrokenIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldBroken.png");
         potionIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Potion.png");
         heartIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/heartIcon.png");
+        orbIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/orbIcon.png");
         
         bloodIcon = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIcon.png");
         bloodIconRed = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIconRed.png");

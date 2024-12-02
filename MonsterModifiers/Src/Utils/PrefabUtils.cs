@@ -54,7 +54,21 @@ public class PrefabUtils
         Projectile fireBallProjectile = fireBallOrbCustomPrefab.Prefab.GetComponent<Projectile>();
         fireBallProjectile.m_gravity = 0f;
         
+        // GameObject staff_iceshard_projectile = PrefabManager.Instance.GetPrefab("staff_iceshard_projectile");
+        // GameObject iceShardOrb = PrefabManager.Instance.CreateClonedPrefab("iceShardOrbCustomPrefab",staff_iceshard_projectile);
+        // CustomPrefab iceShardOrbCustomPrefab = new CustomPrefab(iceShardOrb, false);
+        // Projectile iceShardProjectile = iceShardOrbCustomPrefab.Prefab.GetComponent<Projectile>();
+        // iceShardProjectile.m_gravity = 0f;
+        
+        GameObject hatchling_cold_projectile = PrefabManager.Instance.GetPrefab("hatchling_cold_projectile");
+        GameObject iceShardOrb = PrefabManager.Instance.CreateClonedPrefab("iceShardOrbCustomPrefab",hatchling_cold_projectile);
+        CustomPrefab iceShardOrbCustomPrefab = new CustomPrefab(iceShardOrb, false);
+        Projectile iceShardProjectile = iceShardOrbCustomPrefab.Prefab.GetComponent<Projectile>();
+        iceShardProjectile.m_gravity = 0f;
+        
         PrefabManager.Instance.AddPrefab(healCustomPrefab);
+        PrefabManager.Instance.AddPrefab(iceShardOrbCustomPrefab);
+        PrefabManager.Instance.AddPrefab(fireBallOrbCustomPrefab);
         PrefabManager.Instance.AddPrefab(mistleCustomPrefab);
         PrefabManager.Instance.AddPrefab(staggerDeathNovaCustomPrefab);
         leechDeathVFX = PrefabManager.Instance.GetPrefab("vfx_leech_death");

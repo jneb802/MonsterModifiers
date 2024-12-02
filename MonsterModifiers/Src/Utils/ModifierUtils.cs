@@ -35,7 +35,8 @@ public enum MonsterModifierTypes
     DistantDetection,
     BloodLoss,
     Absorption,
-    FireOrbs
+    FireOrbs,
+    FrostOrbs
 }
 
 public class ModifierData
@@ -103,8 +104,7 @@ public class ModifierUtils
         }
         
         if (modifier == MonsterModifierTypes.PersonalShield ||
-            modifier == MonsterModifierTypes.ShieldDome ||
-            modifier == MonsterModifierTypes.FireOrbs)
+            modifier == MonsterModifierTypes.ShieldDome)
 
         {
             return ModifierAssetUtils.circleIcon;
@@ -134,6 +134,13 @@ public class ModifierUtils
 
         {
             return ModifierAssetUtils.heartIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.FireOrbs ||
+            modifier == MonsterModifierTypes.FrostOrbs)
+
+        {
+            return ModifierAssetUtils.orbIcon;
         }
         
         

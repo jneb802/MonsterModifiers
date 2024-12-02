@@ -108,5 +108,9 @@ Absorption:
 
 FireOrbs:
   weight: 1
-  color: [0.32, 0.66, 0.91, 1]  # Yellow-Gold
+  color: [0.88, 0.01, 0.15, 1]  # Red
+  
+FrostOrbs:
+  weight: 1
+  color: [0.32, 0.66, 0.91, 1]  # Blue
 
