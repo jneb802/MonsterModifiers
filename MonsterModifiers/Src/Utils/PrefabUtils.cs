@@ -41,19 +41,6 @@ public class PrefabUtils
         mainModule.startRotationY = new ParticleSystem.MinMaxCurve(Mathf.Deg2Rad * 0f);
         mainModule.startRotationZ = new ParticleSystem.MinMaxCurve(Mathf.Deg2Rad * 0f);
         
-        GameObject modifierStaggerOrb = PrefabManager.Instance.CreateClonedPrefab("staggerOrbCustomPrefab",mistile);
-        CustomPrefab staggerOrbCustomPrefab = new CustomPrefab(modifierStaggerOrb, false);
-        Object.Destroy(staggerOrbCustomPrefab.Prefab.GetComponent<Humanoid>());
-        Object.Destroy(staggerOrbCustomPrefab.Prefab.GetComponent<MonsterAI>());
-        staggerOrbCustomPrefab.Prefab.GetComponent<ZNetView>().m_persistent = false;
-        Projectile staggerOrbProjectile = staggerOrbCustomPrefab.Prefab.AddComponent<Projectile>();
-        
-        GameObject staff_fireball_projectile = PrefabManager.Instance.GetPrefab("staff_fireball_projectile");
-        GameObject fireBallOrb = PrefabManager.Instance.CreateClonedPrefab("fireBallOrbCustomPrefab",staff_fireball_projectile);
-        CustomPrefab fireBallOrbCustomPrefab = new CustomPrefab(fireBallOrb, false);
-        Projectile fireBallProjectile = fireBallOrbCustomPrefab.Prefab.GetComponent<Projectile>();
-        fireBallProjectile.m_gravity = 0f;
-        
         PrefabManager.Instance.AddPrefab(healCustomPrefab);
         PrefabManager.Instance.AddPrefab(mistleCustomPrefab);
         PrefabManager.Instance.AddPrefab(staggerDeathNovaCustomPrefab);
