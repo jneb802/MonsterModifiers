@@ -33,27 +33,31 @@ public class ElementalInfusions
                 return;
             }
 
+            float addedDamage = hit.GetTotalDamage() * 0.5f;
+            float nonPlayerDamage = hit.m_damage.m_chop + hit.m_damage.m_pickaxe + hit.m_damage.m_spirit;
+            float finalDamageAdd = addedDamage - nonPlayerDamage;
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonInfused))
             {
-                hit.m_damage.m_poison += (hit.GetTotalDamage() * 0.5f);
+                hit.m_damage.m_poison += finalDamageAdd;
                 // Debug.Log("Hit has additional poison damage added. Amount is: " + hit.m_damage.m_poison);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireInfused))
             {
-                hit.m_damage.m_fire += (hit.GetTotalDamage() * 0.5f);
+                hit.m_damage.m_fire += finalDamageAdd;
                 // Debug.Log("Hit has additional fire damage added. Amount is: " + hit.m_damage.m_fire);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.LightningInfused))
             {
-                hit.m_damage.m_lightning += (hit.GetTotalDamage() * 0.5f);
+                hit.m_damage.m_lightning += finalDamageAdd;
                 // Debug.Log("Hit has additional lightning damage added. Amount is: " + hit.m_damage.m_lightning);
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostInfused))
             {
-                hit.m_damage.m_frost += (hit.GetTotalDamage() * 0.5f);
+                hit.m_damage.m_frost += finalDamageAdd;
                 // Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
             }
         }
