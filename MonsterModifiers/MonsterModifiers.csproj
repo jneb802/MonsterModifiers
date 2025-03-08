@@ -10,7 +10,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>MonsterModifiers</RootNamespace>
         <AssemblyName>MonsterModifiers</AssemblyName>
-        <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
@@ -172,9 +172,6 @@
         <Content Include="icons\README.txt" />
         <Content Include="ILRepack.targets" />
         <Content Include="Libs\LocalizationManager.dll" />
-        <Content Include="Libs\ServerSync.dll">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
         <Content Include="LICENSE.md" />
         <Content Include="README.md" />
         <EmbeddedResource Include="Src\Config\modifierValues.yml" />
@@ -185,13 +182,14 @@
         <Content Include="UpdateManifest.ps1" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="HarmonyX" Version="2.14.0" />
         <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2" />
         <PackageReference Include="JotunnLib" Version="2.20.3" />
         <PackageReference Include="Mono.Cecil" Version="0.11.4" />
         <PackageReference Include="MonoMod" Version="21.9.19.1" />
         <PackageReference Include="MonoMod.RuntimeDetour" Version="22.1.29.1" />
         <PackageReference Include="MonoMod.Utils" Version="22.1.29.1" />
-        <PackageReference Include="YamlDotNet" Version="13.2.0" />
+        <PackageReference Include="YamlDotNet" Version="16.3.0" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

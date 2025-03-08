@@ -11,7 +11,6 @@ using Jotunn.Managers;
 using Jotunn.Utils;
 using LocalizationManager;
 using MonsterModifiers.Modifiers;
-using ServerSync;
 using UnityEngine;
 using Paths = BepInEx.Paths;
 
@@ -21,7 +20,7 @@ namespace MonsterModifiers
     public class MonsterModifiersPlugin : BaseUnityPlugin
     {
         internal const string ModName = "MonsterModifiers";
-        internal const string ModVersion = "1.0.15";
+        internal const string ModVersion = "1.0.19";
         internal const string Author = "warpalicious";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
@@ -30,9 +29,6 @@ namespace MonsterModifiers
         private readonly Harmony _harmony = new(ModGUID);
 
         public static readonly ManualLogSource MonsterModifiersLogger = BepInEx.Logging.Logger.CreateLogSource(ModName);
-
-        private static readonly ConfigSync ConfigSync = new(ModGUID)
-            { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
 
         // Location Manager variables
         public Texture2D tex = null!;
@@ -54,10 +50,6 @@ namespace MonsterModifiers
             bool saveOnSet = Config.SaveOnConfigSet;
             Config.SaveOnConfigSet =
                 false; // This and the variable above are used to prevent the config from saving on startup for each config entry. This is speeds up the startup process.
-
-            _serverConfigLocked = config("1 - General", "Lock Configuration", Toggle.On,
-                "If on, the configuration is locked and can be changed by server admins only.");
-            _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
@@ -113,57 +105,6 @@ namespace MonsterModifiers
                 MonsterModifiersLogger.LogError("Please check your config entries for spelling and format!");
             }
         }
-
-
-        #region ConfigOptions
-
-        private static ConfigEntry<Toggle> _serverConfigLocked = null!;
-
-        private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description,
-            bool synchronizedSetting = true)
-        {
-            ConfigDescription extendedDescription =
-                new(
-                    description.Description +
-                    (synchronizedSetting ? " [Synced with Server]" : " [Not Synced with Server]"),
-                    description.AcceptableValues, description.Tags);
-            ConfigEntry<T> configEntry = Config.Bind(group, name, value, extendedDescription);
-            //var configEntry = Config.Bind(group, name, value, description);
-
-            SyncedConfigEntry<T> syncedConfigEntry = ConfigSync.AddConfigEntry(configEntry);
-            syncedConfigEntry.SynchronizedConfig = synchronizedSetting;
-
-            return configEntry;
-        }
-
-        private ConfigEntry<T> config<T>(string group, string name, T value, string description,
-            bool synchronizedSetting = true)
-        {
-            return config(group, name, value, new ConfigDescription(description), synchronizedSetting);
-        }
-
-        private class ConfigurationManagerAttributes
-        {
-            [UsedImplicitly] public int? Order = null!;
-            [UsedImplicitly] public bool? Browsable = null!;
-            [UsedImplicitly] public string? Category = null!;
-            [UsedImplicitly] public Action<ConfigEntryBase>? CustomDrawer = null!;
-        }
-
-        class AcceptableShortcuts : AcceptableValueBase
-        {
-            public AcceptableShortcuts() : base(typeof(KeyboardShortcut))
-            {
-            }
-
-            public override object Clamp(object value) => value;
-            public override bool IsValid(object value) => true;
-
-            public override string ToDescriptionString() =>
-                "# Acceptable values: " + string.Join(", ", UnityInput.Current.SupportedKeyCodes);
-        }
-
-        #endregion
     }
 
     public static class KeyboardExtensions
