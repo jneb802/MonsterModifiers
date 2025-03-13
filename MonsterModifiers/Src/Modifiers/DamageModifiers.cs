@@ -28,19 +28,19 @@ public class DamageModifiers
                 return;
             }
 
-            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PhysicalImmunity))
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PierceImmunity))
+            {
+                __instance.m_damageModifiers.m_pierce = HitData.DamageModifier.Immune;
+            }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.SlashImmunity))
+            {
+                __instance.m_damageModifiers.m_slash = HitData.DamageModifier.Immune;
+            }
+            
+            if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.BluntImmunity))
             {
                 __instance.m_damageModifiers.m_blunt = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_pierce = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_slash = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_chop = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_pickaxe = HitData.DamageModifier.Immune;
-                
-                __instance.m_damageModifiers.m_fire = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_frost = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_lightning = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_poison = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_spirit = HitData.DamageModifier.Weak;
             }
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.ElementalImmunity))
@@ -50,12 +50,6 @@ public class DamageModifiers
                 __instance.m_damageModifiers.m_lightning = HitData.DamageModifier.Immune;
                 __instance.m_damageModifiers.m_poison = HitData.DamageModifier.Immune;
                 __instance.m_damageModifiers.m_spirit = HitData.DamageModifier.Immune;
-                
-                __instance.m_damageModifiers.m_blunt = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_pierce = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_slash = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_chop = HitData.DamageModifier.Weak;
-                __instance.m_damageModifiers.m_pickaxe = HitData.DamageModifier.Weak;
             }
         }
     }

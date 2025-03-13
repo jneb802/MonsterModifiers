@@ -29,7 +29,9 @@ public enum MonsterModifierTypes
     FrostInfused,
     LightningInfused,
     ElementalImmunity,
-    PhysicalImmunity,
+    PierceImmunity,
+    BluntImmunity,
+    SlashImmunity,
     FastMovement,
     FastAttackSpeed,
     DistantDetection,
@@ -95,7 +97,6 @@ public class ModifierUtils
         }
         
         if (modifier == MonsterModifierTypes.ElementalImmunity ||
-            modifier == MonsterModifierTypes.PhysicalImmunity ||
             modifier == MonsterModifierTypes.StaggerImmune)
         {
             return ModifierAssetUtils.shieldIcon;
@@ -112,6 +113,24 @@ public class ModifierUtils
 
         {
             return ModifierAssetUtils.soulIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.PierceImmunity)
+
+        {
+            return ModifierAssetUtils.shieldSpearIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.SlashImmunity)
+
+        {
+            return ModifierAssetUtils.shieldSwordIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.BluntImmunity)
+
+        {
+            return ModifierAssetUtils.shieldMaceIcon;
         }
         
         if (modifier == MonsterModifierTypes.FastAttackSpeed ||
@@ -149,7 +168,7 @@ public class ModifierUtils
         List<MonsterModifierTypes> selectedModifiers = new List<MonsterModifierTypes>();
         Dictionary<MonsterModifierTypes, ModifierData> availableModifiers =
             new Dictionary<MonsterModifierTypes, ModifierData>(modifiers);
-
+        
         for (int i = 0; i < numModifiers; i++)
         {
             int totalWeight = 0;
@@ -176,14 +195,6 @@ public class ModifierUtils
 
             selectedModifiers.Add(selected);
             availableModifiers.Remove(selected);
-            if (selected == MonsterModifierTypes.ElementalImmunity)
-            {
-                availableModifiers.Remove(MonsterModifierTypes.PhysicalImmunity);
-            }
-            if (selected == MonsterModifierTypes.PhysicalImmunity)
-            {
-                availableModifiers.Remove(MonsterModifierTypes.ElementalImmunity);
-            }
         }
 
         return selectedModifiers;

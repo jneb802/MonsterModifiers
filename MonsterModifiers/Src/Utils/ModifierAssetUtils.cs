@@ -19,6 +19,9 @@ public class ModifierAssetUtils
     public static Sprite skullIcon;
     public static Sprite appleIcon;
     public static Sprite shieldBrokenIcon;
+    public static Sprite shieldSpearIcon;
+    public static Sprite shieldMaceIcon;
+    public static Sprite shieldSwordIcon;
     public static Sprite potionIcon;
     public static Sprite bloodIcon;
     public static Sprite bloodIconRed;
@@ -26,7 +29,7 @@ public class ModifierAssetUtils
 
     public static void Setup()
     {
-        ashlandsAssetBundle = AssetUtils.LoadAssetBundleFromResources("monster_modifiers_ashlands", Assembly.GetExecutingAssembly());
+        // ashlandsAssetBundle = AssetUtils.LoadAssetBundleFromResources("monster_modifiers_ashlands", Assembly.GetExecutingAssembly());
         statusEffectBundle = AssetUtils.LoadAssetBundleFromResources("statusicon", Assembly.GetExecutingAssembly());
         modiferIconsBundle = AssetUtils.LoadAssetBundleFromResources("modifiericons", Assembly.GetExecutingAssembly());
     }
@@ -41,6 +44,9 @@ public class ModifierAssetUtils
         skullIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Skull.png");
         appleIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Apple.png");
         shieldBrokenIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldBroken.png");
+        shieldSpearIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldSpear.png");
+        shieldMaceIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldMace.png");
+        shieldSwordIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/ShieldSword.png");
         potionIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Potion.png");
         heartIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/heartIcon.png");
         
