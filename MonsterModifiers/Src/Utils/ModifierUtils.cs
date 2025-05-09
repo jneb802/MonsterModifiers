@@ -36,7 +36,9 @@ public enum MonsterModifierTypes
     FastAttackSpeed,
     DistantDetection,
     BloodLoss,
-    Absorption
+    Absorption,
+    Vampiric,
+    Forceful
 }
 
 public class ModifierData
@@ -135,7 +137,8 @@ public class ModifierUtils
         
         if (modifier == MonsterModifierTypes.FastAttackSpeed ||
             modifier == MonsterModifierTypes.FastMovement ||
-            modifier == MonsterModifierTypes.DistantDetection)
+            modifier == MonsterModifierTypes.DistantDetection ||
+            modifier == MonsterModifierTypes.Forceful)
 
         {
             return ModifierAssetUtils.plusSquareIcon;
@@ -147,7 +150,8 @@ public class ModifierUtils
             return ModifierAssetUtils.bloodIcon;
         }
         
-        if (modifier == MonsterModifierTypes.Absorption)
+        if (modifier == MonsterModifierTypes.Absorption ||
+            modifier == MonsterModifierTypes.Vampiric)
 
         {
             return ModifierAssetUtils.heartIcon;

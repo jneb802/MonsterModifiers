@@ -113,4 +113,11 @@ BloodLoss:
 Absorption:
   weight: 1
   color: [0.32, 0.66, 0.91, 1]  # Blue
-
+  
+Vampiric:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red
+  
+Forceful:
+  weight: 1
+  color: [0.22, 0.15, 0.04, 1]  # Brown
