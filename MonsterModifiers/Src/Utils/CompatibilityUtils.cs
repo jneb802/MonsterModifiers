@@ -13,9 +13,9 @@ public class CompatibilityUtils
             MonsterModifiersPlugin.MonsterModifiersLogger.LogWarning("CreatureLevelandLootControl plugin is installed. Please ensure special effects and infusions are disabled in CLLC configuration.");
         }  
         
-        if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("StarLevelsExpanded"))
+        if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MidnightsFX.StarLevelSystem"))
         {
-            MonsterModifiersPlugin.MonsterModifiersLogger.LogWarning("StarLevelsExpanded plugin is installed. Please ensure max modifiers config is set.");
+            MonsterModifiersPlugin.MonsterModifiersLogger.LogWarning("StarLevelSystem plugin is installed. Please ensure max modifiers config is set.");
 
             isStarLevelsExpandedInstalled = true;
         }
