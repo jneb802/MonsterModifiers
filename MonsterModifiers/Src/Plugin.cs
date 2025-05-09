@@ -7,6 +7,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using JetBrains.Annotations;
+using Jotunn.Extensions;
 using Jotunn.Managers;
 using Jotunn.Utils;
 using LocalizationManager;
@@ -20,7 +21,7 @@ namespace MonsterModifiers
     public class MonsterModifiersPlugin : BaseUnityPlugin
     {
         internal const string ModName = "MonsterModifiers";
-        internal const string ModVersion = "1.0.19";
+        internal const string ModVersion = "1.2.1";
         internal const string Author = "warpalicious";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
@@ -66,7 +67,9 @@ namespace MonsterModifiers
             ModifierAssetUtils.Setup();
             ModifierAssetUtils.LoadAllIcons();
             
-            ShieldDome.LoadShieldDome();
+            Configurations_MaxModifiers = ConfigFileExtensions.BindConfig(Config, "Balance", "Max Modifiers",5,"The maximum amount of modifiers a creature can have.", true);
+            
+            // ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
             
@@ -74,6 +77,9 @@ namespace MonsterModifiers
             
             PrefabManager.OnVanillaPrefabsAvailable += PrefabUtils.CreateCustomPrefabs;
         }
+        
+        public static ConfigEntry<int> Configurations_MaxModifiers;
+        
 
         private void OnDestroy()
         {

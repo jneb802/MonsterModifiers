@@ -41,8 +41,18 @@ namespace MonsterModifiers.Patches
 
 			GameObject creatureGUI = value.m_gui;
 			// Debug.Log("Name of creatureGUI is " + creatureGUI.name);
+
+			int startPosition = 0;
 			
-			for (int i = 0; i < creatureGUI.transform.childCount; i++)
+			// The maximum stars StarLevelsExpanded will allow on a creature HUD before truncated to a new star display format.
+			int starLevelsExpandedMaxStarOnHud = 7;
+			
+			if (CompatibilityUtils.isStarLevelsExpandedInstalled && character.GetLevel() > starLevelsExpandedMaxStarOnHud)
+			{
+				startPosition = 2;
+			}
+			
+			for (int i = startPosition; i < creatureGUI.transform.childCount; i++)
 			{
 				Transform child = creatureGUI.transform.GetChild(i);
 				if (child.name.StartsWith("level_"+(modifiers.Count+1)) && child.gameObject.activeSelf)

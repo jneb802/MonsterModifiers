@@ -33,7 +33,9 @@ public class MonsterModifier : MonoBehaviour
          string modifiersString = character.m_nview.GetZDO().GetString("modifiers", string.Empty);
          if (string.IsNullOrEmpty(modifiersString))
          {
-            foreach (var modifier in ModifierUtils.RollRandomModifiers(level - 1))
+            int numModifiers = Mathf.Min(level - 1, MonsterModifiersPlugin.Configurations_MaxModifiers.Value);
+            
+            foreach (var modifier in ModifierUtils.RollRandomModifiers(numModifiers))
             {
                Modifiers.Add(modifier);
                // Debug.Log("Adding modifier: " + modifier.ToString() + " to monster with name: " + character.m_name);
