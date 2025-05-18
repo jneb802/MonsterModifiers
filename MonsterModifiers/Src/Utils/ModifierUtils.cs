@@ -38,7 +38,9 @@ public enum MonsterModifierTypes
     BloodLoss,
     Absorption,
     Vampiric,
-    Forceful
+    Forceful,
+    Wet,
+    Quiet
 }
 
 public class ModifierData
@@ -144,7 +146,8 @@ public class ModifierUtils
             return ModifierAssetUtils.plusSquareIcon;
         }
         
-        if (modifier == MonsterModifierTypes.BloodLoss)
+        if (modifier == MonsterModifierTypes.BloodLoss ||
+            modifier == MonsterModifierTypes.Wet)
 
         {
             return ModifierAssetUtils.bloodIcon;
@@ -155,6 +158,12 @@ public class ModifierUtils
 
         {
             return ModifierAssetUtils.heartIcon;
+        }
+        
+        if (modifier == MonsterModifierTypes.Quiet)
+
+        {
+            return ModifierAssetUtils.earIcon;
         }
         
         

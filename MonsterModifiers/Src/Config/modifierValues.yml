@@ -121,3 +121,11 @@ Vampiric:
 Forceful:
   weight: 1
   color: [0.22, 0.15, 0.04, 1]  # Brown
+  
+Wet:
+  weight: 1
+  color: [0.32, 0.66, 0.91, 1]  # Blue
+  
+Quiet:
+  weight: 1
+  color: [0.88, 0.01, 0.15, 1]  # Red

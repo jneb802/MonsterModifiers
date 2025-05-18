@@ -133,6 +133,7 @@
         <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
         <Compile Include="Src\Modifiers\Forceful.cs" />
         <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
+        <Compile Include="Src\Modifiers\Quiet.cs" />
         <Compile Include="Src\Modifiers\StaggerDeath.cs" />
         <Compile Include="Src\Modifiers\StaggerImmune.cs" />
         <Compile Include="Src\Modifiers\DamageModifiers.cs" />
@@ -144,6 +145,7 @@
         <Compile Include="Src\Modifiers\SoulEater.cs" />
         <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
         <Compile Include="Src\Modifiers\Vampiric.cs" />
+        <Compile Include="Src\Modifiers\Wet.cs" />
         <Compile Include="Src\Patches\AddMonsterModifiersToCharacter.cs" />
         <Compile Include="Src\Patches\EnemyHudPatch.cs" />
         <Compile Include="Src\Plugin.cs" />

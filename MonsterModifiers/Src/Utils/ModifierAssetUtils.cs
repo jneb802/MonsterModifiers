@@ -26,6 +26,7 @@ public class ModifierAssetUtils
     public static Sprite bloodIcon;
     public static Sprite bloodIconRed;
     public static Sprite heartIcon;
+    public static Sprite earIcon;
 
     public static void Setup()
     {
@@ -52,6 +53,8 @@ public class ModifierAssetUtils
         
         bloodIcon = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIcon.png");
         bloodIconRed = statusEffectBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/bloodIconRed.png");
+        
+        earIcon = modiferIconsBundle.LoadAsset<Sprite>("Assets/WarpProjects/Modifiers/NewModifierIcons/Ear.png");
     }
 
 
