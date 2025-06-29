@@ -147,6 +147,7 @@
         <Compile Include="Src\Modifiers\Vampiric.cs" />
         <Compile Include="Src\Modifiers\Wet.cs" />
         <Compile Include="Src\Patches\AddMonsterModifiersToCharacter.cs" />
+        <Compile Include="Src\Patches\AddVisualsPatch.cs" />
         <Compile Include="Src\Patches\EnemyHudPatch.cs" />
         <Compile Include="Src\Plugin.cs" />
         <Compile Include="Src\StatusEffects\BloodLoss_SE.cs" />
@@ -162,6 +163,7 @@
         <Compile Include="Src\Utils\WorldUtils.cs" />
         <Compile Include="Src\Utils\YamlUtils.cs" />
         <Compile Include="Src\Utils\ZnetUtils.cs" />
+        <Compile Include="Src\Visuals\BowVisuals.cs" />
         <Compile Include="VersionHandshake.cs" />
     </ItemGroup>
     <ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using MonsterModifiers.Modifiers;
 using UnityEngine;
+using MonsterModifiers.Visuals;
 
 namespace MonsterModifiers.Custom_Components;
 
@@ -55,7 +56,6 @@ public class MonsterModifier : MonoBehaviour
          }
 
          ApplyStartModifiers();
-
       }
    }
 
