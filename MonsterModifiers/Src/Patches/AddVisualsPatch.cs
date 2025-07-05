@@ -7,31 +7,47 @@ namespace MonsterModifiers.Custom_Components;
 
 public class AddVisualsPatch
 {
-    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.Start))]
-    public static class Humanoid_Start_Patch
+    [HarmonyPatch(typeof(MonsterAI), nameof(MonsterAI.Start))]
+    public static class MonsterAI_Start_Patch
     {
-        private static void Postfix(Humanoid __instance)
+        private static void Postfix(MonsterAI __instance)
         {
-            if (!__instance.IsPlayer() && !__instance.IsBoss())
+            MonsterModifier monsterModifier = __instance.GetComponent<MonsterModifier>();
+            if (monsterModifier == null) return;
+
+            bool hasSkeletonBow = false;
+            bool hasDraugrBow = false;
+            Humanoid humanoid = __instance.GetComponent<Humanoid>();
+
+            foreach (var item in humanoid.m_inventory.GetAllItems())
             {
-                ItemDrop.ItemData currentItem = __instance.GetCurrentWeapon();
-                    
-                if (currentItem.m_shared.m_name.Equals("skeleton_bow") || currentItem.m_shared.m_name.Equals("draugr_bow"))
+                if (item.m_dropPrefab.name == "skeleton_bow")
                 {
-                    Debug.Log("Adding visuals to humanoid with name " + __instance.name);
-                    MonsterModifier monsterModifier = __instance.GetComponent<MonsterModifier>();
-                    if (monsterModifier != null)
-                    {
-                        Debug.Log("Adding bow visuals");
-                        List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
-                        Debug.Log("monster has modifiers: " + modifiers.Count);
-                        GameObject newItem = Visuals.BowVisuals.GetModifierVisual(currentItem, modifiers);
-                        Debug.Log("Unequiping items");
-                        __instance.UnequipAllItems();
-                        Debug.Log("Adding new item with name: " + newItem);
-                        __instance.GiveDefaultItem(newItem);
-                    } 
+                    hasSkeletonBow = true;
+                    //Debug.Log("Humanoid has skeleton bow item");
                 }
+
+                if (item.m_dropPrefab.name == "draugr_bow")
+                {
+                    hasDraugrBow = true;
+                    // Debug.Log("Humanoid has draugr bow item");
+                }
+            }
+
+            if (hasSkeletonBow)
+            {
+                List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
+                GameObject newItem = Visuals.BowVisuals.GetModifierVisual("skeleton_bow", modifiers);
+                humanoid.m_inventory.RemoveAll();
+                humanoid.m_inventory.AddItem(newItem, 1);
+            }
+
+            if (hasDraugrBow)
+            {
+                List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
+                GameObject newItem = Visuals.BowVisuals.GetModifierVisual("draugr_bow", modifiers);
+                humanoid.m_inventory.RemoveAll();
+                humanoid.m_inventory.AddItem(newItem, 1);
             }
         }
     }

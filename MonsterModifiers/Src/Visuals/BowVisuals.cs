@@ -9,20 +9,18 @@ namespace MonsterModifiers.Visuals;
 
 public class BowVisuals
 {
-    public static GameObject GetModifierVisual(ItemDrop.ItemData item, List<MonsterModifierTypes> modifiers)
+    public static GameObject GetModifierVisual(string itemName, List<MonsterModifierTypes> modifiers)
     {
-        switch (item.m_shared.m_name)
+        switch (itemName)
         {
             case "skeleton_bow":
-                Debug.Log("Skeleton bow detected");
                 return Visuals.BowVisuals.GetSkeletonBowVisual(modifiers);
 
             case "draugr_bow":
-                Debug.Log("Draugr bow detected");
                 return Visuals.BowVisuals.GetDraugrBowVisual(modifiers);
 
             default:
-                Debug.Log("No matching visual found for: " + item.m_shared.m_name);
+                // Debug.Log("No matching visual found for: " + itemName);
                 return null;
         }
     }
@@ -59,8 +57,7 @@ public class BowVisuals
         {
             return PrefabManager.Instance.GetPrefab("draugrBowCustomPrefab_Poison");
         }
-
-        Debug.Log("No matching visual found for Draugr bow");
+        
         return null;
     }
 }
