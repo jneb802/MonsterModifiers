@@ -14,6 +14,9 @@ public class AddVisualsPatch
         {
             MonsterModifier monsterModifier = __instance.GetComponent<MonsterModifier>();
             if (monsterModifier == null) return;
+            
+            List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
+            if (modifiers.Count == 0) return;
 
             bool hasSkeletonBow = false;
             bool hasDraugrBow = false;
@@ -36,7 +39,6 @@ public class AddVisualsPatch
 
             if (hasSkeletonBow)
             {
-                List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
                 GameObject newItem = Visuals.BowVisuals.GetModifierVisual("skeleton_bow", modifiers);
                 humanoid.m_inventory.RemoveAll();
                 humanoid.m_inventory.AddItem(newItem, 1);
@@ -44,7 +46,6 @@ public class AddVisualsPatch
 
             if (hasDraugrBow)
             {
-                List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
                 GameObject newItem = Visuals.BowVisuals.GetModifierVisual("draugr_bow", modifiers);
                 humanoid.m_inventory.RemoveAll();
                 humanoid.m_inventory.AddItem(newItem, 1);
