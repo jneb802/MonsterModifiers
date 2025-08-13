@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +12,7 @@ using Jotunn.Extensions;
 using Jotunn.Managers;
 using Jotunn.Utils;
 using LocalizationManager;
+using MonsterModifiers.Config;
 using MonsterModifiers.Modifiers;
 using UnityEngine;
 using Paths = BepInEx.Paths;
@@ -59,10 +61,12 @@ namespace MonsterModifiers
             if (saveOnSet)
             {
                 Config.SaveOnConfigSet = saveOnSet;
+                
                 Config.Save();
             }
-
-            YamlUtils.ParseDefaultYamls();
+            ModifierConfigLogic.Instance.InitConfig(Config);
+            Dictionary<MonsterModifierTypes, ModifierData> defaultModifiers= YamlUtils.ParseDefaultYamls();
+            ModifierUtils.modifiers = ModifierConfigLogic.Instance.InitCustomConfigModifiers(defaultModifiers);
             TranslationUtils.AddLocalizations();
             ModifierAssetUtils.Setup();
             ModifierAssetUtils.LoadAllIcons();
