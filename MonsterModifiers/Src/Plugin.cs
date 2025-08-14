@@ -64,9 +64,7 @@ namespace MonsterModifiers
                 
                 Config.Save();
             }
-            ModifierConfigLogic.Instance.InitConfig(Config);
-            Dictionary<MonsterModifierTypes, ModifierData> defaultModifiers= YamlUtils.ParseDefaultYamls();
-            ModifierUtils.modifiers = ModifierConfigLogic.Instance.InitCustomConfigModifiers(defaultModifiers);
+            InitModifiers();
             TranslationUtils.AddLocalizations();
             ModifierAssetUtils.Setup();
             ModifierAssetUtils.LoadAllIcons();
@@ -81,6 +79,15 @@ namespace MonsterModifiers
             
             PrefabManager.OnVanillaPrefabsAvailable += PrefabUtils.CreateCustomPrefabs;
         }
+
+        void InitModifiers()
+        {
+            ModifierConfigHandler.Instance.InitConfig(Config);
+            Dictionary<MonsterModifierTypes, ModifierData> defaultModifiers= YamlUtils.ParseDefaultYamls();
+            ModifierUtils.modifiers = ModifierConfigHandler.Instance.InitCustomConfigModifiers(defaultModifiers);
+        }
+        
+        
         
         public static ConfigEntry<int> Configurations_MaxModifiers;
         
