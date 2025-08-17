@@ -12,7 +12,7 @@ public class YamlUtils
 {
     public static string defaultModifierValues;
     
-    public static void ParseDefaultYamls()
+    public static Dictionary<MonsterModifierTypes, ModifierData> ParseDefaultYamls()
     { 
         defaultModifierValues = AssetUtils.LoadTextFromResources("modifierValues.yml");
         
@@ -20,6 +20,7 @@ public class YamlUtils
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
         
-        ModifierUtils.modifiers = deserializer.Deserialize<Dictionary<MonsterModifierTypes, ModifierData>>(new StringReader(defaultModifierValues));
+        return deserializer.Deserialize<Dictionary<MonsterModifierTypes, ModifierData>>(new StringReader(defaultModifierValues));
     }
+    
 }
