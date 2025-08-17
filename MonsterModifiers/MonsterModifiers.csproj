@@ -125,6 +125,7 @@
     <Compile Include="Src\Custom Components\MonsterModifier.cs" />
     <Compile Include="Src\Modifiers\Absorption.cs" />
     <Compile Include="Src\Modifiers\BloodLoss.cs" />
+    <Compile Include="Src\Config\ModifierConfigHandler.cs" />
     <Compile Include="Src\Modifiers\DistantDetection.cs" />
     <Compile Include="Src\Modifiers\EitrSiphon.cs" />
     <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
