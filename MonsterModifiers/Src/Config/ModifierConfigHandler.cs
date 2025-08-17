@@ -61,7 +61,7 @@ public class ModifierConfigHandler
                 "Modifier Weights",
                 modifierType.ToString(),
                 1,
-                "The weighting of this modifier to be applied to monsters."
+                "The application weight of the modifier. Value should be any positive integer."
             );
             if (modifierEntry.Value <= 0)
             {
