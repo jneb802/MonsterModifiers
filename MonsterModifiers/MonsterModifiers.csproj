@@ -63,9 +63,6 @@
     </When>
   </Choose>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="assembly_guiutils">
       <HintPath>$(PublicizedAssembliesPath)\assembly_guiutils_publicized.dll</HintPath>
     </Reference>
