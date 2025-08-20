@@ -14,6 +14,10 @@ public class AddVisualsPatch
         {
             MonsterModifier monsterModifier = __instance.GetComponent<MonsterModifier>();
             if (monsterModifier == null) return;
+
+            if (!monsterModifier.Modifiers.Contains(MonsterModifierTypes.FireInfused) &&
+                !monsterModifier.Modifiers.Contains(MonsterModifierTypes.FrostInfused) &&
+                !monsterModifier.Modifiers.Contains(MonsterModifierTypes.PoisonInfused)) return;
             
             List<MonsterModifierTypes> modifiers = monsterModifier.Modifiers;
             if (modifiers.Count == 0) return;
