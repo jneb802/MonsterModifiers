@@ -2,6 +2,16 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="environment.props" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.10.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -63,9 +73,6 @@
     </When>
   </Choose>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="assembly_guiutils">
       <HintPath>$(PublicizedAssembliesPath)\assembly_guiutils_publicized.dll</HintPath>
     </Reference>
@@ -125,6 +132,7 @@
     <Compile Include="Src\Custom Components\MonsterModifier.cs" />
     <Compile Include="Src\Modifiers\Absorption.cs" />
     <Compile Include="Src\Modifiers\BloodLoss.cs" />
+    <Compile Include="Src\Config\ModifierConfigHandler.cs" />
     <Compile Include="Src\Modifiers\DistantDetection.cs" />
     <Compile Include="Src\Modifiers\EitrSiphon.cs" />
     <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
