@@ -33,32 +33,27 @@ public class ElementalInfusions
                 return;
             }
 
-            float addedDamage = hit.GetTotalDamage() * 0.5f;
+            float totalDamage = hit.GetTotalDamage();
             float nonPlayerDamage = hit.m_damage.m_chop + hit.m_damage.m_pickaxe + hit.m_damage.m_spirit;
-            float finalDamageAdd = addedDamage - nonPlayerDamage;
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PoisonInfused))
             {
-                hit.m_damage.m_poison += finalDamageAdd;
-                // Debug.Log("Hit has additional poison damage added. Amount is: " + hit.m_damage.m_poison);
+                hit.m_damage.m_poison += Mathf.Max(0f, totalDamage * (MonsterModifiersPlugin.Cfg_PoisonInfused_DamagePercent.Value / 100f) - nonPlayerDamage);
             }
-            
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FireInfused))
             {
-                hit.m_damage.m_fire += finalDamageAdd;
-                // Debug.Log("Hit has additional fire damage added. Amount is: " + hit.m_damage.m_fire);
+                hit.m_damage.m_fire += Mathf.Max(0f, totalDamage * (MonsterModifiersPlugin.Cfg_FireInfused_DamagePercent.Value / 100f) - nonPlayerDamage);
             }
-            
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.LightningInfused))
             {
-                hit.m_damage.m_lightning += finalDamageAdd;
-                // Debug.Log("Hit has additional lightning damage added. Amount is: " + hit.m_damage.m_lightning);
+                hit.m_damage.m_lightning += Mathf.Max(0f, totalDamage * (MonsterModifiersPlugin.Cfg_LightningInfused_DamagePercent.Value / 100f) - nonPlayerDamage);
             }
-            
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FrostInfused))
             {
-                hit.m_damage.m_frost += finalDamageAdd;
-                // Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
+                hit.m_damage.m_frost += Mathf.Max(0f, totalDamage * (MonsterModifiersPlugin.Cfg_FrostInfused_DamagePercent.Value / 100f) - nonPlayerDamage);
             }
         }
     }

@@ -47,10 +47,11 @@ public class SoulEater : MonoBehaviour
                          int soulEaterCount = character.m_nview.GetZDO().GetInt("MM_soulEaterCount") + 1;
                          character.m_nview.GetZDO().Set("MM_soulEaterCount",soulEaterCount);
                          
-                         character.transform.localScale *= 1.1f;
+                         float growthMult = 1f + MonsterModifiersPlugin.Cfg_SoulEater_GrowthPerStack.Value / 100f;
+                         character.transform.localScale *= growthMult;
                          Physics.SyncTransforms();
 
-                         character.m_health *= 1.1f;
+                         character.m_health *= growthMult;
                      }
                  }
              }
@@ -82,35 +83,12 @@ public class SoulEater : MonoBehaviour
 
              if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.SoulEater))
              {
-                 if (attacker.m_nview.GetZDO().GetInt("MM_soulEaterCount") > 0)
+                 int soulEaterCount = attacker.m_nview.GetZDO().GetInt("MM_soulEaterCount");
+                 if (soulEaterCount > 0)
                  {
-                     int soulEaterCount = attacker.m_nview.GetZDO().GetInt("MM_soulEaterCount");
-                     float baseDamage = hit.GetTotalDamage();
-                     float finalDamage = baseDamage;
-                     switch (soulEaterCount)
-                     {
-                         case 1:
-                             hit.ApplyModifier(1.1f);
-                             finalDamage = baseDamage * 1.1f;
-                             // Debug.Log($"SoulEater modifier applied: 1.1. Final damage: {finalDamage}");
-                             break;
-                         case 2:
-                             hit.ApplyModifier(1.2f);
-                             finalDamage = baseDamage * 1.2f;
-                             // Debug.Log($"SoulEater modifier applied: 1.2. Final damage: {finalDamage}");
-                             break;
-                         case 3:
-                             hit.ApplyModifier(1.3f);
-                             finalDamage = baseDamage * 1.3f;
-                             // Debug.Log($"SoulEater modifier applied: 1.3. Final damage: {finalDamage}");
-                             break;
-                         default:
-                             // Handle cases where soulEaterCount is outside the range 1-3
-                             hit.ApplyModifier(1.0f); // No modifier or a default modifier
-                             finalDamage = baseDamage * 1.0f;
-                             // Debug.Log($"SoulEater modifier applied: 1.0 (default). Final damage: {finalDamage}");
-                             break;
-                     }
+                     float growthPct = MonsterModifiersPlugin.Cfg_SoulEater_GrowthPerStack.Value / 100f;
+                     float damageModifier = 1f + growthPct * Mathf.Clamp(soulEaterCount, 1, 3);
+                     hit.ApplyModifier(damageModifier);
                  }
              }
          }

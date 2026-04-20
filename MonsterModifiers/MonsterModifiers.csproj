@@ -63,6 +63,14 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Reference Include="Jotunn">
+      <HintPath>$(NuGetPackageRoot)jotunnlib\2.26.0\lib\net462\Jotunn.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>$(NuGetPackageRoot)yamldotnet\16.3.0\lib\net47\YamlDotNet.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
     </Reference>
@@ -132,6 +140,10 @@
     <Compile Include="Src\Modifiers\FoodDrain.cs" />
     <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
     <Compile Include="Src\Modifiers\Forceful.cs" />
+    <Compile Include="Src\Modifiers\Knockback.cs" />
+    <Compile Include="Src\Modifiers\ResistanceNotification.cs" />
+    <Compile Include="Src\Modifiers\FireTrail.cs" />
+    <Compile Include="Src\Modifiers\ArmorCharge.cs" />
     <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
     <Compile Include="Src\Modifiers\Quiet.cs" />
     <Compile Include="Src\Modifiers\StaggerDeath.cs" />
@@ -149,6 +161,7 @@
     <Compile Include="Src\Patches\AddMonsterModifiersToCharacter.cs" />
     <Compile Include="Src\Patches\AddVisualsPatch.cs" />
     <Compile Include="Src\Patches\EnemyHudPatch.cs" />
+    <Compile Include="Src\Patches\ShaderLogFilter.cs" />
     <Compile Include="Src\Plugin.cs" />
     <Compile Include="Src\StatusEffects\BloodLoss_SE.cs" />
     <Compile Include="Src\StatusEffects\HealDeath_SE.cs" />

@@ -25,9 +25,8 @@ public class FastAttackSpeed
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.FastAttackSpeed))
             {
-                // Debug.Log("Monster has fast attack speed");
                 double currentAttackSpeed = ___m_animator.speed * 10000000.0 % 100.0;
-                float attackSpeedModifier = 0.5f;
+                float attackSpeedModifier = MonsterModifiersPlugin.Cfg_FastAttackSpeed_SpeedPercent.Value / 100f;
                 if ((!(currentAttackSpeed < 30.0) || !(currentAttackSpeed > 10.0)) && !(___m_animator.speed <= 0.001f))
                 {
                     ___m_animator.speed = ___m_animator.speed * (1f + attackSpeedModifier) + 1.9E-06f;
@@ -56,7 +55,7 @@ public class FastAttackSpeed
             {
                 if (!character.IsPlayer() && __result && !character.IsBoss())
                 {
-                    float speedModifier = 0.5f;
+                    float speedModifier = MonsterModifiersPlugin.Cfg_FastAttackSpeed_SpeedPercent.Value / 100f;
                     weapon.m_lastAttackTime -= weapon.m_shared.m_aiAttackInterval * Mathf.Max(0f, speedModifier);
                 }
             }

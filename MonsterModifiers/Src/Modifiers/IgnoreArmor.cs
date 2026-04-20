@@ -47,8 +47,7 @@ public class IgnoreArmor
         {
             if (shouldIgnoreArmor)
             {
-                __result *= 0.5f;
-                // Debug.Log("Get body armor has reduced the armor");
+                __result *= (1f - MonsterModifiersPlugin.Cfg_IgnoreArmor_ArmorReduction.Value / 100f);
                 shouldIgnoreArmor = false;
             }
         }

@@ -40,7 +40,9 @@ public enum MonsterModifierTypes
     Vampiric,
     Forceful,
     Wet,
-    Quiet
+    Quiet,
+    Knockback,
+    SummonDeath
 }
 
 public class ModifierData
@@ -51,7 +53,7 @@ public class ModifierData
 
 public class ModifierUtils
 {
-    public static Dictionary<MonsterModifierTypes, ModifierData> modifiers;
+    public static Dictionary<MonsterModifierTypes, ModifierData> modifiers = null!;
 
     public static Color GetModifierColor(MonsterModifierTypes modifier)
     {
@@ -68,7 +70,8 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FrostInfused ||
             modifier == MonsterModifierTypes.PoisonInfused ||
             modifier == MonsterModifierTypes.LightningInfused ||
-            modifier == MonsterModifierTypes.RemoveStatusEffect)
+            modifier == MonsterModifierTypes.RemoveStatusEffect ||
+            modifier == MonsterModifierTypes.Knockback)
         {
             return ModifierAssetUtils.swordIcon;
         }
@@ -95,7 +98,8 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FrostDeath ||
             modifier == MonsterModifierTypes.HealDeath ||
             modifier == MonsterModifierTypes.StaggerDeath ||
-            modifier == MonsterModifierTypes.TarDeath)
+            modifier == MonsterModifierTypes.TarDeath ||
+            modifier == MonsterModifierTypes.SummonDeath)
         {
             return ModifierAssetUtils.skullIcon;
         }
@@ -141,7 +145,6 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FastMovement ||
             modifier == MonsterModifierTypes.DistantDetection ||
             modifier == MonsterModifierTypes.Forceful)
-
         {
             return ModifierAssetUtils.plusSquareIcon;
         }

@@ -34,7 +34,7 @@ public class BloodLoss_SE : StatusEffect
             
             HitData bloodLossHit = new HitData
             {
-                m_damage = { m_slash = m_character.GetMaxHealth() * 0.30f }
+                m_damage = { m_slash = m_character.GetMaxHealth() * (MonsterModifiersPlugin.Cfg_BloodLoss_BurstDamagePercent.Value / 100f) }
             };
             
             m_character.Damage(bloodLossHit);

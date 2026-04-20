@@ -129,3 +129,11 @@ Wet:
 Quiet:
   weight: 0
   color: [0.88, 0.01, 0.15, 1]  # Red
+
+Knockback:
+  weight: 1
+  color: [0.95, 0.60, 0.10, 1]  # Orange
+
+SummonDeath:
+  weight: 1
+  color: [0.85, 0.85, 0.85, 1]  # Light Gray (bone)

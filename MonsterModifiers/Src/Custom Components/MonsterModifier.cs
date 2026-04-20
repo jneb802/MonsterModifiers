@@ -34,7 +34,7 @@ public class MonsterModifier : MonoBehaviour
          string modifiersString = character.m_nview.GetZDO().GetString("modifiers", string.Empty);
          if (string.IsNullOrEmpty(modifiersString))
          {
-            int numModifiers = Mathf.Min(level - 1, MonsterModifiersPlugin.Configurations_MaxModifiers.Value);
+            int numModifiers = Mathf.Min(level, MonsterModifiersPlugin.Configurations_MaxModifiers.Value);
             
             foreach (var modifier in ModifierUtils.RollRandomModifiers(numModifiers))
             {
@@ -51,8 +51,11 @@ public class MonsterModifier : MonoBehaviour
          }
          else
          {
-            Modifiers = new List<MonsterModifierTypes>(Array.ConvertAll(modifiersString.Split(','), 
-               str => (MonsterModifierTypes)Enum.Parse(typeof(MonsterModifierTypes), str)));
+            foreach (string str in modifiersString.Split(','))
+            {
+               if (Enum.TryParse(str.Trim(), out MonsterModifierTypes parsed))
+                  Modifiers.Add(parsed);
+            }
          }
 
          ApplyStartModifiers();
@@ -108,6 +111,19 @@ public class MonsterModifier : MonoBehaviour
       if (Modifiers.Contains(MonsterModifierTypes.Quiet))
       {
          Quiet.AddQuiet(character);
+      }
+
+      // 시너지: FireInfused + FastAttackSpeed → 화염 흔적
+      if (Modifiers.Contains(MonsterModifierTypes.FireInfused) && Modifiers.Contains(MonsterModifierTypes.FastAttackSpeed))
+      {
+         var fireTrail = character.gameObject.AddComponent<Modifiers.FireTrail>();
+         fireTrail.Initialize(character);
+      }
+
+      // 시너지: 물리 3종 저항 + FastMovement → 철갑 돌격
+      if (ArmorCharge.IsArmorChargeType(this))
+      {
+         ArmorCharge.ApplyArmorCharge(character);
       }
    }
 }

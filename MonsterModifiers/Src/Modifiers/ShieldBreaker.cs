@@ -36,7 +36,7 @@ public class ShieldBreaker
             {
                 if (shield.m_durability > (shield.GetMaxDurability() * 0.1))
                 {
-                    shield.m_durability *= 0.5f;  
+                    shield.m_durability *= (1f - MonsterModifiersPlugin.Cfg_ShieldBreaker_DurabilityReduction.Value / 100f);
                 }
             }
         }

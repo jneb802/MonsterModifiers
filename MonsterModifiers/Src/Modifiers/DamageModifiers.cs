@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
 
@@ -13,43 +11,36 @@ public class DamageModifiers
         public static void Prefix(Character __instance, HitData hit)
         {
             if (hit == null || __instance == null)
-            {
                 return;
-            }
-            
+
             if (hit.m_damage.GetTotalDamage() == 0)
-            {
                 return;
-            }
-            
+
+            // 몬스터만 적용 (플레이어 제외)
+            if (__instance.IsPlayer())
+                return;
+
             var modiferComponent = __instance.GetComponent<Custom_Components.MonsterModifier>();
             if (modiferComponent == null)
-            {
                 return;
-            }
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.PierceImmunity))
-            {
-                __instance.m_damageModifiers.m_pierce = HitData.DamageModifier.Immune;
-            }
-            
+                hit.m_damage.m_pierce *= (1f - MonsterModifiersPlugin.Cfg_PierceImmunity_DamageReduction.Value / 100f);
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.SlashImmunity))
-            {
-                __instance.m_damageModifiers.m_slash = HitData.DamageModifier.Immune;
-            }
-            
+                hit.m_damage.m_slash *= (1f - MonsterModifiersPlugin.Cfg_SlashImmunity_DamageReduction.Value / 100f);
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.BluntImmunity))
-            {
-                __instance.m_damageModifiers.m_blunt = HitData.DamageModifier.Immune;
-            }
-            
+                hit.m_damage.m_blunt *= (1f - MonsterModifiersPlugin.Cfg_BluntImmunity_DamageReduction.Value / 100f);
+
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.ElementalImmunity))
             {
-                __instance.m_damageModifiers.m_fire = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_frost = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_lightning = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_poison = HitData.DamageModifier.Immune;
-                __instance.m_damageModifiers.m_spirit = HitData.DamageModifier.Immune;
+                float elemMult = 1f - MonsterModifiersPlugin.Cfg_ElementalImmunity_DamageReduction.Value / 100f;
+                hit.m_damage.m_fire *= elemMult;
+                hit.m_damage.m_frost *= elemMult;
+                hit.m_damage.m_lightning *= elemMult;
+                hit.m_damage.m_poison *= elemMult;
+                hit.m_damage.m_spirit *= elemMult;
             }
         }
     }

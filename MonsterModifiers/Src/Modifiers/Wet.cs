@@ -39,7 +39,12 @@ public class Wet
             {
                 return;
             }
-            
+
+            if (Random.value * 100f > MonsterModifiersPlugin.Cfg_Wet_ApplyChance.Value)
+            {
+                return;
+            }
+
             __instance.GetSEMan().AddStatusEffect("Wet".GetStableHashCode());
         }
     }

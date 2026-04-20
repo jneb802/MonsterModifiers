@@ -35,7 +35,7 @@ public class Forceful
 
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.Forceful))
             {
-                hit.m_pushForce *= 5.0f;
+                hit.m_pushForce *= MonsterModifiersPlugin.Cfg_Forceful_PushMultiplier.Value;
             }
             
         }

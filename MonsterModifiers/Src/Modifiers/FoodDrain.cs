@@ -47,7 +47,7 @@ public class FoodDrain
                 if (foodCount > 0)
                 {
                     int randomNumber = Random.Range(0, foodCount);
-                    playerFoods[randomNumber].m_time *= 0.5f;
+                    playerFoods[randomNumber].m_time *= (1f - MonsterModifiersPlugin.Cfg_FoodDrain_FoodReduction.Value / 100f);
                 }
             }
         }

@@ -38,7 +38,7 @@ public class EitrSiphon
                 return;
             }
             
-            __instance.UseEitr(hit.GetTotalDamage());
+            __instance.UseEitr(hit.GetTotalDamage() * (MonsterModifiersPlugin.Cfg_EitrSiphon_DrainPercent.Value / 100f));
         }
     }
 }

@@ -40,6 +40,11 @@ public class RemoveStatusEffect
                 return;
             }
 
+            if (Random.value * 100f > MonsterModifiersPlugin.Cfg_RemoveStatusEffect_Chance.Value)
+            {
+                return;
+            }
+
             List<StatusEffect> playerStatusEffects = __instance.GetSEMan().GetStatusEffects();
             if (playerStatusEffects.Count > 1)
             {

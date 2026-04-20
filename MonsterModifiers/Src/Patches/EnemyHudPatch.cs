@@ -36,42 +36,45 @@ namespace MonsterModifiers.Patches
 			{
 				return;
 			}
-			
-			// Debug.Log("Count of modifiers is " + modifiers.Count);
+
+			if (modifiers.Count == 0)
+			{
+				return;
+			}
 
 			GameObject creatureGUI = value.m_gui;
-			// Debug.Log("Name of creatureGUI is " + creatureGUI.name);
 
 			int startPosition = 0;
-			
+
 			// The maximum stars StarLevelsExpanded will allow on a creature HUD before truncated to a new star display format.
 			int starLevelsExpandedMaxStarOnHud = 7;
-			
+
 			if (CompatibilityUtils.isStarLevelsExpandedInstalled && character.GetLevel() > starLevelsExpandedMaxStarOnHud)
 			{
 				startPosition = 2;
 			}
-			
+
+			int characterLevel = character.GetLevel();
+
 			for (int i = startPosition; i < creatureGUI.transform.childCount; i++)
 			{
 				Transform child = creatureGUI.transform.GetChild(i);
-				if (child.name.StartsWith("level_"+(modifiers.Count+1)) || child.name.StartsWith("level_n") && child.gameObject.activeSelf)
+				if (child.name.StartsWith("level_" + characterLevel) || child.name.StartsWith("level_n") && child.gameObject.activeSelf)
 				{
-					// Debug.Log("Name of child at high index " + i + " is " + child.name);
-					for (int j = 0; j < child.transform.childCount; j++) {
+					for (int j = 0; j < child.transform.childCount; j++)
+					{
 						Transform child2 = child.transform.GetChild(j);
-						// Only modify stars, dont care about other componets in here
-						if (child2.name.StartsWith("star") && child2.gameObject.activeSelf) {
-                            child2.GetComponent<Image>().sprite =
-                            ModifierUtils.GetModifierIcon(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
-                            child2.GetComponent<Image>().color =
-                                ModifierUtils.GetModifierColor(modifiers[Mathf.Min(j, character.GetLevel() - 2)]);
-                            child2.GetChild(0).gameObject.SetActive(false);
-                        }
+						if (child2.name.StartsWith("star") && child2.gameObject.activeSelf)
+						{
+							int modIdx = Mathf.Min(j, modifiers.Count - 1);
+							child2.GetComponent<Image>().sprite = ModifierUtils.GetModifierIcon(modifiers[modIdx]);
+							child2.GetComponent<Image>().color = ModifierUtils.GetModifierColor(modifiers[modIdx]);
+							child2.GetChild(0).gameObject.SetActive(false);
+						}
 					}
 				}
 			}
-			
+
 		}
 	}
 }

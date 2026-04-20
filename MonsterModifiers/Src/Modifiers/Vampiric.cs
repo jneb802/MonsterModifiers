@@ -33,14 +33,15 @@ public class Vampiric
                 return;
             }
 
-            float addedDamage = hit.GetTotalDamage() * 0.5f;
+            float addedDamage = hit.GetTotalDamage() * (MonsterModifiersPlugin.Cfg_Vampiric_HealPercent.Value / 100f);
             float nonPlayerDamage = hit.m_damage.m_chop + hit.m_damage.m_pickaxe + hit.m_damage.m_spirit;
             float finalDamage = addedDamage - nonPlayerDamage;
             
             if (modiferComponent.Modifiers.Contains(MonsterModifierTypes.Vampiric))
             {
-                attacker.Heal(finalDamage);
-                // Debug.Log("Hit has additional frost damage added. Amount is: " + hit.m_damage.m_frost);
+                // 시너지: Vampiric + Absorption 동시 보유 시 회복량 1.5배
+                float healMult = modiferComponent.Modifiers.Contains(MonsterModifierTypes.Absorption) ? 1.5f : 1.0f;
+                attacker.Heal(finalDamage * healMult);
             }
         }
     }

@@ -38,7 +38,7 @@ public class StaminaSiphon
                 return;
             }
             
-            __instance.UseStamina(hit.GetTotalDamage());
+            __instance.UseStamina(hit.GetTotalDamage() * (MonsterModifiersPlugin.Cfg_StaminaSiphon_DrainPercent.Value / 100f));
             // __instance.UseStamina(1);
         }
     }

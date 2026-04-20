@@ -7,8 +7,8 @@ namespace MonsterModifiers;
 
 public class PrefabUtils
 {
-    public static GameObject leechDeathVFX;
-    public static GameObject leechDeathSFX;
+    public static GameObject leechDeathVFX = null!;
+    public static GameObject leechDeathSFX = null!;
     
     public static void CreateCustomPrefabs()
     {
