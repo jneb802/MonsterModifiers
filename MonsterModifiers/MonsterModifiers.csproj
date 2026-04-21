@@ -1,48 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="environment.props" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net48</TargetFramework>
     <RootNamespace>MonsterModifiers</RootNamespace>
     <AssemblyName>MonsterModifiers</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
   <Choose>
     <When Condition="($(OS) == 'Unix' OR $(OS) == 'OSX') AND $(GamePath) == ''">
       <PropertyGroup>
-        <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.steam/steam/steamapps/common/Valheim</GamePath>
-        <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/Library/Application Support/Steam/steamapps/common/Valheim/Contents/MacOS</GamePath>
-        <CorlibPath Condition="!Exists('$(CorlibPath)') AND Exists('$(GamePath)')">$(GamePath)\valheim_Data\Managed</CorlibPath>
-        <CorlibPath Condition="!Exists('$(CorlibPath)')">$(GamePath)/unstripped_corelib</CorlibPath>
+        <GamePath>$(HOME)/Library/Application Support/Steam/steamapps/common/Valheim</GamePath>
+        <ValheimAppPath>$(GamePath)/Valheim.app</ValheimAppPath>
+        <ManagedPath>$(ValheimAppPath)/Contents/Resources/Data/Managed</ManagedPath>
+        <BepInExPath>$(GamePath)/BepInEx</BepInExPath>
+        <PublicizedAssembliesPath>$(ManagedPath)/publicized_assemblies</PublicizedAssembliesPath>
+        <CorlibPath>$(ManagedPath)</CorlibPath>
       </PropertyGroup>
     </When>
     <When Condition="($(OS) == 'Windows_NT') AND $(GamePath) == ''">
@@ -62,144 +56,108 @@
       </PropertyGroup>
     </When>
   </Choose>
+
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
+      <HintPath>$(BepInExPath)/core/0Harmony.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="assembly_guiutils">
-      <HintPath>$(PublicizedAssembliesPath)\assembly_guiutils_publicized.dll</HintPath>
+      <HintPath>$(PublicizedAssembliesPath)/assembly_guiutils_publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="assembly_utils">
-      <HintPath>$(PublicizedAssembliesPath)\assembly_utils_publicized.dll</HintPath>
+      <HintPath>$(PublicizedAssembliesPath)/assembly_utils_publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="assembly_valheim">
-      <HintPath>$(PublicizedAssembliesPath)\assembly_valheim_publicized.dll</HintPath>
+      <HintPath>$(PublicizedAssembliesPath)/assembly_valheim_publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
+      <HintPath>$(BepInExPath)/core/BepInEx.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="ServerSync">
-      <HintPath>Libs\ServerSync.dll</HintPath>
+      <HintPath>Libs/ServerSync.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>$(CorlibPath)\UnityEngine.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(CorlibPath)/UnityEngine.AnimationModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>$(CorlibPath)\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(CorlibPath)\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(CorlibPath)\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(CorlibPath)\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>$(CorlibPath)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>$(CorlibPath)\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>$(CorlibPath)\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(CorlibPath)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>$(CorlibPath)\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(CorlibPath)/UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>$(GamePath)\valheim_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>$(CorlibPath)/Unity.TextMeshPro.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Managers\LocalizationManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Src\Custom Components\MonsterModifier.cs" />
-    <Compile Include="Src\Modifiers\Absorption.cs" />
-    <Compile Include="Src\Modifiers\BloodLoss.cs" />
-    <Compile Include="Src\Modifiers\DistantDetection.cs" />
-    <Compile Include="Src\Modifiers\EitrSiphon.cs" />
-    <Compile Include="Src\Modifiers\FastAttackSpeed.cs" />
-    <Compile Include="Src\Modifiers\FastMovement.cs" />
-    <Compile Include="Src\Modifiers\FoodDrain.cs" />
-    <Compile Include="Src\Modifiers\ElementalInfusions.cs" />
-    <Compile Include="Src\Modifiers\Forceful.cs" />
-    <Compile Include="Src\Modifiers\IgnoreArmor.cs" />
-    <Compile Include="Src\Modifiers\Quiet.cs" />
-    <Compile Include="Src\Modifiers\StaggerDeath.cs" />
-    <Compile Include="Src\Modifiers\StaggerImmune.cs" />
-    <Compile Include="Src\Modifiers\DamageModifiers.cs" />
-    <Compile Include="Src\Modifiers\RemoveStatusEffect.cs" />
-    <Compile Include="Src\Modifiers\ShieldBreaker.cs" />
-    <Compile Include="Src\Modifiers\ShieldDome.cs" />
-    <Compile Include="Src\Modifiers\PersonalShield.cs" />
-    <Compile Include="Src\Modifiers\DeathSpawns.cs" />
-    <Compile Include="Src\Modifiers\SoulEater.cs" />
-    <Compile Include="Src\Modifiers\StaminaSiphon.cs" />
-    <Compile Include="Src\Modifiers\Vampiric.cs" />
-    <Compile Include="Src\Modifiers\Wet.cs" />
-    <Compile Include="Src\Patches\AddMonsterModifiersToCharacter.cs" />
-    <Compile Include="Src\Patches\AddVisualsPatch.cs" />
-    <Compile Include="Src\Patches\EnemyHudPatch.cs" />
-    <Compile Include="Src\Plugin.cs" />
-    <Compile Include="Src\StatusEffects\BloodLoss_SE.cs" />
-    <Compile Include="Src\StatusEffects\HealDeath_SE.cs" />
-    <Compile Include="Src\Utils\CompatibilityUtils.cs" />
-    <Compile Include="Src\Utils\DamageUtils.cs" />
-    <Compile Include="Src\Utils\ModifierAssetUtils.cs" />
-    <Compile Include="Src\Utils\ModifierUtils.cs" />
-    <Compile Include="Src\Utils\PrefabUtils.cs" />
-    <Compile Include="Src\Utils\SpawnCommands.cs" />
-    <Compile Include="Src\Utils\StatusEffectUtils.cs" />
-    <Compile Include="Src\Utils\TranslationUtils.cs" />
-    <Compile Include="Src\Utils\WorldUtils.cs" />
-    <Compile Include="Src\Utils\YamlUtils.cs" />
-    <Compile Include="Src\Utils\ZnetUtils.cs" />
-    <Compile Include="Src\Visuals\BowVisuals.cs" />
-    <Compile Include="VersionHandshake.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
-    <Content Include="environment.props" />
-    <Content Include="icons\README.txt" />
-    <Content Include="ILRepack.targets" />
-    <Content Include="Libs\LocalizationManager.dll" />
-    <Content Include="LICENSE.md" />
-    <Content Include="README.md" />
-    <Content Include="Thunderstore\CHANGELOG.md" />
-    <Content Include="Thunderstore\icon.png" />
-    <Content Include="Thunderstore\manifest.json" />
-    <Content Include="UpdateManifest.ps1" />
-    <EmbeddedResource Include="assets\modifiericons" />
-    <EmbeddedResource Include="assets\monster_modifiers_ashlands" />
-    <EmbeddedResource Include="assets\statusicon" />
-    <EmbeddedResource Include="Src\Config\modifierValues.yml" />
-    <EmbeddedResource Include="translations\English.yml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.43">
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.43" Condition="$(OS) == 'Windows_NT'">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <PackageReference Include="JotunnLib" Version="2.26.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets/modifiericons" />
+    <EmbeddedResource Include="assets/monster_modifiers_ashlands" />
+    <EmbeddedResource Include="assets/statusicon" />
+    <EmbeddedResource Include="Src/Config/modifierValues.yml" />
+    <EmbeddedResource Include="translations/English.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+
   <UsingTask AssemblyFile="KeyManager.dll" TaskName="KeyManager.Seal" Condition="'$(AfterTargets)' == 'KeyManager'" />
   <Target Name="KeyManager" AfterTargets="ILRepack" Condition="'$(AfterTargets)' == 'KeyManager'">
     <Seal DLL="$(TargetPath)" />
   </Target>
+
   <Target Name="GetAssemblyVersion" AfterTargets="$(AfterTargets)">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="Targets" />
@@ -218,19 +176,25 @@
       <PackageDir>$(ProjectDir)\Thunderstore\$(PackageName)</PackageDir>
     </PropertyGroup>
   </Target>
-  <Target Name="CopyOutputDLL" AfterTargets="GetAssemblyVersion">
+
+  <Target Name="CopyOutputDLL" AfterTargets="GetAssemblyVersion" Condition="'$(OS)' == 'Windows_NT'">
     <Error Text="DLL not found in target directory." Condition="!Exists('$(TargetDir)$(AssemblyName).dll')" />
     <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(CopyOutputDLLPath)" OverwriteReadOnlyFiles="true" />
     <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(CopyOutputDLLPath2)" OverwriteReadOnlyFiles="true" Condition="Exists('$(CopyOutputDLLPath2)')" />
     <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(CopyOutputDLLPath3)" OverwriteReadOnlyFiles="true" Condition="Exists('$(CopyOutputDLLPath3)')" />
   </Target>
+  <Target Name="CopyOutputDLLMacOS" AfterTargets="GetAssemblyVersion" Condition="$(OS) == 'Unix' OR $(OS) == 'OSX'">
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(CopyOutputDLLPath)" OverwriteReadOnlyFiles="true" Condition="'$(CopyOutputDLLPath)' != '' AND Exists('$(CopyOutputDLLPath)')" />
+  </Target>
+
   <Target Name="CopyReadMeToTSFolder" AfterTargets="CopyOutputDLL" Condition=" ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') And ('$(OS)' == 'Windows_NT') ">
     <Warning Text="README.md not found in project directory. A default README.md file will be created for the Thunderstore package" Condition="!Exists('README.md')" />
     <WriteLinesToFile File="README.md" Lines="Default Readme file from one of Azumatt's Templates. Replace this with actual content." Overwrite="false" Condition="!Exists('README.md')" />
     <Copy SourceFiles="README.md" DestinationFolder="$(PackageDir)" OverwriteReadOnlyFiles="true" />
     <Copy SourceFiles="README.md" DestinationFolder="$(ProjectDir)\Thunderstore" OverwriteReadOnlyFiles="true" />
   </Target>
-  <UsingTask TaskName="WriteManifestFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+
+  <UsingTask TaskName="WriteManifestFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" Condition="'$(OS)' == 'Windows_NT'">
     <ParameterGroup>
       <ManifestFile ParameterType="System.String" Required="true" />
       <AssemblyName ParameterType="System.String" Required="true" />
@@ -253,6 +217,7 @@ System.IO.File.WriteAllText(ManifestFile, content);
 ]]></Code>
     </Task>
   </UsingTask>
+
   <Target Name="UpdateManifestVersion" AfterTargets="CopyReadmeToTSFolder" Condition=" ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') And ('$(OS)' == 'Windows_NT') ">
     <WriteManifestFile ManifestFile="$(ProjectDir)Thunderstore\manifest.json" AssemblyName="$(AssemblyName)" />
     <ItemGroup>
@@ -262,7 +227,8 @@ System.IO.File.WriteAllText(ManifestFile, content);
     <Message Text="Updating version number in Thunderstore\manifest.json" Condition="Exists(@(ManifestFile))" />
     <Exec Command="powershell.exe -ExecutionPolicy Bypass -Command &quot;&amp; { &amp; '$(ProjectDir)UpdateManifest.ps1' -manifestFile '@(ManifestFile)' -versionString '$(PackageVersion)' }&quot;" />
   </Target>
-  <Target Name="MakeThunderstorePackage" AfterTargets="UpdateManifestVersion" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+  <Target Name="MakeThunderstorePackage" AfterTargets="UpdateManifestVersion" Condition=" ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') And ('$(OS)' == 'Windows_NT') ">
     <Error Text="manifest.json not found in Thunderstore directory." Condition="!Exists('$(ProjectDir)\Thunderstore\manifest.json')" />
     <Error Text="icon.png not found in Thunderstore directory. Please note that Thunderstore requires this image to be 256x256 in dimension" Condition="!Exists('$(ProjectDir)\Thunderstore\icon.png')" />
     <ItemGroup>
@@ -276,7 +242,8 @@ System.IO.File.WriteAllText(ManifestFile, content);
     <ZipDirectory SourceDirectory="$(PackageDir)" DestinationFile="Thunderstore\$(PackageName).zip" Overwrite="true" />
     <RemoveDir Directories="$(PackageDir)" />
   </Target>
-  <Target Name="MakeNexusPackage" AfterTargets="MakeThunderstorePackage" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+  <Target Name="MakeNexusPackage" AfterTargets="MakeThunderstorePackage" Condition=" ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') And ('$(OS)' == 'Windows_NT') ">
     <MakeDir Directories="$(ProjectDir)\Nexus" />
     <ItemGroup>
       <NexusPackageFiles Include="$(TargetDir)$(AssemblyName).dll;" />
@@ -286,4 +253,5 @@ System.IO.File.WriteAllText(ManifestFile, content);
     <ZipDirectory SourceDirectory="$(PackageDir)" DestinationFile="Nexus\$(PackageName).zip" Overwrite="true" />
     <RemoveDir Directories="$(PackageDir)" />
   </Target>
+
 </Project>

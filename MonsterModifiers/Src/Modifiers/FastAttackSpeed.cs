@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using HarmonyLib;
 using Jotunn.Configs;
 using UnityEngine;
