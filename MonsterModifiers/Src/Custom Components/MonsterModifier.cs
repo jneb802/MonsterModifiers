@@ -15,7 +15,12 @@ public class MonsterModifier : MonoBehaviour
    public Character character;
 
    public int level;
-   
+
+   // Set to true when attached to a boss character
+   public bool IsBossCharacter = false;
+   // Stars beyond the HUD icon slots; displayed as plain stars
+   public int OverflowStars = 0;
+
    private void Start()
    {
       character = GetComponent<Character>();
@@ -29,19 +34,53 @@ public class MonsterModifier : MonoBehaviour
          return;
       }
       
+      if (character.IsBoss())
+      {
+         if (MonsterModifiersPlugin.Configurations_Boss_Modifiers.Value == MonsterModifiersPlugin.Toggle.Off)
+            return;
+
+         IsBossCharacter = true;
+         // Stars determine modifier count, capped at boss_Modifiers_Max; remainder shown as plain stars
+         int starCount = Mathf.Max(0, level - 1);
+         int actualCount = Mathf.Min(starCount, MonsterModifiersPlugin.Configurations_Boss_MaxModifiers.Value);
+         OverflowStars = starCount - actualCount;
+
+         string bossModifiersString = character.m_nview.GetZDO().GetString("modifiers", string.Empty);
+         if (string.IsNullOrEmpty(bossModifiersString))
+         {
+            foreach (var modifier in ModifierUtils.RollRandomModifiers(actualCount, ModifierUtils.BossExcludedModifiers))
+               Modifiers.Add(modifier);
+
+            if (character.m_nview.GetZDO().IsOwner())
+               character.m_nview.GetZDO().Set("modifiers", string.Join(",", Modifiers));
+         }
+         else
+         {
+            Modifiers = new List<MonsterModifierTypes>(Array.ConvertAll(bossModifiersString.Split(','),
+               str => (MonsterModifierTypes)Enum.Parse(typeof(MonsterModifierTypes), str)));
+
+            // Recalculate overflow in case config changed
+            int reloadedActual = Mathf.Min(starCount, MonsterModifiersPlugin.Configurations_Boss_MaxModifiers.Value);
+            OverflowStars = starCount - reloadedActual;
+         }
+
+         ApplyStartModifiers();
+         return;
+      }
+
       if (level > 1)
       {
          string modifiersString = character.m_nview.GetZDO().GetString("modifiers", string.Empty);
          if (string.IsNullOrEmpty(modifiersString))
          {
             int numModifiers = Mathf.Min(level - 1, MonsterModifiersPlugin.Configurations_MaxModifiers.Value);
-            
+
             foreach (var modifier in ModifierUtils.RollRandomModifiers(numModifiers))
             {
                Modifiers.Add(modifier);
                // Debug.Log("Adding modifier: " + modifier.ToString() + " to monster with name: " + character.m_name);
             }
-            
+
             if (character.m_nview.GetZDO().IsOwner())
             {
                string serializedModifiers = string.Join(",", Modifiers);
@@ -51,7 +90,7 @@ public class MonsterModifier : MonoBehaviour
          }
          else
          {
-            Modifiers = new List<MonsterModifierTypes>(Array.ConvertAll(modifiersString.Split(','), 
+            Modifiers = new List<MonsterModifierTypes>(Array.ConvertAll(modifiersString.Split(','),
                str => (MonsterModifierTypes)Enum.Parse(typeof(MonsterModifierTypes), str)));
          }
 

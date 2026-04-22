@@ -53,6 +53,18 @@ public class ModifierUtils
 {
     public static Dictionary<MonsterModifierTypes, ModifierData> modifiers;
 
+    // Modifiers excluded from boss rolls (death explosions cause issues on bosses)
+    public static readonly HashSet<MonsterModifierTypes> BossExcludedModifiers = new HashSet<MonsterModifierTypes>
+    {
+        MonsterModifierTypes.PoisonDeath,
+        MonsterModifierTypes.FireDeath,
+        MonsterModifierTypes.FrostDeath,
+        MonsterModifierTypes.StaggerDeath,
+        MonsterModifierTypes.HealDeath,
+        MonsterModifierTypes.TarDeath,
+        MonsterModifierTypes.SummonDeath,
+    };
+
     public static Color GetModifierColor(MonsterModifierTypes modifier)
     {
         List<float> rgb = modifiers[modifier].color;
@@ -176,12 +188,17 @@ public class ModifierUtils
         return modifiers[modifier].weight;
     }
 
-    public static List<MonsterModifierTypes> RollRandomModifiers(int numModifiers)
+    public static List<MonsterModifierTypes> RollRandomModifiers(int numModifiers,
+        HashSet<MonsterModifierTypes> excluded = null)
     {
         List<MonsterModifierTypes> selectedModifiers = new List<MonsterModifierTypes>();
         Dictionary<MonsterModifierTypes, ModifierData> availableModifiers =
             new Dictionary<MonsterModifierTypes, ModifierData>(modifiers);
-        
+
+        if (excluded != null)
+            foreach (var ex in excluded)
+                availableModifiers.Remove(ex);
+
         for (int i = 0; i < numModifiers; i++)
         {
             int totalWeight = 0;

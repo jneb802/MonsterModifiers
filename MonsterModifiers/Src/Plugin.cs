@@ -67,8 +67,12 @@ namespace MonsterModifiers
             ModifierAssetUtils.Setup();
             ModifierAssetUtils.LoadAllIcons();
             
-            Configurations_MaxModifiers = ConfigFileExtensions.BindConfig(Config, "Balance", "Max Modifiers",5,"The maximum amount of modifiers a creature can have.", true);
-            
+            Configurations_MaxModifiers = ConfigFileExtensions.BindConfig(Config, "Balance", "Monster_Modifiers_Max", 38, "Max modifier count per monster — equals star count up to this limit (0=none, 38=max)", true);
+            Configurations_Boss_Modifiers = Config.Bind("Balance", "boss_Modifiers", Toggle.On,
+                new ConfigDescription("Enable or disable modifier assignment for boss monsters."));
+            Configurations_Boss_MaxModifiers = Config.Bind("Balance", "boss_Modifiers_Max", 10,
+                new ConfigDescription("Max modifier count for boss monsters (0=none, 31=all non-death modifiers)", new AcceptableValueRange<int>(0, 31)));
+
             // ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
@@ -79,6 +83,8 @@ namespace MonsterModifiers
         }
         
         public static ConfigEntry<int> Configurations_MaxModifiers;
+        public static ConfigEntry<Toggle> Configurations_Boss_Modifiers;
+        public static ConfigEntry<int> Configurations_Boss_MaxModifiers;
         
 
         private void OnDestroy()
