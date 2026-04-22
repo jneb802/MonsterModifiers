@@ -28,13 +28,13 @@ public class AddVisualsPatch
 
             foreach (var item in humanoid.m_inventory.GetAllItems())
             {
-                if (item.m_dropPrefab.name == "skeleton_bow")
+                if (item.m_dropPrefab != null && item.m_dropPrefab.name == "skeleton_bow")
                 {
                     hasSkeletonBow = true;
                     //Debug.Log("Humanoid has skeleton bow item");
                 }
 
-                if (item.m_dropPrefab.name == "draugr_bow")
+                if (item.m_dropPrefab != null && item.m_dropPrefab.name == "draugr_bow")
                 {
                     hasDraugrBow = true;
                     // Debug.Log("Humanoid has draugr bow item");
