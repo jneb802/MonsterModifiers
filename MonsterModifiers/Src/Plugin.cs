@@ -78,6 +78,9 @@ namespace MonsterModifiers
             Cfg_ElementalImmunity_DamageReduction = Config.Bind("Modifier_Defense", "ElementalImmunity Damage Reduction %", 70,
                 new ConfigDescription("Reduce fire/frost/lightning/poison/spirit damage by N%", new AcceptableValueRange<int>(0, 100)));
 
+            Cfg_Absorption_HealPercent = Config.Bind("Modifier_Defense", "Absorption Heal %", 100,
+                new ConfigDescription("Heal monster by N% of damage absorbed (100 = full heal)", new AcceptableValueRange<int>(0, 100)));
+
             // ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
@@ -94,6 +97,7 @@ namespace MonsterModifiers
         public static ConfigEntry<int> Cfg_SlashImmunity_DamageReduction = null!;
         public static ConfigEntry<int> Cfg_BluntImmunity_DamageReduction = null!;
         public static ConfigEntry<int> Cfg_ElementalImmunity_DamageReduction = null!;
+        public static ConfigEntry<int> Cfg_Absorption_HealPercent = null!;
 
         private void OnDestroy()
         {
