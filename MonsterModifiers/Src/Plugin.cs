@@ -68,7 +68,19 @@ namespace MonsterModifiers
             ModifierAssetUtils.LoadAllIcons();
             
             Configurations_MaxModifiers = ConfigFileExtensions.BindConfig(Config, "Balance", "Max Modifiers",5,"The maximum amount of modifiers a creature can have.", true);
-            
+
+            Cfg_PierceImmunity_DamageReduction = Config.Bind("Modifier_Defense", "PierceImmunity Damage Reduction %", 70,
+                new ConfigDescription("Reduce pierce damage by N% (70 = take only 30%)", new AcceptableValueRange<int>(0, 100)));
+            Cfg_SlashImmunity_DamageReduction = Config.Bind("Modifier_Defense", "SlashImmunity Damage Reduction %", 70,
+                new ConfigDescription("Reduce slash damage by N%", new AcceptableValueRange<int>(0, 100)));
+            Cfg_BluntImmunity_DamageReduction = Config.Bind("Modifier_Defense", "BluntImmunity Damage Reduction %", 70,
+                new ConfigDescription("Reduce blunt damage by N%", new AcceptableValueRange<int>(0, 100)));
+            Cfg_ElementalImmunity_DamageReduction = Config.Bind("Modifier_Defense", "ElementalImmunity Damage Reduction %", 70,
+                new ConfigDescription("Reduce fire/frost/lightning/poison/spirit damage by N%", new AcceptableValueRange<int>(0, 100)));
+
+            Cfg_Absorption_HealPercent = Config.Bind("Modifier_Defense", "Absorption Heal %", 100,
+                new ConfigDescription("Heal monster by N% of damage absorbed (100 = full heal)", new AcceptableValueRange<int>(0, 100)));
+
             // ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
@@ -79,7 +91,13 @@ namespace MonsterModifiers
         }
         
         public static ConfigEntry<int> Configurations_MaxModifiers;
-        
+
+        // Immunity damage reduction config
+        public static ConfigEntry<int> Cfg_PierceImmunity_DamageReduction = null!;
+        public static ConfigEntry<int> Cfg_SlashImmunity_DamageReduction = null!;
+        public static ConfigEntry<int> Cfg_BluntImmunity_DamageReduction = null!;
+        public static ConfigEntry<int> Cfg_ElementalImmunity_DamageReduction = null!;
+        public static ConfigEntry<int> Cfg_Absorption_HealPercent = null!;
 
         private void OnDestroy()
         {
