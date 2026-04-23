@@ -40,7 +40,8 @@ public enum MonsterModifierTypes
     Vampiric,
     Forceful,
     Wet,
-    Quiet
+    Quiet,
+    Knockback
 }
 
 public class ModifierData
@@ -68,7 +69,8 @@ public class ModifierUtils
             modifier == MonsterModifierTypes.FrostInfused ||
             modifier == MonsterModifierTypes.PoisonInfused ||
             modifier == MonsterModifierTypes.LightningInfused ||
-            modifier == MonsterModifierTypes.RemoveStatusEffect)
+            modifier == MonsterModifierTypes.RemoveStatusEffect ||
+            modifier == MonsterModifierTypes.Knockback)
         {
             return ModifierAssetUtils.swordIcon;
         }

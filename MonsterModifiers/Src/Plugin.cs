@@ -68,7 +68,12 @@ namespace MonsterModifiers
             ModifierAssetUtils.LoadAllIcons();
             
             Configurations_MaxModifiers = ConfigFileExtensions.BindConfig(Config, "Balance", "Max Modifiers",5,"The maximum amount of modifiers a creature can have.", true);
-            
+
+            Cfg_Knockback_StaggerForce = Config.Bind("Modifier_Offense", "Knockback Stagger Force", 500,
+                new ConfigDescription("Flat stagger force applied on knockback hit (default 500)", new AcceptableValueRange<int>(0, 2000)));
+            Cfg_Knockback_PushForce = Config.Bind("Modifier_Offense", "Knockback Push Force", 45,
+                new ConfigDescription("Flat push force magnitude for knockback (default 45)", new AcceptableValueRange<int>(0, 200)));
+
             // ShieldDome.LoadShieldDome();
             
             CompatibilityUtils.RunCompatibiltyChecks();
@@ -79,7 +84,10 @@ namespace MonsterModifiers
         }
         
         public static ConfigEntry<int> Configurations_MaxModifiers;
-        
+
+        // Knockback config
+        public static ConfigEntry<int> Cfg_Knockback_StaggerForce = null!;
+        public static ConfigEntry<int> Cfg_Knockback_PushForce = null!;
 
         private void OnDestroy()
         {
